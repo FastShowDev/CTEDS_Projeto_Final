@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\icons8-close-window-50.png" />
+	<Resource Include="Assets\icons8-calculator-50.png" />
+    <Resource Include="Assets\icons8-clock-settings-48.png" />
+    <Resource Include="Assets\icons8-menu-rounded-50.png" />
+	<Resource Include="Assets\icons8-test-tube-48.png" />
+  </ItemGroup>
+
+</Project>
