@@ -15,95 +15,7 @@
         
         >
     <Window.Resources>
-        <Style x:Key="Test" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Opacity" Value="0.7"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Opacity" Value="0.7"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border"  Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border"  Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border"  Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground"  Color="DarkGray"/>
-
-        <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.3"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.3"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.3"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.7"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="CalculatorButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Margin" Value="2, 2, 2, 2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-        </Style>
+        
     </Window.Resources>
 
     <Grid>
@@ -137,7 +49,7 @@
                        Width="40"
                        Height="40"
                        Margin="10, 0 , 0 ,0"/>
-                <Button Style="{DynamicResource MenuButtonStyle}"
+                <Button Style="{StaticResource CommonButtonStyle}"
                         x:Name="CloseMenuButton" 
                         Grid.Row="0" 
                         Height="40" Width="40"
@@ -176,49 +88,48 @@
                                    HorizontalAlignment="Left"
                                    />
 
-                            <Image Source="/Assets/icons8-calculator-50.png"
-                                   Grid.Row="1" 
-                                   HorizontalAlignment="Left"
-                                   Margin="10, 0, 0, 0" Width="30" Height="30"
-                                   />
-                            <TextBlock Grid.Row="1"
-                                       Text="Padrão"
-                                       FontSize="18"
-                                       FontWeight="Medium"
-                                       Margin="45, 0, 0, 0"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       />
-                            <Button Style="{DynamicResource MenuButtonStyle}" 
-                                    x:Name="StandardCalculatorButton"
-                                    Grid.Row="1"
-                                    BorderThickness="0"
-                                    Opacity="1"
-                                    Background="Transparent"
-                                    />
+                            <RadioButton Grid.Row="1"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}">
+                                <Grid>
+                                    <Image Source="/Assets/icons8-calculator-50.png"
+                                           HorizontalAlignment="Left"
+                                           Width="30" 
+                                           Height="30"
+                                           Margin="5 0 0 0"
+                                           ></Image>
+                                    <TextBlock Text="Padrão"
+                                               FontSize="18"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Margin="50 0 0 0">
+                                    </TextBlock>
+                                </Grid>
+                            </RadioButton>
 
-                            <Image Source="/Assets/icons8-test-tube-48.png" 
-                                   Grid.Row="2"
-                                   HorizontalAlignment="Left"
-                                   Margin="10, 0, 0, 0" 
-                                   Width="30" 
-                                   Height="30"
-                                   />
-                            <Label Grid.Row="2"
-                                   Content="Científica"
-                                   FontSize="18"
-                                   FontWeight="Medium"
-                                   Margin="40, 0 , 0 ,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   />
-                            <Button Style="{DynamicResource MenuButtonStyle}" 
-                                    x:Name="ScienceCalculatorButton"
-                                    Grid.Row="2"
-                                    BorderThickness="0"
-                                    Opacity="1"
-                                    Background="Transparent"
-                                    />
+                            <RadioButton Grid.Row="2"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}"
+                                >
+                                <Grid>
+                                    <Image Source="/Assets/icons8-test-tube-48.png"
+                                           HorizontalAlignment="Left"
+                                           Width="30" 
+                                           Height="30"
+                                           Margin="5 0 0 0"
+                                           ></Image>
+                                    <TextBlock Text="Científica"
+                                               FontSize="18"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Margin="50 0 0 0"
+                                               >
+
+                                    </TextBlock>
+                                </Grid>
+                            </RadioButton>
+
+
                         </Grid>
 
                     </Grid>
@@ -255,7 +166,7 @@
                        Height="40"
                        Width="40"
                        />
-                <Button Style="{DynamicResource MenuButtonStyle}" 
+                <Button Style="{StaticResource CommonButtonStyle}" 
                         x:Name="OpenMenuButton" 
                         Grid.Row="0"
                         Grid.Column="0"
@@ -284,11 +195,24 @@
                        Width="40"
                        />
             </Grid>
-            <Viewbox Grid.Row="1"
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0"
+                         HorizontalAlignment="Right">
+                    <TextBlock Text="Resultado"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Margin="0, 0, 10, 0"/>
+                </Viewbox>
+                <Viewbox Grid.Row="1"
+                     x:Name="CalculatorDisplayViewBox"
                      Stretch="Uniform"
-                     HorizontalAlignment="Right"
-                     >
-                <TextBlock x:Name="CalculatorDisplay"
+                     HorizontalAlignment="Right">
+                    <TextBox x:Name="CalculatorDisplay"
                        Text="0"
                        Margin="0, 0, 10, 0"
                        HorizontalAlignment="Right"
@@ -296,12 +220,14 @@
                        FontStretch="Normal" 
                        FontWeight="DemiBold" 
                        FontSize="48"
+                       BorderThickness="0"
+                       IsManipulationEnabled="True"
+                       IsHitTestVisible="True"
                        TextOptions.TextFormattingMode="Ideal"
-                       TextOptions.TextRenderingMode="Auto"
-                       
-                       />
-            </Viewbox>
-            
+                       TextOptions.TextRenderingMode="Auto"/>
+                </Viewbox>
+
+            </Grid>
                        
 
             <Grid Grid.Row="2">
@@ -321,35 +247,35 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Content="MC" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="0" Content="ME" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="0" Content="M+" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="0" Grid.Row="0" Content="MC" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="0" Content="ME" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="0" Content="M+" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{StaticResource CalculatorButtonStyle}"/>
 
-                <Button Grid.Column="0" Grid.Row="1" Content="CE" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="1" Content="C" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="1" Content="Back" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="1" Content="/" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="0" Grid.Row="1" Content="CE" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="C" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="1" Content="Back" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="1" Content="/" Style="{StaticResource CalculatorButtonStyle}"/>
 
-                <Button Grid.Column="0" Grid.Row="2" Content="7" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="2" Content="8" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="2" Content="9" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="2" Content="*" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="0" Grid.Row="2" Content="7" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="2" Content="8" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="2" Content="9" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="2" Content="*" Style="{StaticResource CalculatorButtonStyle}"/>
 
-                <Button Grid.Column="0" Grid.Row="3" Content="4" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="3" Content="5" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="3" Content="6" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="3" Content="+" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="0" Grid.Row="3" Content="4" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="3" Content="5" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="3" Content="6" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="3" Content="+" Style="{StaticResource CalculatorButtonStyle}"/>
 
-                <Button Grid.Column="0" Grid.Row="4" Content="1" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="4" Content="2" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="4" Content="3" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="4" Content="-" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="0" Grid.Row="4" Content="1" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="4" Content="2" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="4" Content="3" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="4" Content="-" Style="{StaticResource CalculatorButtonStyle}"/>
 
-                <Button Grid.Column="0" Grid.Row="5" Content="+/-" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="5" Content="0" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="5" Content="," Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="5" Content="=" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="0" Grid.Row="5" Content="+/-" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="5" Content="0" Style="{StaticResource CalculatorButtonStyle}" Click="Button_Click"/>
+                <Button Grid.Column="2" Grid.Row="5" Content="," Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="5" Content="=" Style="{StaticResource CalculatorButtonStyle}"/>
 
                
             </Grid>

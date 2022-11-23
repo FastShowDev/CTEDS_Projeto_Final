@@ -44,3 +44,6 @@ C:\Users\zlFas\Documents\CTEDS_Projeto_Final\Calculadora\obj\Debug\net6.0-window
 C:\Users\zlFas\Documents\CTEDS_Projeto_Final\Calculadora\obj\Debug\net6.0-windows\ref\Calculadora.dll
 C:\Users\zlFas\Documents\CTEDS_Projeto_Final\Calculadora\obj\Debug\net6.0-windows\View\StandardCalculator.g.cs
 C:\Users\zlFas\Documents\CTEDS_Projeto_Final\Calculadora\obj\Debug\net6.0-windows\View\StandardCalculator.baml
+C:\Users\zlFas\Documents\CTEDS_Projeto_Final\Calculadora\obj\Debug\net6.0-windows\Styles\MenuButton.baml
+C:\Users\zlFas\Documents\CTEDS_Projeto_Final\Calculadora\obj\Debug\net6.0-windows\App.baml
+C:\Users\zlFas\Documents\CTEDS_Projeto_Final\Calculadora\obj\Debug\net6.0-windows\Styles\CalculatorButton.baml

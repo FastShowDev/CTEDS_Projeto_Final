@@ -4,6 +4,18 @@
              xmlns:local="clr-namespace:Calculadora.View"
              StartupUri="/View/StandardCalculator.xaml">
     <Application.Resources>
-         
+        
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Styles/MenuButton.xaml"/>
+                <ResourceDictionary Source="Styles/CalculatorButton.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+            
+        </ResourceDictionary>
+        
     </Application.Resources>
+    
 </Application>
