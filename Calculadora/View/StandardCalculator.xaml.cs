@@ -33,5 +33,13 @@ namespace Calculadora.View
         {
             MenuBorder.Visibility = Visibility.Hidden;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (CalculatorDisplay.Text != "0")
+            {
+                CalculatorDisplay.Text += "0";
+            }
+        }
     }
 }
