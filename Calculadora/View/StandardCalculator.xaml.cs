@@ -50,10 +50,14 @@ namespace Calculadora.View
             if (lastButtonPressed == "operator")
             {
                 int lastDisplayIndex = CalculatorDisplay.Text.Length - 1;
-                char[] display = String.Copy(CalculatorDisplay.Text).ToCharArray();
-                display[lastDisplayIndex] = pressedButtonValue;
-
+                string display = CalculatorDisplay.Text.Substring(0, lastDisplayIndex);
+                display += pressedButtonValue;
                 CalculatorDisplay.Text = display.ToString();
+            }
+            else
+            {
+                lastButtonPressed = "operator";
+                CalculatorDisplay.Text += pressedButtonValue;
             }
         }
 

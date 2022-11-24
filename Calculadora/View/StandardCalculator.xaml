@@ -43,19 +43,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Style="{StaticResource CommonButtonStyle}"
-                        x:Name="CloseMenuButton" 
+                <Button x:Name="CloseMenuButton"
+                        Style="{StaticResource CloseMenuButtonStyle}"
                         Grid.Row="0" 
-                        Height="40" Width="40"
-                        BorderThickness="0"
-                        Margin="0, 0 , 10 ,0"
-                        HorizontalAlignment="Right" 
+                        Grid.Column="0"
                         Click="CloseMenuButton_Click">
-                    <Grid>
-                        <Image Source="/Assets/icons8-close-window-50.png"
-                               Width="40"
-                               Height="40"/>
-                    </Grid>
                 </Button>
 
 
@@ -158,20 +150,12 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                
-                <Button Style="{StaticResource CommonButtonStyle}" 
+
+                <Button Style="{StaticResource OpenMenuButtonStyle}" 
                         x:Name="OpenMenuButton" 
                         Grid.Row="0"
                         Grid.Column="0"
-                        Height="50"
-                        Width="50" 
-                        Opacity="1"
                         Click="MenuBtn_Click">
-                    <Grid>
-                        <Image Source="/Assets/icons8-menu-rounded-50.png"
-                               Height="40"
-                               Width="40"/>
-                    </Grid>
                 </Button>
                 
 
@@ -250,12 +234,12 @@
                 <Button Grid.Column="0" Grid.Row="1" Content="CE" Style="{StaticResource CalculatorButtonStyle}"/>
                 <Button Grid.Column="1" Grid.Row="1" Content="C" Style="{StaticResource CalculatorButtonStyle}"/>
                 <Button Grid.Column="2" Grid.Row="1" Content="Back" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="1" Content="/" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="1" Content="/" Style="{StaticResource CalculatorButtonStyle}" Click="Operator_Click"/>
 
                 <Button x:Name="button_7" Grid.Column="0" Grid.Row="2" Content="7" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
                 <Button x:Name="button_8" Grid.Column="1" Grid.Row="2" Content="8" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
                 <Button x:Name="button_9" Grid.Column="2" Grid.Row="2" Content="9" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button Grid.Column="3" Grid.Row="2" Content="*" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="2" Content="*" Style="{StaticResource CalculatorButtonStyle}" Click="Operator_Click"/>
 
                 <Button x:Name="button_4" Grid.Column="0" Grid.Row="3" Content="4" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
                 <Button x:Name="button_5" Grid.Column="1" Grid.Row="3" Content="5" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
