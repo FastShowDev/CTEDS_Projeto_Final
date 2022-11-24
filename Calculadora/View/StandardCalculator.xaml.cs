@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Calculadora.View
 {
@@ -19,6 +20,14 @@ namespace Calculadora.View
     /// </summary>
     public partial class StandardCalculator : Window
     {
+
+        public static bool isNumber;
+        public static bool isFloat;
+        public static bool isOperation;
+        public static string calculation;
+        public const string DECIMAL_SEPARATOR = ",";
+        public string lastButtonPressed;
+
         public StandardCalculator()
         {
             InitializeComponent();
@@ -34,12 +43,37 @@ namespace Calculadora.View
             MenuBorder.Visibility = Visibility.Hidden;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Operator_Click(object sender, RoutedEventArgs e)
         {
-            if (CalculatorDisplay.Text != "0")
+            string objName = ((Button)sender).Name;
+            char pressedButtonValue = Convert.ToChar((sender as Button).Content);
+            if (lastButtonPressed == "operator")
             {
-                CalculatorDisplay.Text += "0";
+                int lastDisplayIndex = CalculatorDisplay.Text.Length - 1;
+                char[] display = String.Copy(CalculatorDisplay.Text).ToCharArray();
+                display[lastDisplayIndex] = pressedButtonValue;
+
+                CalculatorDisplay.Text = display.ToString();
             }
+        }
+
+        private void Number_Click(object sender, RoutedEventArgs e)
+        {
+            
+            isNumber = true;
+            string objName = ((Button)sender).Name;
+            string pressedButtonValue = Convert.ToString((sender as Button).Content);
+            if (CalculatorDisplay.Text == "0" && pressedButtonValue != DECIMAL_SEPARATOR)
+            {
+                CalculatorDisplay.Text = "";
+            }
+            if (objName == "button_float")
+            {
+                isFloat = true;
+            }
+            CalculatorDisplay.Text += pressedButtonValue;
+            lastButtonPressed = "number";
+            
         }
     }
 }
