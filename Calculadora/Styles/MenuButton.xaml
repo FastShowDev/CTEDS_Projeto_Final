@@ -94,12 +94,15 @@
         </Setter>
     </Style>
 
-
-    <Style x:Key="CommonButtonStyle" TargetType="{x:Type Button}">
+    
+    <Style x:Key="CloseMenuButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Opacity" Value="1"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 0, 10, 0"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="50"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -114,17 +117,85 @@
                             <SolidColorBrush x:Name="BorderBackground"
                                              Color="White" />
                         </Border.Background>
-                        <Grid>
-                            
-                        </Grid>
+                        <Image Width="40"
+                               Height="40"
+                               Source="/Assets/icons8-close-window-50.png"/>
                     </Border>
 
                     <ControlTemplate.Triggers>
 
+                        <EventTrigger RoutedEvent="Border.MouseEnter"
+                                      SourceName="border">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                                    Storyboard.TargetProperty="Color"
+                                                    From="White"
+                                                    To="LightGray"
+                                                    Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+
+                        <EventTrigger RoutedEvent="Border.MouseLeave"
+                                      SourceName="border">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                                    Storyboard.TargetProperty="Color"
+                                                    From="LightGray"
+                                                    To="White"
+                                                    Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="LightGray" />
+                        </Trigger>
+
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OpenMenuButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Height="50"
+                            Width="50"
+                            Margin="0"
+                            BorderThickness="0"
+                            CornerRadius="4">
+
+                        <Border.Background>
+                            <SolidColorBrush x:Name="BorderBackground"
+                                             Color="White" />
+                        </Border.Background>
+                        <Image Width="40"
+                               Height="40"
+                               Source="/Assets/icons8-menu-rounded-50.png"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
 
                         <EventTrigger RoutedEvent="Border.MouseEnter"
                                       SourceName="border">
-
                             <BeginStoryboard>
                                 <Storyboard>
                                     <ColorAnimation Storyboard.TargetName="BorderBackground"
