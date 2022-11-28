@@ -19,9 +19,9 @@ namespace Calculadora.Models
         public bool isNumber { get; set; }
         public bool isFloat { get; set; }
         public bool isOperation { get; set; }
+        public bool canCalculate { get; set; }
         public string? calculation { get; set; }
         public string? lastButtonPressed { get; set; }
-
         #endregion
     }
 }
