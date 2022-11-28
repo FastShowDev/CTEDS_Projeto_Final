@@ -13,6 +13,8 @@
     <Resource Include="Assets\icons8-clock-settings-48.png" />
     <Resource Include="Assets\icons8-menu-rounded-50.png" />
 	<Resource Include="Assets\icons8-test-tube-48.png" />
+	<Resource Include="Assets\trigonometria-60.png" />
+	<Resource Include="Assets\formula-fx-50.png" />
   </ItemGroup>
 
 </Project>
