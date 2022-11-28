@@ -9,10 +9,10 @@ namespace Calculadora.Models
     public class Calculator
     {
         #region CONSTANTS
-        public const string DECIMAL_SPERATOR = ",";
+        public readonly string DECIMAL_SPERATOR = ",";
 
-        public const double PI = Math.PI;
-        public const double E = Math.E;
+        public readonly double PI = Math.PI;
+        public readonly double E = Math.E;
         #endregion
 
         #region Properties
@@ -20,6 +20,7 @@ namespace Calculadora.Models
         public bool isFloat { get; set; }
         public bool isOperation { get; set; }
         public bool canCalculate { get; set; }
+        public string displayContent { get; set; } = "0";
         public string? calculation { get; set; }
         public string? lastButtonPressed { get; set; }
         #endregion
