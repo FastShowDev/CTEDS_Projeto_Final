@@ -1,0 +1,264 @@
+﻿<Window x:Class="Calculadora.View.ScientificCalculator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculadora.View"
+        mc:Ignorable="d"
+        Title="Calculadora" 
+        Height="550"
+        MinHeight="550"
+        Width="400"
+        MinWidth="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <!--#region Menu-->
+        <Border x:Name="MenuBorder"
+                Style="{StaticResource MenuBorderStyle}"
+                Visibility="Hidden">
+            <Grid x:Name="MenuBorderGrid"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                  ScrollViewer.CanContentScroll="True"
+                  Margin="0, 10, 0, 0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="CloseMenuButton"
+                        Style="{StaticResource CloseMenuButtonStyle}"
+                        Grid.Row="0" 
+                        Grid.Column="0">
+                </Button>
+
+
+                <ScrollViewer Grid.Row="1">
+                    <Grid x:Name="MenuBorderContentGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="500"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Content="Calculadora"
+                                   Style="{StaticResource MenuCategoryLabelStyle}"/>
+
+                            <RadioButton Grid.Row="1"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}">
+                                <Grid>
+                                    <Image Source="/Assets/icons8-calculator-50.png"
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+
+                                    <TextBlock Text="Padrão"
+                                               Style="{StaticResource MenuTextBlockStyle}"/>
+                                </Grid>
+                            </RadioButton>
+
+                            <RadioButton Grid.Row="2"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}">
+                                <Grid>
+                                    <Image Source="/Assets/icons8-test-tube-48.png"
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+
+                                    <TextBlock Text="Científica"
+                                               Style="{StaticResource MenuTextBlockStyle}"/>
+                                </Grid>
+                            </RadioButton>
+
+
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.8*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+
+                <Button Style="{StaticResource OpenMenuButtonStyle}" 
+                        x:Name="OpenMenuButton" 
+                        Grid.Row="0"
+                        Grid.Column="0">
+                </Button>
+
+
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="30"
+                       HorizontalAlignment="Left"
+                       Content="Científica" 
+                       FontWeight="Bold"
+                       Margin="10, 0, 0, 0"/>
+                
+                <Image Source="/Assets/icons8-clock-settings-48.png"
+                       HorizontalAlignment="Center"
+                       Grid.Column="2"
+                       Height="40"
+                       Width="40"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0"
+                         HorizontalAlignment="Right">
+                    <TextBlock Text="Resultado"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Margin="0, 0, 10, 0"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1"
+                     x:Name="CalculatorDisplayViewBox"
+                     Stretch="Uniform"
+                     HorizontalAlignment="Right">
+                    <TextBox x:Name="CalculatorDisplay"
+                       Text="0"
+                       Margin="0, 0, 10, 0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       FontStretch="Normal" 
+                       FontWeight="DemiBold" 
+                       FontSize="48"
+                       BorderThickness="0"/>
+                </Viewbox>
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0" Content="MC" IsEnabled="False" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="0" Content="MR" IsEnabled="False" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="0" Content="M+" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="0" Content="M^" Style="{StaticResource CalculatorButtonStyle}"/>
+
+                <RadioButton Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource CalculatorRadioButtonStyle}">
+                    <Grid>
+                        <Image Source="/Assets/trigonometria-60.png"
+                               Style="{StaticResource CalculatorRadioButtonImageStyle}"/>
+
+                        <TextBlock Text="Trigonometria"
+                                   Style="{StaticResource CalculatorButtonTextBlockStyle}"/>
+                    </Grid>
+                </RadioButton>
+                
+                <RadioButton Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource CalculatorRadioButtonStyle}">
+                    <Grid>
+                        <Image Source="/Assets/formula-fx-50.png"
+                               Style="{StaticResource CalculatorRadioButtonImageStyle}"/>
+
+                        <TextBlock Text="Função"
+                                   Style="{StaticResource CalculatorButtonTextBlockStyle}"
+                                   Margin="35, 0, 10, 0"/>
+                    </Grid>
+                </RadioButton>
+
+                <Button Grid.Column="0" Grid.Row="2" Content="2^" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="2" Content="Pi" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="2" Content="e" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="2" Content="C" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="2" Content="Back" Style="{StaticResource CalculatorButtonStyle}"/>
+
+                <Button Grid.Column="0" Grid.Row="3" Content="x²" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="3" Content="1/x" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="3" Content="Abs" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="3" Content="exp" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="3" Content="mod" Style="{StaticResource CalculatorButtonStyle}"/>
+
+                <Button Grid.Column="0" Grid.Row="4" Content="Sqrt" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="4" Content="(" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="4" Content=")" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="4" Content="n!" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="4" Content="/" Style="{StaticResource CalculatorButtonStyle}"/>
+
+                <Button Grid.Column="0" Grid.Row="5" Content="x^y" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="5" Content="7" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="5" Content="8" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="5" Content="9" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="5" Content="*" Style="{StaticResource CalculatorButtonStyle}"/>
+
+                <Button Grid.Column="0" Grid.Row="6" Content="10^" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="6" Content="4" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="6" Content="5" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="6" Content="6" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="6" Content="-" Style="{StaticResource CalculatorButtonStyle}"/>
+
+                <Button Grid.Column="0" Grid.Row="7" Content="log" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="7" Content="1" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="7" Content="2" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="7" Content="3" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="7" Content="+" Style="{StaticResource CalculatorButtonStyle}"/>
+
+                <Button Grid.Column="0" Grid.Row="8" Content="ln" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="1" Grid.Row="8" Content="+/-" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="8" Content="0" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="8" Content="," Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="4" Grid.Row="8" Content="=" Style="{StaticResource CalculatorButtonStyle}"/>
+
+            </Grid>
+
+        </Grid>
+
+
+    </Grid>
+</Window>
