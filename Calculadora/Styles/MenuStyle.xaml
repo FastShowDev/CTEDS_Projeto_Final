@@ -258,7 +258,7 @@
     </Style>
     <!--#endregion-->
     
-    <!--#region Border-->
+    <!--#region Borders-->
     <Style x:Key="MenuBorderStyle"
            TargetType="Border">
 
@@ -304,5 +304,23 @@
     </Style>
     <!--#endregion-->
     
+    <!--#region TextBlocks-->
+    <Style x:Key="MenuTextBlockStyle"
+           TargetType="TextBlock">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Left"/>
+
+        <Setter Property="VerticalAlignment"
+                Value="Center"/>
+
+        <Setter Property="FontSize"
+                Value="18"/>
+
+        <Setter Property="Margin"
+                Value="50 0 0 0"/>
+        
+    </Style>
+    <!--#endregion-->
     
 </ResourceDictionary>
