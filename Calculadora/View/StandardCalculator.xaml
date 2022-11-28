@@ -11,25 +11,14 @@
         MinHeight="550"
         Width="400"
         MinWidth="400"
-        WindowStartupLocation="CenterScreen"
-        
-        >
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         
     </Window.Resources>
 
     <Grid>
         <Border x:Name="MenuBorder"
-                CornerRadius="0, 8 , 8, 0"
-                Background="White"
-                Width="250"
-                MinWidth="250"
-                HorizontalAlignment="Left"
-                Panel.ZIndex="1"
-                Visibility="Visible"
-                BorderBrush="Black"
-                BorderThickness="1"
-                >
+                Style="{StaticResource MenuBorderStyle}">
             <Grid x:Name="MenuBorderGrid"
                   ScrollViewer.VerticalScrollBarVisibility="Auto" 
                   ScrollViewer.CanContentScroll="True"
@@ -71,12 +60,7 @@
 
                             <Label Grid.Row="0"
                                    Content="Calculadora"
-                                   FontSize="18"
-                                   FontWeight="Light"
-                                   Margin="10, 0 , 0 ,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   />
+                                   Style="{StaticResource MenuCategoryLabelStyle}"/>
 
                             <RadioButton Grid.Row="1"
                                          Grid.Column="0"
@@ -99,23 +83,19 @@
 
                             <RadioButton Grid.Row="2"
                                          Grid.Column="0"
-                                         Style="{StaticResource MenuGridButtonStyle}"
-                                >
+                                         Style="{StaticResource MenuGridButtonStyle}">
                                 <Grid>
                                     <Image Source="/Assets/icons8-test-tube-48.png"
-                                           HorizontalAlignment="Left"
-                                           Width="30" 
-                                           Height="30"
-                                           Margin="5 0 0 0"
-                                           ></Image>
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+                                    
                                     <TextBlock Text="Científica"
                                                FontSize="18"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
-                                               Margin="50 0 0 0"
-                                               >
+                                               Margin="50 0 0 0">
 
                                     </TextBlock>
+                                    
                                 </Grid>
                             </RadioButton>
 
