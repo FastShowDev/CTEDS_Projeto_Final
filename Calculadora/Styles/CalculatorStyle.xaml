@@ -59,7 +59,7 @@
 
                         <Border.Background>
                             <SolidColorBrush x:Name="BorderBackground"
-                                             Color="Gray" />
+                                             Color="White" />
                         </Border.Background>
 
                         <Grid>
