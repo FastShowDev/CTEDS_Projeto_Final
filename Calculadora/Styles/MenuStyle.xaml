@@ -284,7 +284,7 @@
                 Value="1"/>
 
         <Setter Property="Visibility"
-                Value="Visible"/>
+                Value="Hidden"/>
 
     </Style>
     <!--#endregion-->

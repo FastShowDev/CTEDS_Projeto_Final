@@ -1,9 +1,11 @@
-﻿using Calculadora.Models;
+﻿using Calculadora.Commands;
+using Calculadora.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Calculadora.ViewModels
 {
@@ -21,13 +23,14 @@ namespace Calculadora.ViewModels
         #endregion
 
         #region Commands
-
+        //public CalculateCommand Calculate = new CalculateCommand();
         #endregion
 
         public StandardCalculatorViewModel()
         {
             calculator = new Calculator();
-        }
+        
+    }
 
 
     }

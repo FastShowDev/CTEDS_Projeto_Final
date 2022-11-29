@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calculadora.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,23 +11,19 @@ using System.Windows.Input;
 
 namespace Calculadora.Commands
 {
-    public class OpenMenuCommand : ICommand
+    public class OpenMenuCommand : CommandBase
     {
-        public event EventHandler? CanExecuteChanged;
+        private readonly BaseViewModel _viewModel;
 
-        public OpenMenuCommand()
+        public OpenMenuCommand(BaseViewModel viewModel)
         {
-
+            _viewModel = viewModel;
+            
         }
 
-        public bool CanExecute(object? parameter)
+        public override void Execute(object? parameter)
         {
-            return true;
-        }
-
-        public void Execute(object? parameter)
-        {
-            if(parameter != null)
+            if (parameter != null)
             {
                 Border menu = (Border)parameter;
                 menu.Visibility = Visibility.Visible;
@@ -35,10 +32,6 @@ namespace Calculadora.Commands
             {
                 throw new NullReferenceException();
             }
-        }
-        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }

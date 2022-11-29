@@ -3,24 +3,20 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using Calculadora.ViewModels;
 
 namespace Calculadora.Commands
 {
-    public class CloseMenuCommand : ICommand
+    public class CloseMenuCommand : CommandBase
     {
-        public event EventHandler? CanExecuteChanged;
-
-        public CloseMenuCommand()
+        private readonly BaseViewModel _viewModel;
+        public CloseMenuCommand(BaseViewModel viewModel)
         {
-
+            _viewModel = viewModel;
+            //_viewModel.PropertyChanged += OnCanExecuteChanged;
         }
 
-        public bool CanExecute(object? parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object? parameter)
+        public override void Execute(object? parameter)
         {
             if (parameter != null)
             {
@@ -32,9 +28,6 @@ namespace Calculadora.Commands
                 throw new NullReferenceException();
             }
         }
-        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
-        }
+
     }
 }

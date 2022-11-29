@@ -77,7 +77,7 @@ namespace Calculadora.View
             }
             CalculatorDisplay.Text += pressedButtonValue;
             lastButtonPressed = "number";
-            
+
         }
     }
 }

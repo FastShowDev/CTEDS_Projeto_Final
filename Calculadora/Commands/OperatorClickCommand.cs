@@ -1,4 +1,5 @@
 ﻿using Calculadora.Models;
+using Calculadora.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,17 @@ using System.Windows.Input;
 
 namespace Calculadora.Commands
 {
-    public class OperatorClickCommand : ICommand
+    public class OperatorClickCommand : CommandBase
     {
-        public event EventHandler? CanExecuteChanged;
         private Calculator _calculator;
-        public OperatorClickCommand(Calculator calculator)
+        private readonly BaseViewModel _viewModel;
+        public OperatorClickCommand(BaseViewModel viewModel, Calculator calculator)
         {
             _calculator = calculator;
+            _viewModel = viewModel;
         }
 
-        public bool CanExecute(object? parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object? parameter)
+        public override void Execute(object? parameter)
         {
             string objName = ((Button)parameter).Name;
             char pressedButtonValue = Convert.ToChar((parameter as Button).Content);

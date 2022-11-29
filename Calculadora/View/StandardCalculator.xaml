@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora.View"
+        xmlns:vm="clr-namespace:Calculadora.ViewModels"
         mc:Ignorable="d"
         x:Name="Calculadora"
         Title="Calculadora" 
@@ -13,10 +14,10 @@
         MinWidth="400"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        
+        <vm:StandardCalculatorViewModel x:Key="standardVM"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid DataContext="{StaticResource standardVM}">
         <Border x:Name="MenuBorder"
                 Style="{StaticResource MenuBorderStyle}">
             <Grid x:Name="MenuBorderGrid"
@@ -36,7 +37,7 @@
                         Style="{StaticResource CloseMenuButtonStyle}"
                         Grid.Row="0" 
                         Grid.Column="0"
-                        Click="CloseMenuButton_Click">
+                        Command="{Binding CloseMenu}" CommandParameter="{Binding ElementName=MenuBorder}">
                 </Button>
 
 
@@ -122,7 +123,7 @@
                         x:Name="OpenMenuButton" 
                         Grid.Row="0"
                         Grid.Column="0"
-                        Click="MenuBtn_Click">
+                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=MenuBorder}">
                 </Button>
                 
 
@@ -219,7 +220,7 @@
                 <Button Grid.Column="0" Grid.Row="5" Content="+/-" Style="{StaticResource CalculatorButtonStyle}"/>
                 <Button x:Name="button_0" Grid.Column="1" Grid.Row="5" Content="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                 <Button x:Name="button_float" Grid.Column="2" Grid.Row="5" Content="," Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
-                <Button x:Name="button_equals" Grid.Column="3" Grid.Row="5" Content="=" Style="{StaticResource CalculatorButtonStyle}" />
+                <Button x:Name="button_equals" Grid.Column="3" Grid.Row="5" Content="=" Style="{StaticResource CalculatorButtonStyle}" Command="{Binding Calculate}"/>
                
             </Grid>
             
