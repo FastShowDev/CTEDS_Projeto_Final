@@ -15,7 +15,7 @@ namespace Calculadora.Commands
         {
             _viewModel.displayContent = "0";
             _viewModel.stringResult = "";
-            _viewModel.calculator.lastButtonPressed = "number";
+            _viewModel.calculator.ClearDisplay();
         }
     }
 }
