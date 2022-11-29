@@ -82,6 +82,21 @@ namespace Calculadora.Models
         }
 
 
+
+        /// <summary>
+        /// Método que limpa o display e atualiza as flags
+        /// </summary>
+        public void ClearDisplay()
+        {
+            lastButtonPressed = "number";
+            displayContent = "0";
+            result = "";
+            isFloat = false;
+            isNumber = true;
+            isOperation = false;
+        }
+
+
         /// <summary>
         /// Método que recebe uma expressão matemática simples, contendo apenas operadores aritiméticos elementares e parênteses e faz seu cálculo.
         /// É necessário que a expressão esteja corretamente digitada, caso contrário mostra um MessageBox contendo um aviso de erro.
