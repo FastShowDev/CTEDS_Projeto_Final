@@ -152,7 +152,7 @@
                 
                 <Viewbox Grid.Row="0"
                          HorizontalAlignment="Right">
-                    <TextBlock Text="Resultado"
+                    <TextBlock Text="{Binding stringResult}"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center"
                                Margin="0, 0, 10, 0"/>
@@ -163,7 +163,7 @@
                      Stretch="Uniform"
                      HorizontalAlignment="Right">
                     <TextBox x:Name="CalculatorDisplay"
-                       Text="0"
+                       Text="{Binding displayContent}"
                        Margin="0, 0, 10, 0"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center" 
@@ -192,36 +192,96 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Content="MC" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="0" Content="ME" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="0" Content="M+" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{StaticResource CalculatorButtonStyle}"/>
+                
+                <!--#region Memory Buttons-->
+                <Button Grid.Column="0" Grid.Row="0" Content="MC" 
+                        Style="{StaticResource CalculatorButtonStyle}"/>
+                
+                <Button Grid.Column="1" Grid.Row="0" Content="ME" 
+                        Style="{StaticResource CalculatorButtonStyle}"/>
+                
+                <Button Grid.Column="2" Grid.Row="0" Content="M+" 
+                        Style="{StaticResource CalculatorButtonStyle}"/>
+                
+                <Button Grid.Column="3" Grid.Row="0" Content="M-" 
+                        Style="{StaticResource CalculatorButtonStyle}"/>
+                <!--#endregion-->
 
-                <Button Grid.Column="0" Grid.Row="1" Content="CE" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="1" Content="C" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="1" Content="Back" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="1" Content="/" Style="{StaticResource CalculatorButtonStyle}" Click="Operator_Click"/>
-
-                <Button x:Name="button_7" Grid.Column="0" Grid.Row="2" Content="7" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button x:Name="button_8" Grid.Column="1" Grid.Row="2" Content="8" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button x:Name="button_9" Grid.Column="2" Grid.Row="2" Content="9" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button Grid.Column="3" Grid.Row="2" Content="*" Style="{StaticResource CalculatorButtonStyle}" Click="Operator_Click"/>
-
-                <Button x:Name="button_4" Grid.Column="0" Grid.Row="3" Content="4" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button x:Name="button_5" Grid.Column="1" Grid.Row="3" Content="5" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button x:Name="button_6" Grid.Column="2" Grid.Row="3" Content="6" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button x:Name="button_plus" Grid.Column="3" Grid.Row="3" Content="+" Style="{StaticResource CalculatorButtonStyle}" Click="Operator_Click"/>
-
-                <Button x:Name="button_1" Grid.Column="0" Grid.Row="4" Content="1" Style="{StaticResource CalculatorButtonStyle}"  Click="Number_Click"/>
-                <Button x:Name="button_2" Grid.Column="1" Grid.Row="4" Content="2" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
-                <Button x:Name="button_3" Grid.Column="2" Grid.Row="4" Content="3" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
-                <Button Grid.Column="3" Grid.Row="4" Content="-" Style="{StaticResource CalculatorButtonStyle}" Click="Operator_Click"/>
-
-                <Button Grid.Column="0" Grid.Row="5" Content="+/-" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button x:Name="button_0" Grid.Column="1" Grid.Row="5" Content="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
-                <Button x:Name="button_float" Grid.Column="2" Grid.Row="5" Content="," Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
-                <Button x:Name="button_equals" Grid.Column="3" Grid.Row="5" Content="=" Style="{StaticResource CalculatorButtonStyle}" Command="{Binding Calculate}"/>
-               
+                
+                <!--#region Buttons: CE, C, BACK, /-->
+                <Button Grid.Column="0" Grid.Row="1" Content="CE" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
+                
+                <Button Grid.Column="1" Grid.Row="1" Content="C" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
+                
+                <Button Grid.Column="2" Grid.Row="1" Content="Back" 
+                        Style="{StaticResource CalculatorButtonStyle}"/>
+                
+                <Button x:Name="button_divide" Grid.Column="3" Grid.Row="1" Content="/" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_divide}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: 7, 8, 9, *-->
+                <Button x:Name="button_7" Grid.Column="0" Grid.Row="2" Content="7" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_7}"/>
+                
+                <Button x:Name="button_8" Grid.Column="1" Grid.Row="2" Content="8" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_8}"/>
+                
+                <Button x:Name="button_9" Grid.Column="2" Grid.Row="2" Content="9" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_9}"/>
+                
+                <Button x:Name="button_times" Grid.Column="3" Grid.Row="2" Content="*" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_times}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: 4, 5, 6, PLUS-->
+                <Button x:Name="button_4" Grid.Column="0" Grid.Row="3" Content="4" 
+                        Style="{StaticResource CalculatorButtonStyle}"  Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_4}"/>
+                
+                <Button x:Name="button_5" Grid.Column="1" Grid.Row="3" Content="5" 
+                        Style="{StaticResource CalculatorButtonStyle}"  Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_5}"/>
+                
+                <Button x:Name="button_6" Grid.Column="2" Grid.Row="3" Content="6" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_6}"/>
+                
+                <Button x:Name="button_plus" Grid.Column="3" Grid.Row="3" Content="+" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_plus}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: 1, 2, 3, MINUS-->
+                <Button x:Name="button_1" Grid.Column="0" Grid.Row="4" Content="1" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_1}"/>
+                
+                <Button x:Name="button_2" Grid.Column="1" Grid.Row="4" Content="2" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_2}"/>
+                
+                <Button x:Name="button_3" Grid.Column="2" Grid.Row="4" Content="3" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_3}"/>
+                
+                <Button x:Name="button_minus" Grid.Column="3" Grid.Row="4" Content="-" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_minus}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: +/-, 0, DOT, EQUALS -->
+                <Button x:Name="button_change_sinal" Grid.Column="0" Grid.Row="5" Content="+/-" 
+                        Style="{StaticResource CalculatorButtonStyle}"/>
+                
+                <Button x:Name="button_0" Grid.Column="1" Grid.Row="5" Content="0" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_0}"/>
+                
+                <Button x:Name="button_float" Grid.Column="2" Grid.Row="5" Content="," 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_float}"/>
+                
+                <Button x:Name="button_equals" Grid.Column="3" Grid.Row="5" Content="=" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding CalculateCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
+               <!--#endregion-->
+                
             </Grid>
             
         </Grid>
