@@ -9,11 +9,9 @@ namespace Calculadora.Commands
 {
     public class CloseMenuCommand : CommandBase
     {
-        private readonly BaseViewModel _viewModel;
-        public CloseMenuCommand(BaseViewModel viewModel)
+        public CloseMenuCommand()
         {
-            _viewModel = viewModel;
-            //_viewModel.PropertyChanged += OnCanExecuteChanged;
+
         }
 
         public override void Execute(object? parameter)

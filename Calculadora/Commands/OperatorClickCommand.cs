@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -12,29 +13,21 @@ namespace Calculadora.Commands
 {
     public class OperatorClickCommand : CommandBase
     {
-        private Calculator _calculator;
-        private readonly BaseViewModel _viewModel;
-        public OperatorClickCommand(BaseViewModel viewModel, Calculator calculator)
+        private readonly StandardCalculatorViewModel _viewModel;
+        public OperatorClickCommand(StandardCalculatorViewModel viewModel)
         {
-            _calculator = calculator;
             _viewModel = viewModel;
         }
 
         public override void Execute(object? parameter)
         {
-            string objName = ((Button)parameter).Name;
-            char pressedButtonValue = Convert.ToChar((parameter as Button).Content);
-            if (_calculator.lastButtonPressed == "operator")
+            if(parameter != null)
             {
-                int lastDisplayIndex = _calculator.displayContent.Length - 1;
-                string display = _calculator.displayContent.Substring(0, lastDisplayIndex);
-                display += pressedButtonValue;
-                _calculator.displayContent = display.ToString();
-            }
-            else
-            {
-                _calculator.lastButtonPressed = "operator";
-                _calculator.displayContent += pressedButtonValue;
+                string objName = ((Button)parameter).Name;
+                string pressedButtonValue = (parameter as Button).Content.ToString();
+
+                _viewModel.calculator.InsertOperatorInDisplay(objName, pressedButtonValue);
+                _viewModel.displayContent = _viewModel.calculator.displayContent;
             }
         }
     }

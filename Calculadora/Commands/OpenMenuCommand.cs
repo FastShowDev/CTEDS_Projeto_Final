@@ -13,11 +13,9 @@ namespace Calculadora.Commands
 {
     public class OpenMenuCommand : CommandBase
     {
-        private readonly BaseViewModel _viewModel;
 
-        public OpenMenuCommand(BaseViewModel viewModel)
+        public OpenMenuCommand()
         {
-            _viewModel = viewModel;
             
         }
 

@@ -13,31 +13,24 @@ namespace Calculadora.Commands
 {
     public class NumberClickCommand : CommandBase
     {
-        private Calculator _calculator;
-        private readonly BaseViewModel _viewModel;
+        private readonly StandardCalculatorViewModel _viewModel;
 
-        public NumberClickCommand(BaseViewModel viewModel,Calculator calculator)
+        public NumberClickCommand(StandardCalculatorViewModel viewModel)
         {
-            _calculator = calculator;
             _viewModel = viewModel;
             
         }
 
         public override void Execute(object? parameter)
         {
-            _calculator.isNumber = true;
-            string objName = ((Button)parameter).Name;
-            string pressedButtonValue = Convert.ToString((parameter as Button).Content);
-            if (_calculator.displayContent == "0" && pressedButtonValue != _calculator.DECIMAL_SPERATOR)
+            if (parameter != null)
             {
-                _calculator.displayContent = "";
+                string buttonName = ((Button)parameter).Name;
+                string pressedButtonValue = Convert.ToString((parameter as Button).Content);
+
+                _viewModel.displayContent = _viewModel.calculator.InsertNumberInDisplay(buttonName, pressedButtonValue);
             }
-            if (objName == "button_float")
-            {
-                _calculator.isFloat = true;
-            }
-            _calculator.displayContent += pressedButtonValue;
-            _calculator.lastButtonPressed = "number";
+            
         }
     }
 }
