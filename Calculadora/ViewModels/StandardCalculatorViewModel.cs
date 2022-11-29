@@ -11,26 +11,44 @@ namespace Calculadora.ViewModels
 {
     public class StandardCalculatorViewModel : BaseViewModel
     {
-        private Calculator calculator;
+        public Calculator calculator;
+
 
         #region Properties
         private string _displayContent = "0";
-        public string DisplayContent
+        public string displayContent
         {
             get { return _displayContent; }
-            set { _displayContent = value; }
+            set { _displayContent = value; OnPropertyChanged(nameof(displayContent)); }
+        }
+
+        private string _stringResult = "";
+        public string stringResult
+        {
+            get { return _stringResult; }
+            set { _stringResult = value; OnPropertyChanged(nameof(stringResult)); }
         }
         #endregion
 
+
         #region Commands
-        //public CalculateCommand Calculate = new CalculateCommand();
+        public ICommand ClearDisplayCM { get; }
+        public ICommand NumberClickCM { get; }
+        public ICommand OperatorClickCM { get; }
+        public ICommand CalculateCM { get; }
         #endregion
+
 
         public StandardCalculatorViewModel()
         {
             calculator = new Calculator();
-        
-    }
+            ClearDisplayCM = new ClearDisplayCommand(this);
+            NumberClickCM = new NumberClickCommand(this);
+            OperatorClickCM = new OperatorClickCommand(this);
+            CalculateCM = new CalculateCommand(this);
+            
+            
+        }
 
 
     }
