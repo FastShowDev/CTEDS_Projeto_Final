@@ -15,13 +15,11 @@ namespace Calculadora.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         public ICommand OpenMenu { get; }
         public ICommand CloseMenu { get; }
-        public ICommand Calculate { get; }
 
         public BaseViewModel()
         {
-            OpenMenu = new OpenMenuCommand(this);
-            CloseMenu = new CloseMenuCommand(this);
-            Calculate = new CalculateCommand(this);
+            OpenMenu = new OpenMenuCommand();
+            CloseMenu = new CloseMenuCommand();
 
         }
         protected void OnPropertyChanged(string propertyName)
