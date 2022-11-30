@@ -133,14 +133,14 @@
                        HorizontalAlignment="Left"
                        Content="Padrão" 
                        FontWeight="Bold"
-                       Margin="10, 0, 0, 0"
-                       />
-                <Image Source="/Assets/icons8-clock-settings-48.png"
-                       HorizontalAlignment="Center"
-                       Grid.Column="2"
-                       Height="40"
-                       Width="40"
-                       />
+                       Margin="10, 0, 0, 0"/>
+                
+                <Button x:Name="OpenHistoryButton"
+                        Style="{StaticResource OpenHistoryButtonStyle}"
+                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=HistoryMenuBorder}"
+                        Grid.Row="0"
+                        Grid.Column="2"/>
+                
             </Grid>
 
             <Grid Grid.Row="1">
@@ -286,5 +286,49 @@
             
         </Grid>
 
+        <Border x:Name="HistoryMenuBorder"
+                Style="{StaticResource HistoryBorderStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal">
+                    
+                    <Button Style="{StaticResource CloseHistoryButtonStyle}"
+                            Command="{Binding CloseMenu}"
+                            CommandParameter="{Binding ElementName=HistoryMenuBorder}"/>
+                    
+                    <RadioButton Margin="5"
+                            Style="{StaticResource HistoryRadioButtonStyle}"
+                                 
+                            >
+                        <TextBlock Text="Histórico"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="18"/>
+                    </RadioButton>
+                    
+                    <RadioButton x:Name="Memory"
+                                 Margin="5"
+                                 Style="{StaticResource HistoryRadioButtonStyle}">
+                        <TextBlock Text="Memória"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="18"/>
+                    </RadioButton>
+                </StackPanel>
+
+
+            </Grid>
+            
+        </Border>
+        
     </Grid>
 </Window>
