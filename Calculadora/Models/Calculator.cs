@@ -43,11 +43,12 @@ namespace Calculadora.Models
 
             if (buttonName == "button_float")
             {
-                if (isFloat)
+                if (lastButtonPressed == "float")
                 {
                     return displayContent;
                 }
                 isFloat = true;
+                lastButtonPressed = "float";
             }
             displayContent += pressedButtonValue;
             lastButtonPressed = "number";
