@@ -32,6 +32,7 @@ namespace Calculadora.ViewModels
 
 
         #region Commands
+        public ICommand BackspaceCM { get; }
         public ICommand ClearDisplayCM { get; }
         public ICommand NumberClickCM { get; }
         public ICommand OperatorClickCM { get; }
@@ -42,6 +43,7 @@ namespace Calculadora.ViewModels
         public StandardCalculatorViewModel()
         {
             calculator = new Calculator();
+            BackspaceCM = new BackspaceCommand(this);
             ClearDisplayCM = new ClearDisplayCommand(this);
             NumberClickCM = new NumberClickCommand(this);
             OperatorClickCM = new OperatorClickCommand(this);

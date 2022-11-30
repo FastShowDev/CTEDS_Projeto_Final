@@ -216,7 +216,7 @@
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
                 
                 <Button Grid.Column="2" Grid.Row="1" Content="Back" 
-                        Style="{StaticResource CalculatorButtonStyle}"/>
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding BackspaceCM}"/>
                 
                 <Button x:Name="button_divide" Grid.Column="3" Grid.Row="1" Content="/" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_divide}"/>
