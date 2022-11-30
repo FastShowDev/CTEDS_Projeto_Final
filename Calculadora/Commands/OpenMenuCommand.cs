@@ -13,10 +13,15 @@ namespace Calculadora.Commands
 {
     public class OpenMenuCommand : CommandBase
     {
-
-        public OpenMenuCommand()
+        BaseViewModel _viewModel;
+        public OpenMenuCommand(BaseViewModel viewModel)
         {
-            
+            _viewModel = viewModel;
+        }
+
+        public override bool CanExecute(object? parameter)
+        {
+            return !_viewModel.IsMenuOpen;
         }
 
         public override void Execute(object? parameter)
@@ -25,6 +30,7 @@ namespace Calculadora.Commands
             {
                 Border menu = (Border)parameter;
                 menu.Visibility = Visibility.Visible;
+                _viewModel.IsMenuOpen = true;
             }
             else
             {

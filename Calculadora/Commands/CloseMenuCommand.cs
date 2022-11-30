@@ -9,9 +9,10 @@ namespace Calculadora.Commands
 {
     public class CloseMenuCommand : CommandBase
     {
-        public CloseMenuCommand()
+        BaseViewModel _viewModel;
+        public CloseMenuCommand(BaseViewModel viewModel)
         {
-
+            _viewModel = viewModel;
         }
 
         public override void Execute(object? parameter)
@@ -20,6 +21,7 @@ namespace Calculadora.Commands
             {
                 Border menu = (Border)parameter;
                 menu.Visibility = Visibility.Hidden;
+                _viewModel.IsMenuOpen = false;
             }
             else
             {

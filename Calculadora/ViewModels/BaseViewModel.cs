@@ -13,13 +13,22 @@ namespace Calculadora.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        private bool isMenuOpen = false;
+        public bool IsMenuOpen
+        {
+            get { return isMenuOpen; }
+            set { isMenuOpen = value; OnPropertyChanged(nameof(IsMenuOpen)); }
+        }
+
+
         public ICommand OpenMenu { get; }
         public ICommand CloseMenu { get; }
 
         public BaseViewModel()
         {
-            OpenMenu = new OpenMenuCommand();
-            CloseMenu = new CloseMenuCommand();
+            OpenMenu = new OpenMenuCommand(this);
+            CloseMenu = new CloseMenuCommand(this);
 
         }
         protected void OnPropertyChanged(string propertyName)
