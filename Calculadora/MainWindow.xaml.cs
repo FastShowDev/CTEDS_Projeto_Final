@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Calculadora.Database;
 using Calculadora.Models;
 using Calculadora.View;
+using Calculadora.ViewModels;
 
 namespace Calculadora
 {
@@ -29,6 +30,9 @@ namespace Calculadora
         {
             this.context = context;
             InitializeComponent();
+            StandardCalculator standardCalculator = new StandardCalculator();
+            standardCalculator.Show();
+
             
         }
 

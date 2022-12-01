@@ -35,8 +35,7 @@ namespace Calculadora
 
         private void OnStartup(object s, StartupEventArgs e)
         {
-            var standardCalculatorView = new StandardCalculator();
-            standardCalculatorView.Show();
+            var mainWindow = serviceProvider.GetService<MainWindow>();
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Calculadora.View
     /// </summary>
     public partial class StandardCalculator : Window
     {
+
         public StandardCalculator()
         {
             InitializeComponent();
