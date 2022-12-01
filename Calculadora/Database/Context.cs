@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculadora.Context
+namespace Calculadora.Database
 {
     public class Context : DbContext
     {
@@ -24,15 +24,17 @@ namespace Calculadora.Context
                 entity.HasData(
                     new History
                     {
-                        Id = new Guid(),
+                        Id = 1,
+                        fullExpression = "18+4-2+5 = 25",
                         expression = "18+4-2+5",
                         result = "25",
                     },
                     new History
                     {
-                        Id = new Guid(),
-                        expression = "",
-                        result = "",
+                        Id = 2,
+                        fullExpression = "30*3+2/2-1=90",
+                        expression = "30*3+2/2-1",
+                        result = "90",
                     });
             });
             base.OnModelCreating(modelBuilder);
