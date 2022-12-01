@@ -55,10 +55,10 @@ namespace Calculadora.ViewModels
             CalculateCM = new CalculateCommand(this);
             InitDbCM = new InitDbCommand(this);
 
-            var contextOptions = new DbContextOptionsBuilder<Context>().UseSqlite("Data source = Test.db").Options;
+            var contextOptions = new DbContextOptionsBuilder<Context>().UseSqlite("Data source = History.db").Options;
             context = new Context(contextOptions);
 
-            histories = context.Users.ToList();
+            histories = context.History.ToList();
 
         }
 

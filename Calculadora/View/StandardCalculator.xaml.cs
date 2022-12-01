@@ -29,9 +29,9 @@ namespace Calculadora.View
         {
             var mainWindow = new MainWindow();
             mainWindow.Show();
-            var contextOptions = new DbContextOptionsBuilder<Context>().UseSqlite("Data source = Test.db").Options;
+            var contextOptions = new DbContextOptionsBuilder<Context>().UseSqlite("Data source = History.db").Options;
             myContext = new Context(contextOptions);
-            myHistories = myContext.Users.ToList();
+            myHistories = myContext.History.ToList();
         }
     }
 }

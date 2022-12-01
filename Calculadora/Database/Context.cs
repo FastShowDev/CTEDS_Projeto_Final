@@ -15,7 +15,7 @@ namespace Calculadora.Database
             Database.EnsureCreated();
         }
 
-        public DbSet<History> Users { get; set; }
+        public DbSet<History> History { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
