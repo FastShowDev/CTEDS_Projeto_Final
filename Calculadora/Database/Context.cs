@@ -15,7 +15,7 @@ namespace Calculadora.Database
             Database.EnsureCreated();
         }
 
-        public DbSet<History> History { get; set; }
+        public DbSet<History> Histories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,11 @@ namespace Calculadora.Database
                         result = "90",
                     });
             });
+
+            modelBuilder.Entity<History>()
+                .Property(f => f.Id)
+                .ValueGeneratedOnAdd();
+
             base.OnModelCreating(modelBuilder);
         }
     }
