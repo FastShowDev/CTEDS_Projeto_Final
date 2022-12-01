@@ -6,12 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Calculadora.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Calculadora.ViewModels
 {
     public class StandardCalculatorViewModel : BaseViewModel
     {
         public Calculator calculator;
+        public readonly Context context;
+        public List<History> histories;
 
 
         #region Properties
@@ -37,6 +41,7 @@ namespace Calculadora.ViewModels
         public ICommand NumberClickCM { get; }
         public ICommand OperatorClickCM { get; }
         public ICommand CalculateCM { get; }
+        public ICommand InitDbCM { get; }
         #endregion
 
 
@@ -48,8 +53,13 @@ namespace Calculadora.ViewModels
             NumberClickCM = new NumberClickCommand(this);
             OperatorClickCM = new OperatorClickCommand(this);
             CalculateCM = new CalculateCommand(this);
-            
-            
+            InitDbCM = new InitDbCommand(this);
+
+            var contextOptions = new DbContextOptionsBuilder<Context>().UseSqlite("Data source = History.db").Options;
+            context = new Context(contextOptions);
+
+            histories = context.History.ToList();
+
         }
 
 

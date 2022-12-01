@@ -23,14 +23,18 @@ namespace Calculadora.Database
             {
                 entity.HasData(
                     new History
-                    {   Id = 1,
-                        Expression = "18+4-2+5",
-                        Result = "25",
+                    {
+                        Id = 1,
+                        fullExpression = "18+4-2+5 = 25",
+                        expression = "18+4-2+5",
+                        result = "25",
                     },
                     new History
-                    {   Id = 2,
-                        Expression = "10+10",
-                        Result = "20",
+                    {
+                        Id = 2,
+                        fullExpression = "30*3+2/2-1=90",
+                        expression = "30*3+2/2-1",
+                        result = "90",
                     });
             });
 

@@ -307,7 +307,8 @@
                     
                     <RadioButton Margin="5"
                             Style="{StaticResource HistoryRadioButtonStyle}"
-                                 
+                            Command="{Binding InitDbCM}"
+                            CommandParameter="{Binding ElementName=HistoryDataGrid}"
                             >
                         <TextBlock Text="Histórico"
                                    VerticalAlignment="Center"
@@ -325,7 +326,19 @@
                     </RadioButton>
                 </StackPanel>
 
-
+                <DataGrid x:Name="HistoryDataGrid"
+                          Grid.Row="1"
+                          IsSynchronizedWithCurrentItem="True"
+                          Margin="0"
+                          FontSize="20"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Histórico" Binding="{Binding fullExpression}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+                
             </Grid>
             
         </Border>

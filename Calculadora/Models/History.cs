@@ -9,7 +9,8 @@ namespace Calculadora.Models
     public class History
     {
         public int Id { get; set; }
-        public string? Expression { get; set; }
-        public string? Result { get; set; }
+        public string fullExpression { get; set; }
+        public string? expression { get; set; }
+        public string? result { get; set; }
     }
 }

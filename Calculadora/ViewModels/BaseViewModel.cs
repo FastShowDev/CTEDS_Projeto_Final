@@ -31,7 +31,6 @@ namespace Calculadora.ViewModels
         {
             OpenMenu = new OpenMenuCommand(this);
             CloseMenu = new CloseMenuCommand(this);
-
         }
         protected void OnPropertyChanged(string propertyName)
         {
