@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculadora.Context
+namespace Calculadora.Database
 {
     public class Context : DbContext
     {
@@ -15,7 +15,7 @@ namespace Calculadora.Context
             Database.EnsureCreated();
         }
 
-        public DbSet<History> Users { get; set; }
+        public DbSet<History> Histories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,18 +23,21 @@ namespace Calculadora.Context
             {
                 entity.HasData(
                     new History
-                    {
-                        Id = new Guid(),
-                        expression = "18+4-2+5",
-                        result = "25",
+                    {   Id = 1,
+                        Expression = "18+4-2+5",
+                        Result = "25",
                     },
                     new History
-                    {
-                        Id = new Guid(),
-                        expression = "",
-                        result = "",
+                    {   Id = 2,
+                        Expression = "10+10",
+                        Result = "20",
                     });
             });
+
+            modelBuilder.Entity<History>()
+                .Property(f => f.Id)
+                .ValueGeneratedOnAdd();
+
             base.OnModelCreating(modelBuilder);
         }
     }

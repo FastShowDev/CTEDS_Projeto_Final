@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Calculadora.Database;
+using Calculadora.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,7 @@ namespace Calculadora.View
     /// </summary>
     public partial class ScientificCalculator : Window
     {
-        public ScientificCalculator()
+        public ScientificCalculator(Context context)
         {
             InitializeComponent();
         }
