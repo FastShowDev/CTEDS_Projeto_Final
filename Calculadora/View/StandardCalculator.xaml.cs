@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Calculadora.Database;
+using Calculadora.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +23,15 @@ namespace Calculadora.View
     /// </summary>
     public partial class StandardCalculator : Window
     {
-
+        public Context myContext;
+        public List<History> myHistories;
+        public StandardCalculator()
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            var contextOptions = new DbContextOptionsBuilder<Context>().UseSqlite("Data source = Test.db").Options;
+            myContext = new Context(contextOptions);
+            myHistories = myContext.Users.ToList();
+        }
     }
 }

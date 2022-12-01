@@ -1,4 +1,5 @@
 ﻿using Calculadora.Commands;
+using Calculadora.Database;
 using Calculadora.Models;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,6 @@ namespace Calculadora.ViewModels
         {
             OpenMenu = new OpenMenuCommand(this);
             CloseMenu = new CloseMenuCommand(this);
-
         }
         protected void OnPropertyChanged(string propertyName)
         {
