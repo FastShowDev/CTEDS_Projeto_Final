@@ -32,7 +32,7 @@ namespace Calculadora.Database
                     new History
                     {
                         Id = 2,
-                        fullExpression = "30*3+2/2-1=90",
+                        fullExpression = "30*3+2/2-1 = 90",
                         expression = "30*3+2/2-1",
                         result = "90",
                     });
