@@ -26,6 +26,11 @@ namespace Calculadora.Commands
                 string objName = ((Button)parameter).Name;
                 string pressedButtonValue = (parameter as Button).Content.ToString();
 
+                if(pressedButtonValue == "mod")
+                {
+                    pressedButtonValue = "%";
+                }
+
                 _viewModel.calculator.InsertOperatorInDisplay(objName, pressedButtonValue);
                 _viewModel.displayContent = _viewModel.calculator.displayContent;
             }

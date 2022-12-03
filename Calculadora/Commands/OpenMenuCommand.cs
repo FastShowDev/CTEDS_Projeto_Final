@@ -1,13 +1,7 @@
-﻿using Calculadora.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Calculadora.Stores;
+using Calculadora.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Calculadora.Commands
 {
@@ -18,24 +12,17 @@ namespace Calculadora.Commands
         {
             _viewModel = viewModel;
         }
-
+#nullable enable
         public override bool CanExecute(object? parameter)
         {
-            return !_viewModel.IsMenuOpen;
+            return !NavigationStore.CurrentViewModel.IsMenuOpen;
         }
-
+#nullable enable
         public override void Execute(object? parameter)
         {
-            if (parameter != null)
-            {
-                Border menu = (Border)parameter;
-                menu.Visibility = Visibility.Visible;
-                _viewModel.IsMenuOpen = true;
-            }
-            else
-            {
-                throw new NullReferenceException();
-            }
+            Border menu = (Border)parameter;
+            menu.Visibility = Visibility.Visible;
+            NavigationStore.CurrentViewModel.IsMenuOpen = true;
         }
     }
 }

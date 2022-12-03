@@ -28,6 +28,7 @@
     </Style>
     <!--#endregion-->
     
+    
     <!--#region RadioButtons-->
     <Style x:Key="CalculatorRadioButtonStyle"
            TargetType="RadioButton">
@@ -133,6 +134,7 @@
     </Style>
     <!--#endregion-->
 
+    
     <!--#region Images-->
     <Style x:Key="CalculatorRadioButtonImageStyle"
            TargetType="Image">
@@ -148,8 +150,21 @@
         <Setter Property="Margin"
                 Value="0, 0, 0, 0"/>
     </Style>
+
+    <Style x:Key="BackspaceImageStyle"
+           TargetType="Image">
+        <Setter Property="Width"
+                Value="50"/>
+        <Setter Property="HorizontalAlignment"
+                Value="Center"/>
+        <Setter Property="VerticalAlignment"
+                Value="Center"/>
+        <Setter Property="Source"
+                Value="/Assets/backspace-50.png"/>
+    </Style>
     <!--#endregion-->
 
+    
     <!--#region TextBlocks-->
     <Style x:Key="CalculatorButtonTextBlockStyle"
            TargetType="TextBlock">
@@ -170,6 +185,37 @@
                 Value="30 0 10 0"/>
 
     </Style>
+
+    <Style x:Key="CalculatorDisplayResultTextBlock"
+           TargetType="TextBlock">
+        <Setter Property="Text" Value="{Binding stringResult}"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 0 10 0"/>
+    </Style>
     <!--#endregion-->
+        
+    
+    <!--#region Display (ViewBox and TextBox)-->
+    <Style x:Key="CalculatorDisplayViewBoxStyle"
+           TargetType="Viewbox">
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+
+    <Style x:Key="CalculatorDisplayTextBoxStyle"
+           TargetType="TextBox">
+        <Setter Property="Text" Value="{Binding displayContent}"/>
+        <Setter Property="Margin" Value="0 0 10 0"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="48"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <!--#endregion-->
+
+    
 
 </ResourceDictionary>

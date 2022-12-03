@@ -25,15 +25,10 @@ namespace Calculadora
     public partial class MainWindow : Window
     {
         private readonly Context context;
-        History history = new();
         public MainWindow(Context context)
         {
             this.context = context;
             InitializeComponent();
-            StandardCalculator standardCalculator = new StandardCalculator();
-            standardCalculator.Show();
-
-            
         }
 
     }
