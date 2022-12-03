@@ -1,102 +1,27 @@
-﻿<Window x:Class="Calculadora.View.StandardCalculator"
+﻿<UserControl x:Class="Calculadora.View.StandardCalculator"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora.View"
-        xmlns:vm="clr-namespace:Calculadora.ViewModels"
+        xmlns:vm="clr-namespace:Calculadora.ViewModels" 
+        d:DataContext="{x:Type vm:StandardCalculatorViewModel}"
         mc:Ignorable="d"
-        x:Name="Calculadora"
-        Title="Calculadora" 
-        Height="550"
+        x:Name="StandardCalculatorView"
+        d:DesignHeight="550"
+        d:DesignWidth="400"
         MinHeight="550"
-        Width="400"
-        MinWidth="400"
-        WindowStartupLocation="CenterScreen">
-    <Window.Resources>
+        MinWidth="400">
+    
+    <UserControl.Resources>
         <vm:StandardCalculatorViewModel x:Key="standardVM"/>
-    </Window.Resources>
+        <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
+    </UserControl.Resources>
+    
 
-    <Grid DataContext="{StaticResource standardVM}">
-        <Border x:Name="MenuBorder"
-                Style="{StaticResource MenuBorderStyle}">
-            <Grid x:Name="MenuBorderGrid"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                  ScrollViewer.CanContentScroll="True"
-                  Margin="0, 10, 0, 0"
-                  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+    <Grid Background="White" Height="auto" Width="auto">
 
-                <Button x:Name="CloseMenuButton"
-                        Style="{StaticResource CloseMenuButtonStyle}"
-                        Grid.Row="0" 
-                        Grid.Column="0"
-                        Command="{Binding CloseMenu}" CommandParameter="{Binding ElementName=MenuBorder}">
-                </Button>
-
-
-                <ScrollViewer Grid.Row="1">
-                    <Grid x:Name="MenuBorderContentGrid"
-                      >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="300"/>
-                            <RowDefinition Height="500"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <Label Grid.Row="0"
-                                   Content="Calculadora"
-                                   Style="{StaticResource MenuCategoryLabelStyle}"/>
-
-                            <RadioButton Grid.Row="1"
-                                         Grid.Column="0"
-                                         Style="{StaticResource MenuGridButtonStyle}">
-                                <Grid>
-                                    <Image Source="/Assets/icons8-calculator-50.png"
-                                           Style="{StaticResource MenuButtonImageStyle}"/>
-                                    
-                                    <TextBlock Text="Padrão"
-                                               Style="{StaticResource MenuTextBlockStyle}"/>
-                                </Grid>
-                            </RadioButton>
-
-                            <RadioButton Grid.Row="2"
-                                         Grid.Column="0"
-                                         Style="{StaticResource MenuGridButtonStyle}">
-                                <Grid>
-                                    <Image Source="/Assets/icons8-test-tube-48.png"
-                                           Style="{StaticResource MenuButtonImageStyle}"/>
-
-                                    <TextBlock Text="Científica"
-                                               Style="{StaticResource MenuTextBlockStyle}"/>
-                                </Grid>
-                            </RadioButton>
-
-
-                        </Grid>
-
-                    </Grid>
-                </ScrollViewer>
-
-            </Grid>
-
-        </Border>
-
+        <!--#region CalculatorInterface-->
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -108,7 +33,7 @@
                 <RowDefinition Height="0.8*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Height="55" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="*"/>
@@ -118,31 +43,21 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-
                 <Button Style="{StaticResource OpenMenuButtonStyle}" 
                         x:Name="OpenMenuButton" 
-                        Grid.Row="0"
-                        Grid.Column="0"
+                        Grid.Row="0" Grid.Column="0"
                         Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=MenuBorder}">
-                </Button>
+                 </Button>
                 
+                 <Label Grid.Row="0" Grid.Column="1" 
+                        Style="{StaticResource OperationModeLabelStyle}"/>
 
-                <Label Grid.Row="0"
-                       Grid.Column="1"
-                       FontSize="30"
-                       HorizontalAlignment="Left"
-                       Content="Padrão" 
-                       FontWeight="Bold"
-                       Margin="10, 0, 0, 0"/>
-                
-                <Button x:Name="OpenHistoryButton"
+                <Button Grid.Row="0" Grid.Column="2"
                         Style="{StaticResource OpenHistoryButtonStyle}"
-                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=HistoryMenuBorder}"
-                        Grid.Row="0"
-                        Grid.Column="2"/>
-                
+                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=HistoryMenuBorder}"/>
             </Grid>
-
+            
+            
             <Grid Grid.Row="1">
                 
                 <Grid.RowDefinitions>
@@ -152,25 +67,15 @@
                 
                 <Viewbox Grid.Row="0"
                          HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding stringResult}"
-                               HorizontalAlignment="Right"
-                               VerticalAlignment="Center"
-                               Margin="0, 0, 10, 0"/>
+                    <TextBlock Style="{StaticResource CalculatorDisplayResultTextBlock}"/>
                 </Viewbox>
-                
+
                 <Viewbox Grid.Row="1"
                      x:Name="CalculatorDisplayViewBox"
-                     Stretch="Uniform"
-                     HorizontalAlignment="Right">
+                     Style="{StaticResource CalculatorDisplayViewBoxStyle}">
                     <TextBox x:Name="CalculatorDisplay"
-                       Text="{Binding displayContent}"
-                       Margin="0, 0, 10, 0"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center" 
-                       FontStretch="Normal" 
-                       FontWeight="DemiBold" 
-                       FontSize="48"
-                       BorderThickness="0"/>
+                       Style="{StaticResource CalculatorDisplayTextBoxStyle}"
+                             Text="{Binding displayContent}"/>
                 </Viewbox>
 
             </Grid>
@@ -214,10 +119,12 @@
                 
                 <Button Grid.Column="1" Grid.Row="1" Content="C" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
-                
-                <Button Grid.Column="2" Grid.Row="1" Content="Back" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding BackspaceCM}"/>
-                
+
+                <Button Grid.Column="2" Grid.Row="1" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding BackspaceCM}">
+                    <Image Style="{StaticResource BackspaceImageStyle}"/>
+                </Button>
+
                 <Button x:Name="button_divide" Grid.Column="3" Grid.Row="1" Content="/" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_divide}"/>
                 <!--#endregion-->
@@ -285,9 +192,13 @@
             </Grid>
             
         </Grid>
-
+        <!--#endregion-->
+        
+        
+        <!--#region Historic/Memory Menu-->
         <Border x:Name="HistoryMenuBorder"
-                Style="{StaticResource HistoryBorderStyle}">
+                Style="{StaticResource HistoryBorderStyle}"
+                Panel.ZIndex="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -307,7 +218,7 @@
                     
                     <RadioButton Margin="5"
                             Style="{StaticResource HistoryRadioButtonStyle}"
-                            Command="{Binding InitDbCM}"
+                            Command="{Binding LoadHistoryCM}"
                             CommandParameter="{Binding ElementName=HistoryDataGrid}"
                             >
                         <TextBlock Text="Histórico"
@@ -328,20 +239,24 @@
 
                 <DataGrid x:Name="HistoryDataGrid"
                           Grid.Row="1"
-                          IsSynchronizedWithCurrentItem="True"
-                          Margin="0"
-                          FontSize="20"
-                          IsReadOnly="True"
-                          AutoGenerateColumns="False">
+                         >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Histórico" Binding="{Binding fullExpression}"/>
+                        <DataGridTextColumn Header="Cálculos" Binding="{Binding fullExpression}" 
+                                            FontWeight="Normal"
+                                            Width="*" 
+                                            CanUserReorder="False" CanUserSort="False"/>
                     </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" 
+                               >
+                        </Style>
+                    </DataGrid.CellStyle>
                 </DataGrid>
-                
-                
+
             </Grid>
             
         </Border>
+        <!--#endregion-->
         
     </Grid>
-</Window>
+</UserControl>
