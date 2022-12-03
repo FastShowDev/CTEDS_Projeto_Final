@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Calculadora.Database;
 using Calculadora.Models;
 using Calculadora.View;
+using Calculadora.ViewModels;
+using Calculadora.Stores;
+using System.Runtime.CompilerServices;
 
 namespace Calculadora
 {
@@ -19,23 +22,33 @@ namespace Calculadora
     public partial class App : Application
     {
         private readonly ServiceProvider serviceProvider;
-
+        private readonly NavigationStore _navigationStore;
         public App()
         {
             ServiceCollection services = new();
+            _navigationStore = new NavigationStore();
 
             services.AddDbContext<Context>(options =>
             {
-                options.UseSqlite("Data source = History.db");
+                options.UseSqlite("Data source = Histories.db");
             });
 
             services.AddSingleton<MainWindow>();
             serviceProvider = services.BuildServiceProvider();
+
         }
 
-        private void OnStartup(object s, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            var mainWindow = serviceProvider.GetService<MainWindow>();
+            NavigationStore.CurrentViewModel = new StandardCalculatorViewModel();
+
+            MainWindow = serviceProvider.GetService<MainWindow>();
+            MainWindow.DataContext = new MainViewModel();
+            MainWindow.Show();
+
+
+            base.OnStartup(e);
+
         }
     }
 }
