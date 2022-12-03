@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
 using Calculadora.ViewModels;
+using Calculadora.Stores;
 
 namespace Calculadora.Commands
 {
@@ -13,21 +14,21 @@ namespace Calculadora.Commands
         public CloseMenuCommand(BaseViewModel viewModel)
         {
             _viewModel = viewModel;
+        
+        }
+#nullable enable
+        public override bool CanExecute(object? parameter)
+        {
+            return true;
         }
 
         public override void Execute(object? parameter)
         {
-            if (parameter != null)
-            {
-                Border menu = (Border)parameter;
-                menu.Visibility = Visibility.Hidden;
-                _viewModel.IsMenuOpen = false;
-            }
-            else
-            {
-                throw new NullReferenceException();
-            }
-        }
+            Border menu = (Border)parameter;
+            menu.Visibility = Visibility.Hidden;
+            NavigationStore.CurrentViewModel.IsMenuOpen = false;
 
+        }
+#nullable enable
     }
 }

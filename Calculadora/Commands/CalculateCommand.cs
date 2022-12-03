@@ -26,7 +26,7 @@ namespace Calculadora.Commands
         {
             if(parameter != null)
             {
-                string expression = (parameter as TextBox).Text;
+                string expression = ((TextBox)parameter).Text;
                 _viewModel.stringResult = expression;
                 _viewModel.calculator.result = expression;
                 _viewModel.displayContent = _viewModel.calculator.CalculateExpression(expression).ToString();
