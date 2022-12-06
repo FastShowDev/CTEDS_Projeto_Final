@@ -17,10 +17,13 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            if (_viewModel.calculator.canCalculate)
+            _viewModel.calculator.lastButtonTypePressed = "backspace";
+
+            if (_viewModel.calculator.hasCalculate)
             {
                 _viewModel.displayContent = "0";
                 _viewModel.calculator.displayContent = "0";
+                _viewModel.calculator.lastButtonTypePressed = "reset";
                 return;
             }
 
@@ -34,6 +37,7 @@ namespace Calculadora.Commands
             {
                 _viewModel.displayContent = "0";
                 _viewModel.calculator.displayContent = "0";
+                _viewModel.calculator.lastButtonTypePressed = "reset";
             }
             return;
         }

@@ -28,7 +28,8 @@ namespace Calculadora.Commands
                 string buttonName = ((Button)parameter).Name;
                 string pressedButtonValue = Convert.ToString((parameter as Button).Content);
 
-                _viewModel.displayContent = _viewModel.calculator.InsertNumberInDisplay(buttonName, pressedButtonValue);
+                _viewModel.calculator.InsertNumberInDisplay(buttonName, pressedButtonValue);
+                _viewModel.displayContent = _viewModel.calculator.displayContent;
             }
             
         }
