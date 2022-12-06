@@ -105,7 +105,7 @@
                 <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{StaticResource CalculatorButtonStyle}"/>
                 <Button Grid.Column="4" Grid.Row="0" Content="M^" Style="{StaticResource CalculatorButtonStyle}"/>
 
-                <RadioButton Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource CalculatorRadioButtonStyle}">
+                <CheckBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource CalculatorCheckBoxStyle}">
                     <Grid>
                         <Image Source="/Assets/trigonometria-60.png"
                                Style="{StaticResource CalculatorRadioButtonImageStyle}"/>
@@ -113,9 +113,15 @@
                         <TextBlock Text="Trigonometria"
                                    Style="{StaticResource CalculatorButtonTextBlockStyle}"/>
                     </Grid>
-                </RadioButton>
+                </CheckBox>
                 
-                <RadioButton Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource CalculatorRadioButtonStyle}">
+                <CheckBox x:Name="FunctionButton" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource CalculatorCheckBoxStyle}"
+                          Command="">
+                    <!-- <CheckBox.CommandParameter>
+                        <MultiBinding>
+                            <Binding ElementName="FunctionButton" Path="IsChecked"></Binding>
+                        </MultiBinding>
+                    </CheckBox.CommandParameter> -->
                     <Grid>
                         <Image Source="/Assets/formula-fx-50.png"
                                Style="{StaticResource CalculatorRadioButtonImageStyle}"/>
@@ -124,18 +130,18 @@
                                    Style="{StaticResource CalculatorButtonTextBlockStyle}"
                                    Margin="35, 0, 10, 0"/>
                     </Grid>
-                </RadioButton>
+                </CheckBox>
 
                 
                 <!--#region Buttons: 2^, Pi, e, C, BACK-->
                 <Button Grid.Column="0" Grid.Row="2" Content="2^" Style="{StaticResource CalculatorButtonStyle}"
                         />
 
-                <Button Grid.Column="1" Grid.Row="2" Content="π" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                <Button x:Name="button_pi" Grid.Column="1" Grid.Row="2" Content="π" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding ConstClickCM}" CommandParameter="{Binding ElementName=button_pi}"/>
                 
-                <Button Grid.Column="2" Grid.Row="2" Content="e" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                <Button x:Name="button_e" Grid.Column="2" Grid.Row="2" Content="e" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding ConstClickCM}" CommandParameter="{Binding ElementName=button_e}"/>
                 
                 <Button Grid.Column="3" Grid.Row="2" Content="C" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding ClearDisplayCM}"/>
@@ -169,11 +175,11 @@
                 <Button x:Name="button_sqrt" Grid.Column="0" Grid.Row="4" Content="√" Style="{StaticResource CalculatorButtonStyle}"
                         />
                 
-                <Button Grid.Column="1" Grid.Row="4" Content="(" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                <Button x:Name="left_parentheses" Grid.Column="1" Grid.Row="4" Content="(" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=left_parentheses}"/>
 
                 <Button x:Name="right_parentheses" Grid.Column="2" Grid.Row="4" Content=")" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=right_parentheses}"/>
                 
                 <Button x:Name="button_fatorial" Grid.Column="3" Grid.Row="4" Content="n!" Style="{StaticResource CalculatorButtonStyle}"
                         />
