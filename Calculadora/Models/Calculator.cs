@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace Calculadora.Models
@@ -17,10 +17,12 @@ namespace Calculadora.Models
         public bool isNumber { get; set; }
         public bool isFloat { get; set; }
         public bool isOperation { get; set; }
-        public bool canCalculate { get; set; } = false;
+        public bool hasConst { get; set; }
+        public bool hasCalculate { get; set; } = false;
         public string displayContent { get; set; } = "0";
-        public string? result { get; set; }
-        public string? lastButtonPressed { get; set; }
+        public string result { get; set; } = "";
+        public Stack<string> buttonsTypePressed { get; }
+        public string? lastButtonTypePressed { get; set; }
         #endregion
 
         
@@ -32,10 +34,12 @@ namespace Calculadora.Models
         /// </summary>
         /// <param name="buttonName"></param>
         /// <param name="pressedButtonValue"></param>
-        /// <returns>string contendo o valor atualizado do display</returns>
-        public string InsertNumberInDisplay(string buttonName, string pressedButtonValue)
+        /// <returns></returns>
+        public void InsertNumberInDisplay(string buttonName, string pressedButtonValue)
         {
+            MessageBox.Show("Numero: " + buttonsTypePressed.Peek());
             isNumber = true;
+            hasCalculate = false;
             if (displayContent == "0" && pressedButtonValue != DECIMAL_SPERATOR)
             {
                 displayContent = "";
@@ -43,16 +47,23 @@ namespace Calculadora.Models
 
             if (buttonName == "button_float")
             {
-                if (lastButtonPressed == "float")
+                if (lastButtonTypePressed == "float")
                 {
-                    return displayContent;
+                    return;
                 }
                 isFloat = true;
-                lastButtonPressed = "float";
+                lastButtonTypePressed = "float";
+                displayContent += pressedButtonValue;
+                return;
             }
+            if(lastButtonTypePressed == "right_parenthesis")
+            {
+                pressedButtonValue = "*" + pressedButtonValue;
+            }
+
             displayContent += pressedButtonValue;
-            lastButtonPressed = "number";
-            return displayContent;
+            lastButtonTypePressed = "number";
+            return;
         }
 
 
@@ -66,7 +77,14 @@ namespace Calculadora.Models
         /// <returns></returns>
         public void InsertOperatorInDisplay(string buttonName, string pressedButtonValue)
         {
-            if (lastButtonPressed == "operator")
+            MessageBox.Show("Operador: " + lastButtonTypePressed);
+            if(lastButtonTypePressed == "left_parenthesis")
+            {
+                return;
+            }
+
+
+            if (lastButtonTypePressed == "operator")
             {
                 int newDisplayLenght = displayContent.Length - 1;
                 string display = displayContent.Substring(0, newDisplayLenght);
@@ -75,11 +93,86 @@ namespace Calculadora.Models
             }
             else
             {
-                lastButtonPressed = "operator";
+                lastButtonTypePressed = "operator";
                 displayContent += pressedButtonValue;
             }
 
             return;
+        }
+
+
+        public void InsertParenthesisInDisplay(string value)
+        {
+            MessageBox.Show(lastButtonTypePressed);
+
+            if(lastButtonTypePressed == "number" && value != ")")
+            {
+                displayContent += "*(";
+                lastButtonTypePressed = "left_parenthesis";
+                return;
+            }
+
+            if(displayContent == "0" && value == "(")
+            {
+                displayContent = value;
+                lastButtonTypePressed = "left_parenthesis";
+                return;
+            }
+
+            if(lastButtonTypePressed == "operator" && value == ")")
+            {
+                return;
+            }
+
+            if(lastButtonTypePressed == "right_parenthesis" && value == "(")
+            {
+                lastButtonTypePressed = "left_parenthesis";
+                value = "*(";
+                displayContent += value;
+                return;
+            }
+
+            displayContent += value;
+
+            if(value == "(")
+            {
+                lastButtonTypePressed = "left_parenthesis";
+            }
+            else
+            {
+                lastButtonTypePressed = "right_parenthesis";
+            }
+
+        }
+
+
+
+
+        public void InsertConstInDisplay(string constValue)
+        {
+            isFloat = true;
+            hasCalculate = false;
+            isNumber = true;
+            MessageBox.Show(lastButtonTypePressed);
+            if (lastButtonTypePressed == "float")
+            {
+                return;
+            }
+
+            if (displayContent == "0")
+            {
+                displayContent = constValue;
+                lastButtonTypePressed = "const";
+                return;
+            }
+
+            if(lastButtonTypePressed != "operator" || lastButtonTypePressed != "backspace")
+            {
+                constValue = "*" + constValue;
+            }
+
+            lastButtonTypePressed = "const";
+            displayContent += constValue;
         }
 
 
@@ -89,13 +182,14 @@ namespace Calculadora.Models
         /// </summary>
         public void ClearDisplay()
         {
-            lastButtonPressed = "number";
+            lastButtonTypePressed = "number";
             displayContent = "0";
             result = "";
             isFloat = false;
             isNumber = true;
             isOperation = false;
-            canCalculate = false;
+            hasConst = false;
+            hasCalculate = false;
         }
 
 
@@ -115,8 +209,13 @@ namespace Calculadora.Models
         {
             try
             {
+                if (hasConst)
+                {
+                    expression = expression.Replace("e", E.ToString());
+                    expression = expression.Replace("π", PI.ToString());
+                }
                 expression = expression.Replace(",", ".");
-
+                MessageBox.Show(expression);
                 System.Data.DataTable table = new System.Data.DataTable();
                 table.Columns.Add("expression", string.Empty.GetType(), expression);
                 System.Data.DataRow row = table.NewRow();
