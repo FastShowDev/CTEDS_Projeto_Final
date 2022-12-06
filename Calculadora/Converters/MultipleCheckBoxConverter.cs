@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculadora.Models
+namespace Calculadora.Converters
 {
-    public class Display
+    internal class MultipleCheckBoxConverter
     {
-        public string displayString { get; set; }
     }
 }
