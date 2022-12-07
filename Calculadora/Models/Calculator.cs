@@ -150,14 +150,15 @@ namespace Calculadora.Models
 
         public void InsertConstInDisplay(string constValue)
         {
-            isFloat = true;
-            hasCalculate = false;
-            isNumber = true;
             MessageBox.Show(lastButtonTypePressed);
             if (lastButtonTypePressed == "float")
             {
                 return;
             }
+
+            isFloat = true;
+            hasCalculate = false;
+            isNumber = true;
 
             if (displayContent == "0")
             {
@@ -166,7 +167,7 @@ namespace Calculadora.Models
                 return;
             }
 
-            if(lastButtonTypePressed != "operator" || lastButtonTypePressed != "backspace")
+            if (lastButtonTypePressed != "operator" && lastButtonTypePressed != "backspace")
             {
                 constValue = "*" + constValue;
             }
