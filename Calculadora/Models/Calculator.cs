@@ -167,7 +167,7 @@ namespace Calculadora.Models
                 return;
             }
 
-            if (lastButtonTypePressed != "operator" && lastButtonTypePressed != "backspace")
+            if(lastButtonTypePressed != "operator" && lastButtonTypePressed != "backspace")
             {
                 constValue = "*" + constValue;
             }
@@ -230,6 +230,43 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+        public double CalculateSquareRoot(string expression)
+        {
+            double rooting = Convert.ToDouble(CalculateExpression(expression));
+
+            try
+            {
+                return Math.Sqrt(rooting);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+
+        }
+
+        public void InsertSquareRootInDisplay(string expression)
+        {
+            displayContent = CalculateSquareRoot(expression).ToString();
+            InsertFunctionSymbolInDisplay("sqrt", expression);
+            return;
+        }
+
+        public void InsertFunctionSymbolInDisplay(string symbol, string expression)
+        {
+            if (hasCalculate)
+            {
+                result = String.Concat(symbol, "(", result, ")");
+
+            }
+            else
+            {
+                result = String.Concat(symbol, "(", expression, ")");
+            }
+        }
+
 
     }
 }
