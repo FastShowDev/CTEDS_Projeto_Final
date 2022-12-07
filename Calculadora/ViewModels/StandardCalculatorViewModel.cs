@@ -89,5 +89,13 @@ namespace Calculadora.ViewModels
             ViewName = "Padrão";
         }
 
+        public void UpdateDisplay()
+        {
+            this.displayContent = calculator.displayContent;
+            this.stringResult = calculator.result;
+            calculator.hasCalculate = true;
+        }
+
+
     }
 }
