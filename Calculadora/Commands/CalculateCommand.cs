@@ -32,6 +32,7 @@ namespace Calculadora.Commands
                 _viewModel.displayContent = _viewModel.calculator.CalculateExpression(expression).ToString();
                 _viewModel.calculator.displayContent = _viewModel.displayContent;
                 _viewModel.calculator.hasCalculate = true;
+                _viewModel.calculator.hasConst = false;
 
             }
             
