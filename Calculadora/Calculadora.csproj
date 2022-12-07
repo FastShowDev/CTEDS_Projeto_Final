@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Managers\**" />
+    <EmbeddedResource Remove="Managers\**" />
+    <None Remove="Managers\**" />
+    <Page Remove="Managers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\icons8-close-window-50.png" />
 	<Resource Include="Assets\icons8-calculator-50.png" />
     <Resource Include="Assets\icons8-clock-settings-48.png" />
@@ -21,10 +28,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Managers\" />
   </ItemGroup>
 
 </Project>

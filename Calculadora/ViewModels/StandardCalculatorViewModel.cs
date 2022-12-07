@@ -21,14 +21,32 @@ namespace Calculadora.ViewModels
         public string displayContent
         {
             get { return _displayContent; }
-            set { _displayContent = value; OnPropertyChanged(nameof(displayContent)); }
+            set
+            {
+                if (_displayContent != value)
+                {
+                    _displayContent = value;
+                    OnPropertyChanged(nameof(displayContent));
+                    calculator.displayContent = value;
+                }
+                return;
+            }
         }
 
         private string _stringResult = "";
         public string stringResult
         {
             get { return _stringResult; }
-            set { _stringResult = value; OnPropertyChanged(nameof(stringResult)); }
+            set
+            {
+                if (_stringResult != value)
+                {
+                    _stringResult = value;
+                    OnPropertyChanged(nameof(stringResult));
+                    calculator.result = value;
+                }
+                return;
+            }
         }
 
 

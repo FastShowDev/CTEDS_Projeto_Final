@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace Calculadora.Commands
 {
-    public class ConstClickCommand : CommandBase
+    public class ConstClickCommand : BaseCommand
     {
         private StandardCalculatorViewModel _viewModel;
         public ConstClickCommand(StandardCalculatorViewModel viewModel)
