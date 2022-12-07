@@ -19,7 +19,7 @@ namespace Calculadora.Commands
         public override void Execute(object? parameter)
         {
             DataGrid dataGrid = (DataGrid)parameter;
-            dataGrid.ItemsSource = _viewModel.histories;
+            dataGrid.ItemsSource = _viewModel.GetAllHistories();
         }
     }
 }

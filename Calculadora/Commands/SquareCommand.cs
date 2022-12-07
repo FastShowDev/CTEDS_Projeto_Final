@@ -23,6 +23,7 @@ namespace Calculadora.Commands
                 string expression = parameter as string;
                 _viewModel.calculator.InsertSquareInDisplay(expression);
                 _viewModel.UpdateDisplay();
+                _viewModel.AddHistory(_viewModel.stringResult, _viewModel.displayContent);
             }
 
         }

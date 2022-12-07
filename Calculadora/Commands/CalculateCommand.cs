@@ -33,6 +33,7 @@ namespace Calculadora.Commands
                 _viewModel.calculator.displayContent = _viewModel.displayContent;
                 _viewModel.calculator.hasCalculate = true;
                 _viewModel.calculator.hasConst = false;
+                _viewModel.AddHistory(expression, _viewModel.displayContent);
 
             }
             

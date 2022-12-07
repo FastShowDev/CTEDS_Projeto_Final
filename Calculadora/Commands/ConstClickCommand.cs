@@ -24,7 +24,7 @@ namespace Calculadora.Commands
             {
                 string buttonName = (parameter as Button).Name;
                 _viewModel.calculator.hasConst = true;
-                MessageBox.Show(buttonName);
+                //MessageBox.Show(buttonName);
 
                 if (buttonName == "button_pi")
                 {

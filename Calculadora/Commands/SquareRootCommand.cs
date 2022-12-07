@@ -25,8 +25,9 @@ namespace Calculadora.Commands
                 _viewModel.calculator.InsertSquareRootInDisplay(expression);
                 _viewModel.displayContent = _viewModel.calculator.displayContent;
                 _viewModel.stringResult = _viewModel.calculator.result;
-                MessageBox.Show("Resultado: " + _viewModel.calculator.result + "\nDisplay: " + _viewModel.calculator.displayContent);
+                //MessageBox.Show("Resultado: " + _viewModel.calculator.result + "\nDisplay: " + _viewModel.calculator.displayContent);
                 _viewModel.calculator.hasCalculate = true;
+                _viewModel.AddHistory(_viewModel.stringResult, _viewModel.displayContent);
             }
             else
             {
