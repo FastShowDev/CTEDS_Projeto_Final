@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Calculadora.Database
 {
-    public class Context : DbContext
+    public class CalculatorDbContext : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options)
+        public CalculatorDbContext(DbContextOptions<CalculatorDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
