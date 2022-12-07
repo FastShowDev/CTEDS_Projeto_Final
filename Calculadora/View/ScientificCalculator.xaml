@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora.View"
         xmlns:vm="clr-namespace:Calculadora.ViewModels" 
+        d:DataContext="{x:Type vm:ScientificCalculatorViewModel}"
         mc:Ignorable="d"
-        Height="550"
+        x:Name="ScientificCalculatorView"
+        d:DesignHeight="550"
+        d:DesignWidth="400"
         MinHeight="550"
-        Width="400"
         MinWidth="400">
 
     <UserControl.Resources>
@@ -16,7 +18,7 @@
         <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
     </UserControl.Resources>
 
-    <Grid Background="White">
+    <Grid Background="White" Height="auto" Width="auto">
         
         <!--#region Interface-->
         <Grid Margin="10">
@@ -267,9 +269,7 @@
         
         <!--#region Historic/Memory Menu-->
         <Border x:Name="HistoryMenuBorder"
-                Style="{StaticResource HistoryBorderStyle}"
-                Opacity="0.5"
-                HorizontalAlignment="Right">
+                Style="{StaticResource HistoryBorderStyle}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -310,36 +310,14 @@
 
                 <DataGrid x:Name="HistoryDataGrid"
                           Grid.Row="1"
-                          IsSynchronizedWithCurrentItem="True"
-                          Margin="0"
-                          FontSize="20"
-                          BorderThickness="1"
-                          BorderBrush="Black"
-                          IsReadOnly="True"
-                          CanUserAddRows="False"
-                          CanUserResizeColumns="False"
-                          CanUserResizeRows="False"
-                          CanUserReorderColumns="False"
-                          AutoGenerateColumns="False">
+                          Style="{StaticResource DataGridFinal}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cálculos" Binding="{Binding fullExpression}" 
-                                            FontWeight="Normal"
-                                            Width="*" 
-                                            CanUserReorder="False" CanUserSort="False"/>
+                                            Width="*"
+                                            CanUserReorder="False" CanUserSort="False" CanUserResize="False"
+                                            MinWidth="250"
+                                            CellStyle="{StaticResource HistoricDataGridCell}"/>
                     </DataGrid.Columns>
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="Height" Value="40"/>
-                            <Setter Property="IsEditing" Value="False"/>
-                            <Setter Property="IsHitTestVisible" Value="True"/>
-                            <Setter Property="BorderBrush" Value="Black"/>
-                            <Setter Property="BorderThickness" Value="1"/>
-                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Margin" Value="0 0 0 0"/>
-                            <Setter Property="Background" Value="LightBlue"/>
-                        </Style>
-                    </DataGrid.CellStyle>
                 </DataGrid>
 
             </Grid>

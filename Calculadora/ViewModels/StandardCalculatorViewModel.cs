@@ -7,12 +7,16 @@ using Calculadora.Database;
 using Microsoft.EntityFrameworkCore;
 using Calculadora.Stores;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
+using Calculadora.Database.Managers;
+using System.Threading.Tasks;
 
 namespace Calculadora.ViewModels
 {
     public class StandardCalculatorViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public Calculator calculator;
+        public HistoryManager historyManager;
         public readonly CalculatorDbContext context;
         public List<History> histories;
 
@@ -88,10 +92,32 @@ namespace Calculadora.ViewModels
             var contextOptions = new DbContextOptionsBuilder<CalculatorDbContext>().UseSqlite("Data source = Histories.db").Options;
             context = new CalculatorDbContext(contextOptions);
 
-            histories = context.Histories.ToList();
+            historyManager = new HistoryManager(context);
 
             ViewName = "Padrão";
         }
+
+
+        public List<History> GetAllHistories()
+        {
+            Task<List<History>> histories = historyManager.GetAllHistories();
+            histories.Result.Reverse();
+            return histories.Result;
+        }
+
+
+        public void AddHistory(string expression, string result)
+        {
+            historyManager.AddHistory(new History(expression, result));
+            return;
+        }
+
+
+        public void DeleteHistory()
+        {
+
+        }
+
 
         public void UpdateDisplay()
         {
