@@ -63,6 +63,8 @@ namespace Calculadora.ViewModels
         public ICommand ClearDisplayCM { get; }
         public ICommand NumberClickCM { get; }
         public ICommand OperatorClickCM { get; }
+        public ICommand SquareClickCM { get; }
+        public ICommand SqrtClickCM { get; }
         public ICommand CalculateCM { get; }
         public ICommand LoadHistoryCM { get; }
         #endregion
@@ -78,6 +80,8 @@ namespace Calculadora.ViewModels
             ClearDisplayCM = new ClearDisplayCommand(this);
             NumberClickCM = new NumberClickCommand(this);
             OperatorClickCM = new OperatorClickCommand(this);
+            SquareClickCM = new SquareCommand(this);
+            SqrtClickCM = new SquareRootCommand(this);
             CalculateCM = new CalculateCommand(this);
             LoadHistoryCM = new LoadHistoryCommand(this);
 
