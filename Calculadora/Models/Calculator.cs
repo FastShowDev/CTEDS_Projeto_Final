@@ -21,7 +21,7 @@ namespace Calculadora.Models
         public bool hasCalculate { get; set; } = false;
         public string displayContent { get; set; } = "0";
         public string result { get; set; } = "";
-        public Stack<string> buttonsTypePressed { get; }
+        public Stack<string> buttonsTypePressed { get; } = new Stack<string>();
         public string? lastButtonTypePressed { get; set; }
         #endregion
 
@@ -37,7 +37,7 @@ namespace Calculadora.Models
         /// <returns></returns>
         public void InsertNumberInDisplay(string buttonName, string pressedButtonValue)
         {
-            MessageBox.Show("Numero: " + buttonsTypePressed.Peek());
+            //MessageBox.Show("Numero: " + buttonsTypePressed.Peek());
             isNumber = true;
             hasCalculate = false;
             if (displayContent == "0" && pressedButtonValue != DECIMAL_SPERATOR)
@@ -77,7 +77,7 @@ namespace Calculadora.Models
         /// <returns></returns>
         public void InsertOperatorInDisplay(string buttonName, string pressedButtonValue)
         {
-            MessageBox.Show("Operador: " + lastButtonTypePressed);
+            //MessageBox.Show("Operador: " + lastButtonTypePressed);
             if(lastButtonTypePressed == "left_parenthesis")
             {
                 return;
@@ -103,7 +103,7 @@ namespace Calculadora.Models
 
         public void InsertParenthesisInDisplay(string value)
         {
-            MessageBox.Show(lastButtonTypePressed);
+            //MessageBox.Show(lastButtonTypePressed);
 
             if(lastButtonTypePressed == "number" && value != ")")
             {
@@ -150,14 +150,15 @@ namespace Calculadora.Models
 
         public void InsertConstInDisplay(string constValue)
         {
-            isFloat = true;
-            hasCalculate = false;
-            isNumber = true;
-            MessageBox.Show(lastButtonTypePressed);
+            //MessageBox.Show(lastButtonTypePressed);
             if (lastButtonTypePressed == "float")
             {
                 return;
             }
+
+            isFloat = true;
+            hasCalculate = false;
+            isNumber = true;
 
             if (displayContent == "0")
             {
@@ -166,7 +167,7 @@ namespace Calculadora.Models
                 return;
             }
 
-            if(lastButtonTypePressed != "operator" || lastButtonTypePressed != "backspace")
+            if(lastButtonTypePressed != "operator" && lastButtonTypePressed != "backspace")
             {
                 constValue = "*" + constValue;
             }
@@ -215,7 +216,7 @@ namespace Calculadora.Models
                     expression = expression.Replace("π", PI.ToString());
                 }
                 expression = expression.Replace(",", ".");
-                MessageBox.Show(expression);
+                //MessageBox.Show(expression);
                 System.Data.DataTable table = new System.Data.DataTable();
                 table.Columns.Add("expression", string.Empty.GetType(), expression);
                 System.Data.DataRow row = table.NewRow();
@@ -229,6 +230,66 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+        public double CalculateSquareRoot(string expression)
+        {
+            double rooting = Convert.ToDouble(CalculateExpression(expression));
+
+            try
+            {
+                return Math.Sqrt(rooting);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+
+        }
+
+        public void InsertSquareRootInDisplay(string expression)
+        {
+            displayContent = CalculateSquareRoot(expression).ToString();
+            InsertFunctionSymbolInDisplay("sqrt", expression);
+            return;
+        }
+
+
+        public double CalculateSquare(string expression)
+        {
+            double value = Convert.ToDouble(CalculateExpression(expression));
+            try
+            {
+                return Math.Pow(value, 2);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+        public void InsertSquareInDisplay(string expression)
+        {
+            displayContent = CalculateSquare(expression).ToString();
+            InsertFunctionSymbolInDisplay("sqr", expression);
+            return;
+        }
+
+
+        public void InsertFunctionSymbolInDisplay(string symbol, string expression)
+        {
+            if (hasCalculate)
+            {
+                result = String.Concat(symbol, "(", result, ")");
+
+            }
+            else
+            {
+                result = String.Concat(symbol, "(", expression, ")");
+            }
+        }
+
 
     }
 }

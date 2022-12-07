@@ -11,7 +11,7 @@
         <Setter Property="CornerRadius"
                 Value="0, 8, 8, 0"/>
 
-        <Setter Property="Width"
+        <Setter Property="MinWidth"
                 Value="250"/>
 
         <Setter Property="HorizontalAlignment"
@@ -293,95 +293,43 @@
     
     <!--#region DataGrid-->
 
-    <Style x:Key="HistoryDataGridStyle"
+    <Style x:Key="DataGridFinal"
            TargetType="DataGrid">
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="CanUserAddRows" Value="False"/>
-        <Setter Property="CanUserResizeRows" Value="False"/>
-        <Setter Property="CanUserResizeColumns" Value="False"/>
-        <Setter Property="CanUserReorderColumns" Value="False"/>
-        <Setter Property="AutoGenerateColumns" Value="False"/>
-    </Style>
-    
-    
-    <Style x:Key="HistoryDataGridCellStyle"
-           TargetType="DataGridCell">
-
-        <Setter Property="Height" Value="60"/>
-        <Setter Property="FontStyle" Value="Normal"/>
-        <Setter Property="FontWeight" Value="ExtraBold"/>
-        <Setter Property="IsEditing" Value="False"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
-        <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="5"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
 
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="DataGridCell">
-                    <Border x:Name="border"
-                            Height="60"
-                            Width="230"
-                            HorizontalAlignment="Center"
-                            Margin="0"
-                            BorderThickness="1"
-                            BorderBrush="Black"
-                            CornerRadius="4">
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="CanUserResizeColumns" Value="False"/>
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+    </Style>
 
-                        <Border.Background>
-                            <SolidColorBrush x:Name="BorderBackground"
-                                             Color="LightGray" />
-                        </Border.Background>
-                    </Border>
-
-
-                    <ControlTemplate.Triggers>
-
-                        <EventTrigger RoutedEvent="Border.MouseEnter"
-                                      SourceName="border">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
-                                                    Storyboard.TargetProperty="Color"
-                                                    From="LightGray"
-                                                    To="Gray"
-                                                    Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-                        <EventTrigger RoutedEvent="Border.MouseLeave"
-                                      SourceName="border">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
-                                                    Storyboard.TargetProperty="Color"
-                                                    From="Gray"
-                                                    To="LightGray"
-                                                    Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-                        <Trigger Property="IsSelected"
-                                 Value="True">
-                            <Setter Property="Background"
-                                    TargetName="border"
-                                    Value="DarkGray" />
-                        </Trigger>
-
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
+    <Style x:Key="HistoricDataGridCell" TargetType="DataGridCell">
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="IsEditing" Value="False"/>
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected"
+                                         Value="True">
+                <Setter Property="Foreground" Value="DeepPink"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <!--#endregion-->
 

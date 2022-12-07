@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Calculadora.Commands
 {
-    public class OperatorClickCommand : CommandBase
+    public class OperatorClickCommand : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
         public OperatorClickCommand(StandardCalculatorViewModel viewModel)

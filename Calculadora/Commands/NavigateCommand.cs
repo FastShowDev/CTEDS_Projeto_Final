@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Calculadora.Commands
 {
-    public class NavigateCommand : CommandBase
+    public class NavigateCommand : BaseCommand
     {
         public NavigateCommand()
         {
@@ -17,7 +17,7 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            NavigationStore.CurrentViewModel = new ScientificCalculatorViewModel();
+            NavigationStore.CurrentViewModel = parameter as BaseViewModel;
         }
     }
 }

@@ -24,8 +24,8 @@ namespace Calculadora
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Context context;
-        public MainWindow(Context context)
+        private readonly CalculatorDbContext context;
+        public MainWindow(CalculatorDbContext context)
         {
             this.context = context;
             InitializeComponent();

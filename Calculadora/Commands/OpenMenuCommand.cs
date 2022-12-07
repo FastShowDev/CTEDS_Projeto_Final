@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace Calculadora.Commands
 {
-    public class OpenMenuCommand : CommandBase
+    public class OpenMenuCommand : BaseCommand
     {
         BaseViewModel _viewModel;
         public OpenMenuCommand(BaseViewModel viewModel)

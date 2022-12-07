@@ -198,6 +198,7 @@
         <!--#region Historic/Memory Menu-->
         <Border x:Name="HistoryMenuBorder"
                 Style="{StaticResource HistoryBorderStyle}"
+                Width="auto"
                 Panel.ZIndex="10">
             <Grid>
                 <Grid.RowDefinitions>
@@ -239,18 +240,14 @@
 
                 <DataGrid x:Name="HistoryDataGrid"
                           Grid.Row="1"
-                         >
+                          Style="{StaticResource DataGridFinal}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cálculos" Binding="{Binding fullExpression}" 
-                                            FontWeight="Normal"
-                                            Width="*" 
-                                            CanUserReorder="False" CanUserSort="False"/>
+                                            Width="*"
+                                            CanUserReorder="False" CanUserSort="False" CanUserResize="False"
+                                            MinWidth="250"
+                                            CellStyle="{StaticResource HistoricDataGridCell}"/>
                     </DataGrid.Columns>
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell" 
-                               >
-                        </Style>
-                    </DataGrid.CellStyle>
                 </DataGrid>
 
             </Grid>

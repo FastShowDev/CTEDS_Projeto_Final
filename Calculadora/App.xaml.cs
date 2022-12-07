@@ -28,7 +28,7 @@ namespace Calculadora
             ServiceCollection services = new();
             _navigationStore = new NavigationStore();
 
-            services.AddDbContext<Context>(options =>
+            services.AddDbContext<CalculatorDbContext>(options =>
             {
                 options.UseSqlite("Data source = Histories.db");
             });

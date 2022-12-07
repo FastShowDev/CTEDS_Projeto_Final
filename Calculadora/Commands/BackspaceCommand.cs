@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculadora.Commands
 {
-    public class BackspaceCommand : CommandBase
+    public class BackspaceCommand : BaseCommand
     {
         StandardCalculatorViewModel _viewModel;
         public BackspaceCommand(StandardCalculatorViewModel viewModel)
