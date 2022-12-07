@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Calculadora.Commands
 {
-    public class NavigateCommand : CommandBase
+    public class NavigateCommand : BaseCommand
     {
         public NavigateCommand()
         {

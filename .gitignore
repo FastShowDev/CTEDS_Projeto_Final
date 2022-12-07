@@ -1,3 +1,5 @@
 **/.vs
 **/bin
 **/obj
+/Calculadora/Histories.db-shm
+/Calculadora/Histories.db-wal

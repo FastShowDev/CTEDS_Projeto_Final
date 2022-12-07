@@ -8,7 +8,7 @@ using Calculadora.Stores;
 
 namespace Calculadora.Commands
 {
-    public class CloseMenuCommand : CommandBase
+    public class CloseMenuCommand : BaseCommand
     {
         BaseViewModel _viewModel;
         public CloseMenuCommand(BaseViewModel viewModel)

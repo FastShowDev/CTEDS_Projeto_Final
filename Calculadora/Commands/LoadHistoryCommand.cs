@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Calculadora.Commands
 {
-    public class LoadHistoryCommand : CommandBase
+    public class LoadHistoryCommand : BaseCommand
     {
         private StandardCalculatorViewModel _viewModel;
         public LoadHistoryCommand(StandardCalculatorViewModel viewModel)

@@ -13,7 +13,7 @@ using System.Windows.Media.TextFormatting;
 
 namespace Calculadora.Commands
 {
-    public class CalculateCommand : CommandBase
+    public class CalculateCommand : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
 

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace Calculadora.Commands
 {
-    public class ClearDisplayCommand : CommandBase
+    public class ClearDisplayCommand : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
         public ClearDisplayCommand(StandardCalculatorViewModel viewModel)
