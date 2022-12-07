@@ -13,7 +13,7 @@ namespace Calculadora.ViewModels
     public class StandardCalculatorViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public Calculator calculator;
-        public readonly Context context;
+        public readonly CalculatorDbContext context;
         public List<History> histories;
 
         #region Properties
@@ -85,8 +85,8 @@ namespace Calculadora.ViewModels
             CalculateCM = new CalculateCommand(this);
             LoadHistoryCM = new LoadHistoryCommand(this);
 
-            var contextOptions = new DbContextOptionsBuilder<Context>().UseSqlite("Data source = Histories.db").Options;
-            context = new Context(contextOptions);
+            var contextOptions = new DbContextOptionsBuilder<CalculatorDbContext>().UseSqlite("Data source = Histories.db").Options;
+            context = new CalculatorDbContext(contextOptions);
 
             histories = context.Histories.ToList();
 
