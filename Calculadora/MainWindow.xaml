@@ -38,7 +38,7 @@
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"
-                        Margin="0" Padding="0"/>
+                        Margin="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
 
         <!--#region Menu Bar-->
