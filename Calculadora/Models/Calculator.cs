@@ -254,6 +254,29 @@ namespace Calculadora.Models
             return;
         }
 
+
+        public double CalculateSquare(string expression)
+        {
+            double value = Convert.ToDouble(CalculateExpression(expression));
+            try
+            {
+                return Math.Pow(value, 2);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+        public void InsertSquareInDisplay(string expression)
+        {
+            displayContent = CalculateSquare(expression).ToString();
+            InsertFunctionSymbolInDisplay("sqr", expression);
+            return;
+        }
+
+
         public void InsertFunctionSymbolInDisplay(string symbol, string expression)
         {
             if (hasCalculate)
