@@ -247,6 +247,51 @@ namespace Calculadora.Models
 
         }
 
+        public double CalculateLog10(string expression)
+        {
+            double rooting = Convert.ToDouble(CalculateExpression(expression));
+
+            try
+            {
+                return Math.Log10(rooting);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+        public double CalculateLn(string expression)
+        {
+            double rooting = Convert.ToDouble(CalculateExpression(expression));
+
+            try
+            {
+                return Math.Log(rooting);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+        public double CalculateInversion(string expression)
+        {
+            double rooting = Convert.ToDouble(CalculateExpression(expression));
+
+            try
+            {
+                return 1 / rooting;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
         public void InsertSquareRootInDisplay(string expression)
         {
             displayContent = CalculateSquareRoot(expression).ToString();
@@ -254,6 +299,33 @@ namespace Calculadora.Models
             return;
         }
 
+        public void InsertLog10InDisplay(string expression)
+        {
+            displayContent = CalculateLog10(expression).ToString();
+            InsertFunctionSymbolInDisplay("log", expression);
+            return;
+        }
+
+        public void InsertLnInDisplay(string expression)
+        {
+            displayContent = CalculateLn(expression).ToString();
+            InsertFunctionSymbolInDisplay("ln", expression);
+            return;
+        }
+
+        public void InsertInversionInDisplay(string expression)
+        {
+            displayContent = CalculateInversion(expression).ToString();
+            InsertFunctionSymbolInDisplay("1/", expression);
+            return;
+        }
+
+        public void InsertAbsoluteInDisplay(string expression)
+        {
+            displayContent = CalculateAbsolute(expression).ToString();
+            InsertFunctionSymbolInDisplay("Abs", expression);
+            return;
+        }
 
         public double CalculateSquare(string expression)
         {
@@ -261,6 +333,21 @@ namespace Calculadora.Models
             try
             {
                 return Math.Pow(value, 2);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+        public double CalculateAbsolute(string expression)
+        {
+            double rooting = Convert.ToDouble(CalculateExpression(expression));
+
+            try
+            {
+                return Math.Abs(rooting);
             }
             catch (Exception e)
             {
