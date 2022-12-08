@@ -63,6 +63,7 @@ namespace Calculadora.ViewModels
         //public new ICommand OpenMenu { get; }
         //public new ICommand CloseMenu { get; }
         //public ICommand NavigateMenuCM { get; }
+        public ICommand OpenHistoryCM { get; }
         public ICommand BackspaceCM { get; }
         public ICommand ClearDisplayCM { get; }
         public ICommand NumberClickCM { get; }
@@ -80,6 +81,7 @@ namespace Calculadora.ViewModels
             //CloseMenu = new CloseMenuCommand(this);
             //OpenMenu = new OpenMenuCommand(this);
             //NavigateMenuCM = new NavigateCommand();
+            OpenHistoryCM = new OpenHistoryCommand(this);
             BackspaceCM = new BackspaceCommand(this);
             ClearDisplayCM = new ClearDisplayCommand(this);
             NumberClickCM = new NumberClickCommand(this);
