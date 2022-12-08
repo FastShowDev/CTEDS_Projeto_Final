@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Calculadora"
         xmlns:views="clr-namespace:Calculadora.View"
         xmlns:vm="clr-namespace:Calculadora.ViewModels"
+        xmlns:converters="clr-namespace:Calculadora.Converters"
         mc:Ignorable="d"
         Title="Calculadora" 
         Height="590"
@@ -15,6 +16,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
+        <converters:MultipleMenuConverter x:Key="menuConverter"/>
         <vm:StandardCalculatorViewModel x:Key="standardVM"/>
         <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
     </Window.Resources>
@@ -86,13 +88,19 @@
                                    Content="Calculadora"
                                    Style="{StaticResource MenuCategoryLabelStyle}"/>
 
-                            <RadioButton x:Name="StandardCalculatorMenuButton"
+                            <RadioButton x:Name="StandardMenuButton"
                                          Grid.Row="1"
                                          Grid.Column="0"
                                          IsChecked="True"
                                          Style="{StaticResource MenuGridButtonStyle}"
-                                         Command="{Binding NavigateMenuCM}"
-                                         CommandParameter="{StaticResource standardVM}">
+                                         Command="{Binding NavigateMenuCM}">
+                                <RadioButton.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource menuConverter}">
+                                        <Binding ElementName="MenuBorder"/>
+                                        <Binding Source="{StaticResource standardVM}"/>
+                                        <Binding ElementName="StandardMenuButton"/>
+                                    </MultiBinding>
+                                </RadioButton.CommandParameter>
                                 <Grid>
                                     <Image Source="/Assets/icons8-calculator-50.png"
                                            Style="{StaticResource MenuButtonImageStyle}"/>
@@ -102,11 +110,18 @@
                                 </Grid>
                             </RadioButton>
 
-                            <RadioButton Grid.Row="2"
+                            <RadioButton x:Name="ScientificMenuButton"
+                                         Grid.Row="2"
                                          Grid.Column="0"
                                          Style="{StaticResource MenuGridButtonStyle}"
-                                         Command="{Binding NavigateMenuCM}"
-                                         CommandParameter="{StaticResource scientificVM}">
+                                         Command="{Binding NavigateMenuCM}">
+                                <RadioButton.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource menuConverter}">
+                                        <Binding ElementName="MenuBorder"/>
+                                        <Binding Source="{StaticResource scientificVM}"/>
+                                        <Binding ElementName="ScientificMenuButton"/>
+                                    </MultiBinding>
+                                </RadioButton.CommandParameter>
                                 <Grid>
                                     <Image Source="/Assets/icons8-test-tube-48.png"
                                            Style="{StaticResource MenuButtonImageStyle}"/>

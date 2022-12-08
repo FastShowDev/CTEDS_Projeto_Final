@@ -301,11 +301,15 @@
 
         <Setter Property="IsHitTestVisible" Value="True"/>
         <Setter Property="IsReadOnly" Value="True"/>
-        
+        <Setter Property="HorizontalScrollBarVisibility" Value="Visible"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserDeleteRows" Value="False"/>
         <Setter Property="CanUserReorderColumns" Value="False"/>
-        <Setter Property="CanUserResizeColumns" Value="False"/>
+        <Setter Property="CanUserResizeColumns" Value="True"/>
         <Setter Property="CanUserSortColumns" Value="False"/>
         <Setter Property="AutoGenerateColumns" Value="False"/>
         
@@ -316,6 +320,7 @@
     </Style>
 
     <Style x:Key="HistoricDataGridCell" TargetType="DataGridCell">
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
         <Setter Property="Height" Value="45"/>
         <Setter Property="IsEditing" Value="False"/>
         <Setter Property="IsHitTestVisible" Value="True"/>

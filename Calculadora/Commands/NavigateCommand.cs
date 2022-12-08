@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Calculadora.Commands
 {
@@ -17,7 +18,14 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            NavigationStore.CurrentViewModel = parameter as BaseViewModel;
+            var values = (object[])parameter;
+            Border menu = values[0] as Border;
+            NavigationStore.CurrentViewModel = values[1] as BaseViewModel;
+            RadioButton radioButton = values[2] as RadioButton;
+
+            menu.Visibility = Visibility.Hidden;
+            radioButton.IsChecked = true;
+            NavigationStore.CurrentViewModel.IsMenuOpen = false;
         }
     }
 }
