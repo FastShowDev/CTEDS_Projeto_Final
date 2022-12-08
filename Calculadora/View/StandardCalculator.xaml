@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora.View"
         xmlns:vm="clr-namespace:Calculadora.ViewModels" 
+        xmlns:converters="clr-namespace:Calculadora.Converters"
         d:DataContext="{x:Type vm:StandardCalculatorViewModel}"
         mc:Ignorable="d"
         x:Name="StandardCalculatorView"
@@ -14,6 +15,7 @@
         MinWidth="400">
     
     <UserControl.Resources>
+        <converters:GenericConverter x:Key="myConverter"/>
         <vm:StandardCalculatorViewModel x:Key="standardVM"/>
         <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
     </UserControl.Resources>
@@ -54,7 +56,14 @@
 
                 <Button Grid.Row="0" Grid.Column="2"
                         Style="{StaticResource OpenHistoryButtonStyle}"
-                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=HistoryMenuBorder}"/>
+                        Command="{Binding OpenHistoryCM}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource myConverter}">
+                            <Binding ElementName="HistoryMenuBorder"/>
+                            <Binding ElementName="HistoryDataGrid"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
             </Grid>
             
             
@@ -220,8 +229,7 @@
                     <RadioButton Margin="5"
                             Style="{StaticResource HistoryRadioButtonStyle}"
                             Command="{Binding LoadHistoryCM}"
-                            CommandParameter="{Binding ElementName=HistoryDataGrid}"
-                            >
+                            CommandParameter="{Binding ElementName=HistoryDataGrid}">
                         <TextBlock Text="Histórico"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
@@ -237,14 +245,13 @@
                                    FontSize="18"/>
                     </RadioButton>
                 </StackPanel>
-
                 <DataGrid x:Name="HistoryDataGrid"
                           Grid.Row="1"
                           Style="{StaticResource DataGridFinal}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cálculos" Binding="{Binding fullExpression}" 
                                             Width="*"
-                                            CanUserReorder="False" CanUserSort="False" CanUserResize="False"
+                                            CanUserReorder="False" CanUserSort="False" CanUserResize="True"
                                             MinWidth="250"
                                             CellStyle="{StaticResource HistoricDataGridCell}"/>
                     </DataGrid.Columns>

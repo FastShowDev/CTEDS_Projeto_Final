@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora.View"
-        xmlns:vm="clr-namespace:Calculadora.ViewModels" 
+        xmlns:vm="clr-namespace:Calculadora.ViewModels"
+        xmlns:converters="clr-namespace:Calculadora.Converters"
         d:DataContext="{x:Type vm:ScientificCalculatorViewModel}"
         mc:Ignorable="d"
         x:Name="ScientificCalculatorView"
@@ -14,6 +15,7 @@
         MinWidth="400">
 
     <UserControl.Resources>
+        <converters:GenericConverter x:Key="myConverter"/>
         <vm:StandardCalculatorViewModel x:Key="standardVM"/>
         <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
     </UserControl.Resources>
@@ -54,7 +56,14 @@
 
                 <Button Grid.Row="0" Grid.Column="2"
                         Style="{StaticResource OpenHistoryButtonStyle}"
-                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=HistoryMenuBorder}"/>
+                        Command="{Binding OpenHistoryCM}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource myConverter}">
+                            <Binding ElementName="HistoryMenuBorder"/>
+                            <Binding ElementName="HistoryDataGrid"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
             </Grid>
 
             
@@ -314,7 +323,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cálculos" Binding="{Binding fullExpression}" 
                                             Width="*"
-                                            CanUserReorder="False" CanUserSort="False" CanUserResize="False"
+                                            CanUserReorder="False" CanUserSort="False" CanUserResize="True"
                                             MinWidth="250"
                                             CellStyle="{StaticResource HistoricDataGridCell}"/>
                     </DataGrid.Columns>
