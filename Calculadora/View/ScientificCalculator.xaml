@@ -159,11 +159,11 @@
                 <Button x:Name="button_sqr" Grid.Column="0" Grid.Row="3" Content="x²" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding SquareClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"/>
                 
-                <Button Grid.Column="1" Grid.Row="3" Content="1/x" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                <Button x:Name="button_inv" Grid.Column="1" Grid.Row="3" Content="1/x" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding InversionClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
-                <Button Grid.Column="2" Grid.Row="3" Content="|x|" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                <Button x:Name="button_abs" Grid.Column="2" Grid.Row="3" Content="|x|" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding AbsoluteClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
                 <Button Grid.Column="3" Grid.Row="3" Content="exp" Style="{StaticResource CalculatorButtonStyle}"
                         />
@@ -228,7 +228,7 @@
                 
                 <!--#region Buttons: log, 1, 2, 3, PLUS-->
                 <Button Grid.Column="0" Grid.Row="7" Content="log" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                        Command="{Binding Log10ClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
                 <Button x:Name="button_1" Grid.Column="1" Grid.Row="7" Content="1" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_1}"/>
@@ -246,7 +246,7 @@
                 
                 <!--#region Buttons: ln, +/-, 0, FLOAT, EQUALS-->
                 <Button Grid.Column="0" Grid.Row="8" Content="ln" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                        Command="{Binding LnClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
                 <Button Grid.Column="1" Grid.Row="8" Content="+/-" Style="{StaticResource CalculatorButtonStyle}"
                         />
