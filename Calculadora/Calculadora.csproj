@@ -23,6 +23,7 @@
 	<Resource Include="Assets\trigonometria-60.png" />
 	<Resource Include="Assets\formula-fx-50.png" />
 	<Resource Include="Assets\backspace-50.png" />
+	<Resource Include="Assets\trash-50.png" />
   </ItemGroup>
 
   <ItemGroup>
