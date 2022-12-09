@@ -178,6 +178,79 @@
     </Style>
 
 
+    <Style x:Key="DeleteHistoryButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Margin" Value="5, 0, 5, 0"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Height="40"
+                            Width="40"
+                            HorizontalAlignment="Center"
+                            Margin="0"
+                            BorderThickness="0"
+                            CornerRadius="4">
+
+                        <Border.Background>
+                            <SolidColorBrush x:Name="BorderBackground"
+                                             Color="White" />
+                        </Border.Background>
+                        <Image Width="40"
+                               Height="40"
+                               Source="/Assets/trash-50.png"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <EventTrigger RoutedEvent="Border.MouseEnter"
+                                      SourceName="border">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                                    Storyboard.TargetProperty="Color"
+                                                    From="White"
+                                                    To="LightGray"
+                                                    Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+
+                        <EventTrigger RoutedEvent="Border.MouseLeave"
+                                      SourceName="border">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                                    Storyboard.TargetProperty="Color"
+                                                    From="LightGray"
+                                                    To="White"
+                                                    Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="LightGray" />
+                        </Trigger>
+
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style x:Key="HistoryRadioButtonStyle"
            TargetType="RadioButton">
 

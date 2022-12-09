@@ -14,31 +14,31 @@ namespace Calculadora.Models
         #endregion
 
         #region Properties
-        public bool isNumber { get; set; }
-        public bool isFloat { get; set; }
-        public bool isOperation { get; set; }
         public bool hasConst { get; set; }
         public bool hasCalculate { get; set; } = false;
+        public bool hasPercentage { get; set; }
         public string displayContent { get; set; } = "0";
         public string result { get; set; } = "";
-        public Stack<string> buttonsTypePressed { get; } = new Stack<string>();
-        public string? lastButtonTypePressed { get; set; }
+        public Stack<string> lastButtonPressed { get; } = new Stack<string>();
         #endregion
 
+        public Calculator()
+        {
+            lastButtonPressed.Push("number");
+        }
         
 
         /// <summary>
-        /// Método que insere um número no display.
-        /// Caso o botão de casa decimal for apertado, só permite a adição de vírgula caso for a primeira vez (isFloar == false)
-        /// Faz o tramento necessário caso o display tenha apenas valor zero.
+        /// Método que insere um número no display e vírgula para casa decimal. Usando os seguintes critérios:
+        /// 
+        /// -Não permite colocar vírgulas seguidas
+        /// -Caso o último caracter for um parênteses direito o símbolo de multiplicação é colocado automaticamente.
         /// </summary>
         /// <param name="buttonName"></param>
         /// <param name="pressedButtonValue"></param>
         /// <returns></returns>
         public void InsertNumberInDisplay(string buttonName, string pressedButtonValue)
         {
-            //MessageBox.Show("Numero: " + buttonsTypePressed.Peek());
-            isNumber = true;
             hasCalculate = false;
             if (displayContent == "0" && pressedButtonValue != DECIMAL_SPERATOR)
             {
@@ -47,22 +47,22 @@ namespace Calculadora.Models
 
             if (buttonName == "button_float")
             {
-                if (lastButtonTypePressed == "float")
+                if (lastButtonPressed.Peek() == "float")
                 {
                     return;
                 }
-                isFloat = true;
-                lastButtonTypePressed = "float";
+                lastButtonPressed.Push("float");
                 displayContent += pressedButtonValue;
                 return;
             }
-            if(lastButtonTypePressed == "right_parenthesis")
+
+            if(lastButtonPressed.Peek() == "right_parenthesis")
             {
                 pressedButtonValue = "*" + pressedButtonValue;
             }
 
             displayContent += pressedButtonValue;
-            lastButtonTypePressed = "number";
+            lastButtonPressed.Push("number");
             return;
         }
 
@@ -72,19 +72,18 @@ namespace Calculadora.Models
         /// Caso o último botão pressionado foi um operador, ou seja, o último caracter do display for um operador aritmético atualiza para o novo operador pressionado.
         /// Caso o último botão pressionado foi um número, apenas adiciona o operador pressionado ao display.
         /// </summary>
-        /// <param name="buttonName"></param>
         /// <param name="pressedButtonValue"></param>
         /// <returns></returns>
-        public void InsertOperatorInDisplay(string buttonName, string pressedButtonValue)
+        public void InsertOperatorInDisplay(string pressedButtonValue)
         {
-            //MessageBox.Show("Operador: " + lastButtonTypePressed);
-            if(lastButtonTypePressed == "left_parenthesis")
+            hasCalculate = false;
+            if(lastButtonPressed.Peek() == "left_parenthesis")
             {
                 return;
             }
 
 
-            if (lastButtonTypePressed == "operator")
+            if (lastButtonPressed.Peek() == "operator")
             {
                 int newDisplayLenght = displayContent.Length - 1;
                 string display = displayContent.Substring(0, newDisplayLenght);
@@ -93,7 +92,7 @@ namespace Calculadora.Models
             }
             else
             {
-                lastButtonTypePressed = "operator";
+                lastButtonPressed.Push("operator");
                 displayContent += pressedButtonValue;
             }
 
@@ -101,32 +100,46 @@ namespace Calculadora.Models
         }
 
 
+        public void InsertPercentageInDisplay()
+        {
+            hasCalculate = false;
+            if (lastButtonPressed.Peek() == "operator")
+            {
+                return;
+            }
+
+            if(lastButtonPressed.Peek() == "number")
+            {
+                displayContent += "%";
+                hasPercentage = true;
+            }
+        }
+
         public void InsertParenthesisInDisplay(string value)
         {
-            //MessageBox.Show(lastButtonTypePressed);
-
-            if(lastButtonTypePressed == "number" && value != ")")
+            hasCalculate = false;
+            if(lastButtonPressed.Peek() == "number" && value != ")")
             {
                 displayContent += "*(";
-                lastButtonTypePressed = "left_parenthesis";
+                lastButtonPressed.Push("left_parenthesis");
                 return;
             }
 
             if(displayContent == "0" && value == "(")
             {
                 displayContent = value;
-                lastButtonTypePressed = "left_parenthesis";
+                lastButtonPressed.Push("left_parenthesis");
                 return;
             }
 
-            if(lastButtonTypePressed == "operator" && value == ")")
+            if(lastButtonPressed.Peek() == "operator" && value == ")")
             {
                 return;
             }
 
-            if(lastButtonTypePressed == "right_parenthesis" && value == "(")
+            if(lastButtonPressed.Peek() == "right_parenthesis" && value == "(")
             {
-                lastButtonTypePressed = "left_parenthesis";
+                lastButtonPressed.Push("left_parenthesis");
                 value = "*(";
                 displayContent += value;
                 return;
@@ -136,44 +149,62 @@ namespace Calculadora.Models
 
             if(value == "(")
             {
-                lastButtonTypePressed = "left_parenthesis";
+                lastButtonPressed.Push("left_parenthesis");
             }
             else
             {
-                lastButtonTypePressed = "right_parenthesis";
+                lastButtonPressed.Push("right_parenthesis");
             }
 
         }
 
 
-
-
         public void InsertConstInDisplay(string constValue)
         {
-            //MessageBox.Show(lastButtonTypePressed);
-            if (lastButtonTypePressed == "float")
+            if (lastButtonPressed.Peek() == "float")
             {
                 return;
             }
 
-            isFloat = true;
             hasCalculate = false;
-            isNumber = true;
 
             if (displayContent == "0")
             {
                 displayContent = constValue;
-                lastButtonTypePressed = "const";
+                lastButtonPressed.Push("const");
                 return;
             }
 
-            if(lastButtonTypePressed != "operator" && lastButtonTypePressed != "backspace")
+            if(lastButtonPressed.Peek() != "operator")
             {
                 constValue = "*" + constValue;
             }
 
-            lastButtonTypePressed = "const";
+            lastButtonPressed.Push("const");
             displayContent += constValue;
+        }
+
+
+        public void BackspaceDisplay()
+        {
+            lastButtonPressed.Pop();
+
+            if (hasCalculate)
+            {
+                ClearDisplay();
+                return;
+            }
+
+            int lenght = displayContent.Length - 1;
+            if (lenght > 0)
+            {
+                displayContent = displayContent.Substring(0, lenght);
+            }
+            else
+            {
+                ClearDisplay();
+            }
+            return;
         }
 
 
@@ -183,26 +214,31 @@ namespace Calculadora.Models
         /// </summary>
         public void ClearDisplay()
         {
-            lastButtonTypePressed = "number";
+            lastButtonPressed.Clear();
+            lastButtonPressed.Push("number");
             displayContent = "0";
             result = "";
-            isFloat = false;
-            isNumber = true;
-            isOperation = false;
+            ResetFlags();
+        }
+
+
+        private void ResetFlags()
+        {
             hasConst = false;
             hasCalculate = false;
+            hasPercentage = false;
         }
 
 
         /// <summary>
-        /// Método que recebe uma expressão matemática simples, contendo apenas operadores aritiméticos elementares e parênteses e faz seu cálculo.
+        /// Método que recebe uma expressão matemática simples, contendo apenas operadores aritiméticos elementares, parênteses, 
+        /// constantes matemáticas (e ou pi) e símbolos de porcentagem e faz seu cálculo.
         /// É necessário que a expressão esteja corretamente digitada, caso contrário mostra um MessageBox contendo um aviso de erro.
         /// 
         /// Exemplo de expressão correta: (10 + 3)*3 -4/3 + 5 ou (10+3)*3-4/3+5
         /// Exemplo de expressão incorreta: (10+3)*3--4/3( ou (10+3)*3 4/3++5
         /// 
         /// O cálculo é feito utilizando uma propriedade do DataTable de calcular expressões matemáticas simples
-        /// Outro modo possível é utilizando o método Compute() do DataTable
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um decimal contendo o valor da expressão corretamente calculada, respeitando precedência de parênteses e operadores</returns>
@@ -215,8 +251,11 @@ namespace Calculadora.Models
                     expression = expression.Replace("e", E.ToString());
                     expression = expression.Replace("π", PI.ToString());
                 }
+                if (hasPercentage)
+                {
+                    expression = expression.Replace("%", "*0.01");
+                }
                 expression = expression.Replace(",", ".");
-                //MessageBox.Show(expression);
                 System.Data.DataTable table = new System.Data.DataTable();
                 table.Columns.Add("expression", string.Empty.GetType(), expression);
                 System.Data.DataRow row = table.NewRow();

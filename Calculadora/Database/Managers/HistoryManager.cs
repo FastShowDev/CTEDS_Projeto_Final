@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace Calculadora.Database.Managers
 {
     public class HistoryManager : BaseManager
     {
+        private const int MAX_INICIAL_INSTANCES = 10;
         public HistoryManager(CalculatorDbContext context) : base(context)
         {
 
@@ -26,10 +28,36 @@ namespace Calculadora.Database.Managers
             await context.SaveChangesAsync();
         }
 
+
         public async void DeleteHistory(History history)
         {
             context.Histories.Remove(history);
             await context.SaveChangesAsync();
         }
+
+
+        public async void DeleteFirstHistory()
+        {
+            context.Histories.Remove(context.Histories.First());
+            await context.SaveChangesAsync();
+        }
+
+
+        public void MaintainHistory()
+        {
+            if(context.Histories.Count() > 10)
+            {
+                DeleteFirstHistory();
+            }
+        }
+
+
+        public async void DeleteAllHistory()
+        {
+            await context.Histories.ExecuteDeleteAsync();
+            await context.SaveChangesAsync();
+
+        }
+
     }
 }

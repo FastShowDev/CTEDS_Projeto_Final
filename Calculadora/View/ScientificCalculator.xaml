@@ -183,8 +183,8 @@
 
 
                 <!--#region Buttons: sqrt, ( , ) , n!, /-->
-                <Button x:Name="button_sqrt" Grid.Column="0" Grid.Row="4" Content="√" Style="{StaticResource CalculatorButtonStyle}"
-                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
+                <Button x:Name="button_sqrt" Grid.Column="0" Grid.Row="4" Content="√x" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"/>
                 
                 <Button x:Name="left_parentheses" Grid.Column="1" Grid.Row="4" Content="(" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=left_parentheses}"/>
@@ -265,9 +265,16 @@
                 
                 <Button x:Name="button_float" Grid.Column="3" Grid.Row="8" Content="," Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_float}"/>
-                
-                <Button Grid.Column="4" Grid.Row="8" Content="=" Style="{StaticResource CalculatorButtonStyle}"
-                        Command="{Binding CalculateCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
+
+                <Button x:Name="button_equals" Grid.Column="4" Grid.Row="8" Content="=" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding CalculateCM}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource myConverter}">
+                            <Binding ElementName="CalculatorDisplay"/>
+                            <Binding ElementName="HistoryDataGrid"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
                 <!--#endregion-->
                 
             </Grid>

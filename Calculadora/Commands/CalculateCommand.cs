@@ -26,14 +26,19 @@ namespace Calculadora.Commands
         {
             if(parameter != null)
             {
-                string expression = ((TextBox)parameter).Text;
+                var values = (object[])parameter;
+                string expression = (values[0] as TextBox).Text;
+                DataGrid dataGrid = values[1] as DataGrid;
+
                 _viewModel.stringResult = expression;
-                _viewModel.calculator.result = expression;
+
                 _viewModel.displayContent = _viewModel.calculator.CalculateExpression(expression).ToString();
-                _viewModel.calculator.displayContent = _viewModel.displayContent;
+
                 _viewModel.calculator.hasCalculate = true;
                 _viewModel.calculator.hasConst = false;
+
                 _viewModel.AddHistory(expression, _viewModel.displayContent);
+                dataGrid.ItemsSource = _viewModel.GetAllHistories();
 
             }
             

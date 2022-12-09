@@ -1,13 +1,10 @@
 ﻿using Calculadora.Commands;
 using Calculadora.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using Calculadora.Database;
 using Microsoft.EntityFrameworkCore;
-using Calculadora.Stores;
 using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
 using Calculadora.Database.Managers;
 using System.Threading.Tasks;
 
@@ -18,7 +15,6 @@ namespace Calculadora.ViewModels
         public Calculator calculator;
         public HistoryManager historyManager;
         public readonly CalculatorDbContext context;
-        public List<History> histories;
 
         #region Properties
         private string _displayContent = "0";
@@ -52,24 +48,24 @@ namespace Calculadora.ViewModels
                 return;
             }
         }
-
-
-
-
         #endregion
 
 
         #region Commands
-        //public new ICommand OpenMenu { get; }
-        //public new ICommand CloseMenu { get; }
-        //public ICommand NavigateMenuCM { get; }
         public ICommand OpenHistoryCM { get; }
+        public ICommand DeleteHistoryCM { get; }
+
         public ICommand BackspaceCM { get; }
         public ICommand ClearDisplayCM { get; }
+
         public ICommand NumberClickCM { get; }
         public ICommand OperatorClickCM { get; }
+        public ICommand PercentageClickCM { get; }
+
+        public ICommand InversionClickCM { get; }
         public ICommand SquareClickCM { get; }
         public ICommand SqrtClickCM { get; }
+
         public ICommand CalculateCM { get; }
         public ICommand LoadHistoryCM { get; }
         #endregion
@@ -78,16 +74,21 @@ namespace Calculadora.ViewModels
         public StandardCalculatorViewModel()
         {
             calculator = new Calculator();
-            //CloseMenu = new CloseMenuCommand(this);
-            //OpenMenu = new OpenMenuCommand(this);
-            //NavigateMenuCM = new NavigateCommand();
+
             OpenHistoryCM = new OpenHistoryCommand(this);
+            DeleteHistoryCM = new DeleteHistoryCommand(this);
+
             BackspaceCM = new BackspaceCommand(this);
             ClearDisplayCM = new ClearDisplayCommand(this);
+
             NumberClickCM = new NumberClickCommand(this);
             OperatorClickCM = new OperatorClickCommand(this);
+            PercentageClickCM = new PercentageCommand(this);
+
+            InversionClickCM = new InversionCommand(this);
             SquareClickCM = new SquareCommand(this);
             SqrtClickCM = new SquareRootCommand(this);
+
             CalculateCM = new CalculateCommand(this);
             LoadHistoryCM = new LoadHistoryCommand(this);
 
@@ -95,7 +96,6 @@ namespace Calculadora.ViewModels
             context = new CalculatorDbContext(contextOptions);
 
             historyManager = new HistoryManager(context);
-
             ViewName = "Padrão";
         }
 
@@ -115,9 +115,24 @@ namespace Calculadora.ViewModels
         }
 
 
-        public void DeleteHistory()
+        public void DeleteFirstHistory()
         {
+            historyManager.DeleteFirstHistory();
+            return;
+        }
 
+
+        public void DeleteAllHistory()
+        {
+            historyManager.DeleteAllHistory();
+            return;
+        }
+
+
+        public void MaintainHistory()
+        {
+            historyManager.MaintainHistory();
+            return;
         }
 
 
@@ -125,7 +140,6 @@ namespace Calculadora.ViewModels
         {
             this.displayContent = calculator.displayContent;
             this.stringResult = calculator.result;
-            calculator.hasCalculate = true;
         }
 
 

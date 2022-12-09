@@ -21,11 +21,9 @@ namespace Calculadora.Commands
         {
             if (parameter != null)
             {
-                string expression = ((TextBox)parameter).Text;
+                string expression = parameter as string;
                 _viewModel.calculator.InsertSquareRootInDisplay(expression);
-                _viewModel.displayContent = _viewModel.calculator.displayContent;
-                _viewModel.stringResult = _viewModel.calculator.result;
-                //MessageBox.Show("Resultado: " + _viewModel.calculator.result + "\nDisplay: " + _viewModel.calculator.displayContent);
+                _viewModel.UpdateDisplay();
                 _viewModel.calculator.hasCalculate = true;
                 _viewModel.AddHistory(_viewModel.stringResult, _viewModel.displayContent);
             }
