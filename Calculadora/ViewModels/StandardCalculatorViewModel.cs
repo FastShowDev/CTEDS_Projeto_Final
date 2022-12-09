@@ -115,9 +115,10 @@ namespace Calculadora.ViewModels
         }
 
 
-        public void DeleteHistory()
+        public void DeleteLastHistory()
         {
-
+            historyManager.DeleteLastHistory();
+            return;
         }
 
 
