@@ -145,7 +145,7 @@
                         Command="{Binding InversionClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
 
                 <Button x:Name="button_sqrt" Grid.Column="1" Grid.Row="2" Content="√x" Style="{StaticResource CalculatorButtonStyle}"
-                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
+                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"/>
 
                 <Button x:Name="button_sqr" Grid.Column="2" Grid.Row="2" Content="x²" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding SquareClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"/>

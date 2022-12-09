@@ -183,8 +183,8 @@
 
 
                 <!--#region Buttons: sqrt, ( , ) , n!, /-->
-                <Button x:Name="button_sqrt" Grid.Column="0" Grid.Row="4" Content="√" Style="{StaticResource CalculatorButtonStyle}"
-                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
+                <Button x:Name="button_sqrt" Grid.Column="0" Grid.Row="4" Content="√x" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"/>
                 
                 <Button x:Name="left_parentheses" Grid.Column="1" Grid.Row="4" Content="(" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=left_parentheses}"/>
