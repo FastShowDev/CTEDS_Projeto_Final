@@ -193,10 +193,17 @@
                 
                 <Button x:Name="button_float" Grid.Column="2" Grid.Row="5" Content="," 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_float}"/>
-                
+
                 <Button x:Name="button_equals" Grid.Column="3" Grid.Row="5" Content="=" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding CalculateCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
-               <!--#endregion-->
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding CalculateCM}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource myConverter}">
+                            <Binding ElementName="CalculatorDisplay"/>
+                            <Binding ElementName="HistoryDataGrid"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+                <!--#endregion-->
                 
             </Grid>
             
