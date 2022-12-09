@@ -25,6 +25,10 @@ namespace Calculadora.Models
         public string? lastButtonTypePressed { get; set; }
         #endregion
 
+        public Calculator()
+        {
+            buttonsTypePressed.Push("number");
+        }
         
 
         /// <summary>
@@ -37,7 +41,6 @@ namespace Calculadora.Models
         /// <returns></returns>
         public void InsertNumberInDisplay(string buttonName, string pressedButtonValue)
         {
-            //MessageBox.Show("Numero: " + buttonsTypePressed.Peek());
             isNumber = true;
             hasCalculate = false;
             if (displayContent == "0" && pressedButtonValue != DECIMAL_SPERATOR)
@@ -47,22 +50,22 @@ namespace Calculadora.Models
 
             if (buttonName == "button_float")
             {
-                if (lastButtonTypePressed == "float")
+                if (buttonsTypePressed.Peek() == "float")
                 {
                     return;
                 }
                 isFloat = true;
-                lastButtonTypePressed = "float";
+                buttonsTypePressed.Push("float");
                 displayContent += pressedButtonValue;
                 return;
             }
-            if(lastButtonTypePressed == "right_parenthesis")
+            if(buttonsTypePressed.Peek() == "right_parenthesis")
             {
                 pressedButtonValue = "*" + pressedButtonValue;
             }
 
             displayContent += pressedButtonValue;
-            lastButtonTypePressed = "number";
+            buttonsTypePressed.Push("number");
             return;
         }
 
@@ -77,14 +80,14 @@ namespace Calculadora.Models
         /// <returns></returns>
         public void InsertOperatorInDisplay(string buttonName, string pressedButtonValue)
         {
-            //MessageBox.Show("Operador: " + lastButtonTypePressed);
-            if(lastButtonTypePressed == "left_parenthesis")
+            hasCalculate = false;
+            if(buttonsTypePressed.Peek() == "left_parenthesis")
             {
                 return;
             }
 
 
-            if (lastButtonTypePressed == "operator")
+            if (buttonsTypePressed.Peek() == "operator")
             {
                 int newDisplayLenght = displayContent.Length - 1;
                 string display = displayContent.Substring(0, newDisplayLenght);
@@ -93,7 +96,7 @@ namespace Calculadora.Models
             }
             else
             {
-                lastButtonTypePressed = "operator";
+                buttonsTypePressed.Push("operator");
                 displayContent += pressedButtonValue;
             }
 
@@ -103,30 +106,29 @@ namespace Calculadora.Models
 
         public void InsertParenthesisInDisplay(string value)
         {
-            //MessageBox.Show(lastButtonTypePressed);
-
-            if(lastButtonTypePressed == "number" && value != ")")
+            hasCalculate = false;
+            if(buttonsTypePressed.Peek() == "number" && value != ")")
             {
                 displayContent += "*(";
-                lastButtonTypePressed = "left_parenthesis";
+                buttonsTypePressed.Push("left_parenthesis");
                 return;
             }
 
             if(displayContent == "0" && value == "(")
             {
                 displayContent = value;
-                lastButtonTypePressed = "left_parenthesis";
+                buttonsTypePressed.Push("left_parenthesis");
                 return;
             }
 
-            if(lastButtonTypePressed == "operator" && value == ")")
+            if(buttonsTypePressed.Peek() == "operator" && value == ")")
             {
                 return;
             }
 
-            if(lastButtonTypePressed == "right_parenthesis" && value == "(")
+            if(buttonsTypePressed.Peek() == "right_parenthesis" && value == "(")
             {
-                lastButtonTypePressed = "left_parenthesis";
+                buttonsTypePressed.Push("left_parenthesis");
                 value = "*(";
                 displayContent += value;
                 return;
@@ -136,22 +138,19 @@ namespace Calculadora.Models
 
             if(value == "(")
             {
-                lastButtonTypePressed = "left_parenthesis";
+                buttonsTypePressed.Push("left_parenthesis");
             }
             else
             {
-                lastButtonTypePressed = "right_parenthesis";
+                buttonsTypePressed.Push("right_parenthesis");
             }
 
         }
 
 
-
-
         public void InsertConstInDisplay(string constValue)
         {
-            //MessageBox.Show(lastButtonTypePressed);
-            if (lastButtonTypePressed == "float")
+            if (buttonsTypePressed.Peek() == "float")
             {
                 return;
             }
@@ -163,17 +162,45 @@ namespace Calculadora.Models
             if (displayContent == "0")
             {
                 displayContent = constValue;
-                lastButtonTypePressed = "const";
+                buttonsTypePressed.Push("const");
                 return;
             }
 
-            if(lastButtonTypePressed != "operator" && lastButtonTypePressed != "backspace")
+            if(buttonsTypePressed.Peek() != "operator")
             {
                 constValue = "*" + constValue;
             }
 
-            lastButtonTypePressed = "const";
+            buttonsTypePressed.Push("const");
             displayContent += constValue;
+        }
+
+
+        public void BackspaceDisplay()
+        {
+            buttonsTypePressed.Pop();
+
+            if (hasCalculate)
+            {
+                displayContent = "0";
+                result = "";
+                buttonsTypePressed.Clear();
+                buttonsTypePressed.Push("number");
+                return;
+            }
+
+            int lenght = displayContent.Length - 1;
+            if (lenght > 0)
+            {
+                displayContent = displayContent.Substring(0, lenght);
+            }
+            else
+            {
+                displayContent = "0";
+                buttonsTypePressed.Clear();
+                buttonsTypePressed.Push("number");
+            }
+            return;
         }
 
 
@@ -183,7 +210,8 @@ namespace Calculadora.Models
         /// </summary>
         public void ClearDisplay()
         {
-            lastButtonTypePressed = "number";
+            buttonsTypePressed.Clear();
+            buttonsTypePressed.Push("number");
             displayContent = "0";
             result = "";
             isFloat = false;
@@ -216,7 +244,6 @@ namespace Calculadora.Models
                     expression = expression.Replace("π", PI.ToString());
                 }
                 expression = expression.Replace(",", ".");
-                //MessageBox.Show(expression);
                 System.Data.DataTable table = new System.Data.DataTable();
                 table.Columns.Add("expression", string.Empty.GetType(), expression);
                 System.Data.DataRow row = table.NewRow();
