@@ -54,13 +54,18 @@ namespace Calculadora.ViewModels
         #region Commands
         public ICommand OpenHistoryCM { get; }
         public ICommand DeleteHistoryCM { get; }
+
         public ICommand BackspaceCM { get; }
         public ICommand ClearDisplayCM { get; }
+
         public ICommand NumberClickCM { get; }
         public ICommand OperatorClickCM { get; }
+        public ICommand PercentageClickCM { get; }
+
         public ICommand InversionClickCM { get; }
         public ICommand SquareClickCM { get; }
         public ICommand SqrtClickCM { get; }
+
         public ICommand CalculateCM { get; }
         public ICommand LoadHistoryCM { get; }
         #endregion
@@ -78,6 +83,7 @@ namespace Calculadora.ViewModels
 
             NumberClickCM = new NumberClickCommand(this);
             OperatorClickCM = new OperatorClickCommand(this);
+            PercentageClickCM = new PercentageCommand(this);
 
             InversionClickCM = new InversionCommand(this);
             SquareClickCM = new SquareCommand(this);

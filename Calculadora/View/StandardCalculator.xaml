@@ -125,7 +125,7 @@
                 
                 <!--#region Buttons: CE, C, BACK, /-->
                 <Button Grid.Column="0" Grid.Row="1" Content="%" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding PercentageClickCM}"/>
                 
                 <Button Grid.Column="1" Grid.Row="1" Content="CE" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
