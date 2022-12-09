@@ -72,10 +72,9 @@ namespace Calculadora.Models
         /// Caso o último botão pressionado foi um operador, ou seja, o último caracter do display for um operador aritmético atualiza para o novo operador pressionado.
         /// Caso o último botão pressionado foi um número, apenas adiciona o operador pressionado ao display.
         /// </summary>
-        /// <param name="buttonName"></param>
         /// <param name="pressedButtonValue"></param>
         /// <returns></returns>
-        public void InsertOperatorInDisplay(string buttonName, string pressedButtonValue)
+        public void InsertOperatorInDisplay(string pressedButtonValue)
         {
             hasCalculate = false;
             if(lastButtonPressed.Peek() == "left_parenthesis")
@@ -100,6 +99,21 @@ namespace Calculadora.Models
             return;
         }
 
+
+        public void InsertPercentageInDisplay()
+        {
+            hasCalculate = false;
+            if (lastButtonPressed.Peek() == "operator")
+            {
+                return;
+            }
+
+            if(lastButtonPressed.Peek() == "number")
+            {
+                displayContent += "%";
+                hasPercentage = true;
+            }
+        }
 
         public void InsertParenthesisInDisplay(string value)
         {
@@ -236,6 +250,10 @@ namespace Calculadora.Models
                 {
                     expression = expression.Replace("e", E.ToString());
                     expression = expression.Replace("π", PI.ToString());
+                }
+                if (hasPercentage)
+                {
+                    expression = expression.Replace("%", "*0.01");
                 }
                 expression = expression.Replace(",", ".");
                 System.Data.DataTable table = new System.Data.DataTable();
