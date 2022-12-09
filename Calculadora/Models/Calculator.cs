@@ -14,34 +14,31 @@ namespace Calculadora.Models
         #endregion
 
         #region Properties
-        public bool isNumber { get; set; }
-        public bool isFloat { get; set; }
-        public bool isOperation { get; set; }
         public bool hasConst { get; set; }
         public bool hasCalculate { get; set; } = false;
+        public bool hasPercentage { get; set; }
         public string displayContent { get; set; } = "0";
         public string result { get; set; } = "";
-        public Stack<string> buttonsTypePressed { get; } = new Stack<string>();
-        public string? lastButtonTypePressed { get; set; }
+        public Stack<string> lastButtonPressed { get; } = new Stack<string>();
         #endregion
 
         public Calculator()
         {
-            buttonsTypePressed.Push("number");
+            lastButtonPressed.Push("number");
         }
         
 
         /// <summary>
-        /// Método que insere um número no display.
-        /// Caso o botão de casa decimal for apertado, só permite a adição de vírgula caso for a primeira vez (isFloar == false)
-        /// Faz o tramento necessário caso o display tenha apenas valor zero.
+        /// Método que insere um número no display e vírgula para casa decimal. Usando os seguintes critérios:
+        /// 
+        /// -Não permite colocar vírgulas seguidas
+        /// -Caso o último caracter for um parênteses direito o símbolo de multiplicação é colocado automaticamente.
         /// </summary>
         /// <param name="buttonName"></param>
         /// <param name="pressedButtonValue"></param>
         /// <returns></returns>
         public void InsertNumberInDisplay(string buttonName, string pressedButtonValue)
         {
-            isNumber = true;
             hasCalculate = false;
             if (displayContent == "0" && pressedButtonValue != DECIMAL_SPERATOR)
             {
@@ -50,22 +47,22 @@ namespace Calculadora.Models
 
             if (buttonName == "button_float")
             {
-                if (buttonsTypePressed.Peek() == "float")
+                if (lastButtonPressed.Peek() == "float")
                 {
                     return;
                 }
-                isFloat = true;
-                buttonsTypePressed.Push("float");
+                lastButtonPressed.Push("float");
                 displayContent += pressedButtonValue;
                 return;
             }
-            if(buttonsTypePressed.Peek() == "right_parenthesis")
+
+            if(lastButtonPressed.Peek() == "right_parenthesis")
             {
                 pressedButtonValue = "*" + pressedButtonValue;
             }
 
             displayContent += pressedButtonValue;
-            buttonsTypePressed.Push("number");
+            lastButtonPressed.Push("number");
             return;
         }
 
@@ -81,13 +78,13 @@ namespace Calculadora.Models
         public void InsertOperatorInDisplay(string buttonName, string pressedButtonValue)
         {
             hasCalculate = false;
-            if(buttonsTypePressed.Peek() == "left_parenthesis")
+            if(lastButtonPressed.Peek() == "left_parenthesis")
             {
                 return;
             }
 
 
-            if (buttonsTypePressed.Peek() == "operator")
+            if (lastButtonPressed.Peek() == "operator")
             {
                 int newDisplayLenght = displayContent.Length - 1;
                 string display = displayContent.Substring(0, newDisplayLenght);
@@ -96,7 +93,7 @@ namespace Calculadora.Models
             }
             else
             {
-                buttonsTypePressed.Push("operator");
+                lastButtonPressed.Push("operator");
                 displayContent += pressedButtonValue;
             }
 
@@ -107,28 +104,28 @@ namespace Calculadora.Models
         public void InsertParenthesisInDisplay(string value)
         {
             hasCalculate = false;
-            if(buttonsTypePressed.Peek() == "number" && value != ")")
+            if(lastButtonPressed.Peek() == "number" && value != ")")
             {
                 displayContent += "*(";
-                buttonsTypePressed.Push("left_parenthesis");
+                lastButtonPressed.Push("left_parenthesis");
                 return;
             }
 
             if(displayContent == "0" && value == "(")
             {
                 displayContent = value;
-                buttonsTypePressed.Push("left_parenthesis");
+                lastButtonPressed.Push("left_parenthesis");
                 return;
             }
 
-            if(buttonsTypePressed.Peek() == "operator" && value == ")")
+            if(lastButtonPressed.Peek() == "operator" && value == ")")
             {
                 return;
             }
 
-            if(buttonsTypePressed.Peek() == "right_parenthesis" && value == "(")
+            if(lastButtonPressed.Peek() == "right_parenthesis" && value == "(")
             {
-                buttonsTypePressed.Push("left_parenthesis");
+                lastButtonPressed.Push("left_parenthesis");
                 value = "*(";
                 displayContent += value;
                 return;
@@ -138,11 +135,11 @@ namespace Calculadora.Models
 
             if(value == "(")
             {
-                buttonsTypePressed.Push("left_parenthesis");
+                lastButtonPressed.Push("left_parenthesis");
             }
             else
             {
-                buttonsTypePressed.Push("right_parenthesis");
+                lastButtonPressed.Push("right_parenthesis");
             }
 
         }
@@ -150,42 +147,37 @@ namespace Calculadora.Models
 
         public void InsertConstInDisplay(string constValue)
         {
-            if (buttonsTypePressed.Peek() == "float")
+            if (lastButtonPressed.Peek() == "float")
             {
                 return;
             }
 
-            isFloat = true;
             hasCalculate = false;
-            isNumber = true;
 
             if (displayContent == "0")
             {
                 displayContent = constValue;
-                buttonsTypePressed.Push("const");
+                lastButtonPressed.Push("const");
                 return;
             }
 
-            if(buttonsTypePressed.Peek() != "operator")
+            if(lastButtonPressed.Peek() != "operator")
             {
                 constValue = "*" + constValue;
             }
 
-            buttonsTypePressed.Push("const");
+            lastButtonPressed.Push("const");
             displayContent += constValue;
         }
 
 
         public void BackspaceDisplay()
         {
-            buttonsTypePressed.Pop();
+            lastButtonPressed.Pop();
 
             if (hasCalculate)
             {
-                displayContent = "0";
-                result = "";
-                buttonsTypePressed.Clear();
-                buttonsTypePressed.Push("number");
+                ClearDisplay();
                 return;
             }
 
@@ -196,9 +188,7 @@ namespace Calculadora.Models
             }
             else
             {
-                displayContent = "0";
-                buttonsTypePressed.Clear();
-                buttonsTypePressed.Push("number");
+                ClearDisplay();
             }
             return;
         }
@@ -210,27 +200,31 @@ namespace Calculadora.Models
         /// </summary>
         public void ClearDisplay()
         {
-            buttonsTypePressed.Clear();
-            buttonsTypePressed.Push("number");
+            lastButtonPressed.Clear();
+            lastButtonPressed.Push("number");
             displayContent = "0";
             result = "";
-            isFloat = false;
-            isNumber = true;
-            isOperation = false;
+            ResetFlags();
+        }
+
+
+        private void ResetFlags()
+        {
             hasConst = false;
             hasCalculate = false;
+            hasPercentage = false;
         }
 
 
         /// <summary>
-        /// Método que recebe uma expressão matemática simples, contendo apenas operadores aritiméticos elementares e parênteses e faz seu cálculo.
+        /// Método que recebe uma expressão matemática simples, contendo apenas operadores aritiméticos elementares, parênteses, 
+        /// constantes matemáticas (e ou pi) e símbolos de porcentagem e faz seu cálculo.
         /// É necessário que a expressão esteja corretamente digitada, caso contrário mostra um MessageBox contendo um aviso de erro.
         /// 
         /// Exemplo de expressão correta: (10 + 3)*3 -4/3 + 5 ou (10+3)*3-4/3+5
         /// Exemplo de expressão incorreta: (10+3)*3--4/3( ou (10+3)*3 4/3++5
         /// 
         /// O cálculo é feito utilizando uma propriedade do DataTable de calcular expressões matemáticas simples
-        /// Outro modo possível é utilizando o método Compute() do DataTable
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um decimal contendo o valor da expressão corretamente calculada, respeitando precedência de parênteses e operadores</returns>
