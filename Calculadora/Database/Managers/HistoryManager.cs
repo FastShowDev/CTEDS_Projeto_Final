@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace Calculadora.Database.Managers
 {
@@ -29,6 +30,12 @@ namespace Calculadora.Database.Managers
         public async void DeleteHistory(History history)
         {
             context.Histories.Remove(history);
+            await context.SaveChangesAsync();
+        }
+
+        public async void DeleteLastHistory()
+        {
+            context.Histories.Remove(context.Histories.First());
             await context.SaveChangesAsync();
         }
     }
