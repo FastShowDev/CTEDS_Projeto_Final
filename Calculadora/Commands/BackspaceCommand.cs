@@ -17,29 +17,8 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            _viewModel.calculator.lastButtonTypePressed = "backspace";
-
-            if (_viewModel.calculator.hasCalculate)
-            {
-                _viewModel.displayContent = "0";
-                _viewModel.calculator.displayContent = "0";
-                _viewModel.calculator.lastButtonTypePressed = "reset";
-                return;
-            }
-
-            int lenght = _viewModel.displayContent.Length - 1;
-            if (lenght > 0)
-            {
-                _viewModel.displayContent = _viewModel.displayContent.Substring(0, lenght);
-                _viewModel.calculator.displayContent = _viewModel.displayContent;
-            }
-            else
-            {
-                _viewModel.displayContent = "0";
-                _viewModel.calculator.displayContent = "0";
-                _viewModel.calculator.lastButtonTypePressed = "reset";
-            }
-            return;
+            _viewModel.calculator.BackspaceDisplay();
+            _viewModel.UpdateDisplay();
         }
     }
 }
