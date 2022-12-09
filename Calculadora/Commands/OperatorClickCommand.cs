@@ -23,7 +23,6 @@ namespace Calculadora.Commands
         {
             if(parameter != null)
             {
-                string objName = ((Button)parameter).Name;
                 string pressedButtonValue = (parameter as Button).Content.ToString();
 
                 if (pressedButtonValue == "(" || pressedButtonValue == ")")
@@ -38,7 +37,7 @@ namespace Calculadora.Commands
                     pressedButtonValue = "%";
                 }
 
-                _viewModel.calculator.InsertOperatorInDisplay(objName, pressedButtonValue);
+                _viewModel.calculator.InsertOperatorInDisplay(pressedButtonValue);
                 _viewModel.displayContent = _viewModel.calculator.displayContent;
             }
         }

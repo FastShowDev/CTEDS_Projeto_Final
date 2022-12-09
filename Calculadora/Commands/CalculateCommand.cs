@@ -31,10 +31,8 @@ namespace Calculadora.Commands
                 DataGrid dataGrid = values[1] as DataGrid;
 
                 _viewModel.stringResult = expression;
-                _viewModel.calculator.result = expression;
 
                 _viewModel.displayContent = _viewModel.calculator.CalculateExpression(expression).ToString();
-                _viewModel.calculator.displayContent = _viewModel.displayContent;
 
                 _viewModel.calculator.hasCalculate = true;
                 _viewModel.calculator.hasConst = false;
