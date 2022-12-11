@@ -1,4 +1,5 @@
-﻿using Calculadora.Stores;
+﻿using Calculadora.Models;
+using Calculadora.Stores;
 using Calculadora.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,8 @@ namespace Calculadora.Commands
             menu.Visibility = Visibility.Hidden;
             radioButton.IsChecked = true;
             NavigationStore.CurrentViewModel.IsMenuOpen = false;
+
+            CalculatorDisplay.ClearDisplay();
         }
     }
 }
