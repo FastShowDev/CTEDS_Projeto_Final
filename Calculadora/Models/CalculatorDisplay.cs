@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Calculadora.Models
@@ -37,7 +38,8 @@ namespace Calculadora.Models
         #region PROPERTIES
         public static string displayContent { get; set; } = "0";
         public static string result { get; set; } = "";
-        public static Stack<string> lastButtonPressed { get; } = new Stack<string>();
+        private static string[] values = { "number" };
+        public static Stack<string> lastButtonPressed { get; } = new Stack<string>(values);
         #endregion
 
 

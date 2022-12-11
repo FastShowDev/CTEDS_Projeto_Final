@@ -4,11 +4,10 @@ using System.Windows;
 
 namespace Calculadora.Models
 {
-    public class Calculator
+    public static class Calculator
     {
         #region CONSTANTS
         private const string DECIMAL_SPERATOR = ",";
-
         private const double PI = Math.PI;
         private const double E = Math.E;
         #endregion
@@ -22,12 +21,8 @@ namespace Calculadora.Models
         private const string INVERSION_SYMBOL = "1/";
         #endregion
 
-        public Calculator()
-        {
-            CalculatorDisplay.lastButtonPressed.Push("number");
-        }
 
-        public void ExecuteCalculate(string expression)
+        public static void ExecuteCalculate(string expression)
         {
             CalculatorDisplay.result = expression;
             CalculatorDisplay.displayContent = CalculatorEngine.CalculateExpression(expression).ToString();
@@ -35,7 +30,7 @@ namespace Calculadora.Models
             return;
         }
 
-        public void ExecuteSquare(string expression)
+        public static void ExecuteSquare(string expression)
         {
             CalculatorDisplay.displayContent = CalculatorEngine.Square(expression).ToString();
             CalculatorDisplay.InsertSymbolInResult(SQUARE_SYMBOL, expression);
@@ -43,7 +38,7 @@ namespace Calculadora.Models
             return;
         }
 
-        public void ExecuteSquareRoot(string expression)
+        public static void ExecuteSquareRoot(string expression)
         {
             CalculatorDisplay.displayContent = CalculatorEngine.SquareRoot(expression).ToString();
             CalculatorDisplay.InsertSymbolInResult(SQUARE_ROOT_SYMBOL, expression);
@@ -52,7 +47,7 @@ namespace Calculadora.Models
         }
 
 
-        public void ExecuteLog10(string expression)
+        public static void ExecuteLog10(string expression)
         {
             CalculatorDisplay.displayContent = CalculatorEngine.Log10(expression).ToString();
             CalculatorDisplay.InsertSymbolInResult(LOG_SYMBOL, expression);
@@ -61,7 +56,7 @@ namespace Calculadora.Models
         }
 
 
-        public void ExecuteLn(string expression)
+        public static void ExecuteLn(string expression)
         {
             CalculatorDisplay.displayContent = CalculatorEngine.Ln(expression).ToString();
             CalculatorDisplay.InsertSymbolInResult(LN_SYMBOL, expression);
@@ -70,7 +65,7 @@ namespace Calculadora.Models
         }
 
 
-        public void ExecuteInversion(string expression)
+        public static void ExecuteInversion(string expression)
         {
             CalculatorDisplay.displayContent = CalculatorEngine.Inversion(expression).ToString();
             CalculatorDisplay.InsertSymbolInResult(INVERSION_SYMBOL, expression);
@@ -79,7 +74,7 @@ namespace Calculadora.Models
         }
 
 
-        public void ExecuteAbsolute(string expression)
+        public static void ExecuteAbsolute(string expression)
         {
             CalculatorDisplay.displayContent = CalculatorEngine.Absolute(expression).ToString();
             CalculatorDisplay.InsertSymbolInResult(ABSOLUTE_SYMBOL, expression);
