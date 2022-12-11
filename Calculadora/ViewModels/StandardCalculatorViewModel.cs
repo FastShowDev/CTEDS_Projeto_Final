@@ -12,7 +12,6 @@ namespace Calculadora.ViewModels
 {
     public class StandardCalculatorViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        public Calculator calculator;
         public HistoryManager historyManager;
         public readonly CalculatorDbContext context;
 
@@ -27,7 +26,7 @@ namespace Calculadora.ViewModels
                 {
                     _displayContent = value;
                     OnPropertyChanged(nameof(displayContent));
-                    calculator.displayContent = value;
+                    CalculatorDisplay.displayContent = value;
                 }
                 return;
             }
@@ -43,7 +42,7 @@ namespace Calculadora.ViewModels
                 {
                     _stringResult = value;
                     OnPropertyChanged(nameof(stringResult));
-                    calculator.result = value;
+                    CalculatorDisplay.result = value;
                 }
                 return;
             }
@@ -73,7 +72,6 @@ namespace Calculadora.ViewModels
 
         public StandardCalculatorViewModel()
         {
-            calculator = new Calculator();
 
             OpenHistoryCM = new OpenHistoryCommand(this);
             DeleteHistoryCM = new DeleteHistoryCommand(this);
@@ -138,8 +136,8 @@ namespace Calculadora.ViewModels
 
         public void UpdateDisplay()
         {
-            this.displayContent = calculator.displayContent;
-            this.stringResult = calculator.result;
+            this.displayContent = CalculatorDisplay.displayContent;
+            this.stringResult = CalculatorDisplay.result;
         }
 
 

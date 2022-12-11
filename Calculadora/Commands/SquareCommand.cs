@@ -1,9 +1,5 @@
-﻿using Calculadora.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Calculadora.Models;
+using Calculadora.ViewModels;
 
 namespace Calculadora.Commands
 {
@@ -21,9 +17,8 @@ namespace Calculadora.Commands
             if (parameter != null)
             {
                 string expression = parameter as string;
-                _viewModel.calculator.InsertSquareInDisplay(expression);
+                Calculator.ExecuteSquare(expression);
                 _viewModel.UpdateDisplay();
-                _viewModel.calculator.hasCalculate = true;
                 _viewModel.AddHistory(_viewModel.stringResult, _viewModel.displayContent);
             }
 

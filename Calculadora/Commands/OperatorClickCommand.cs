@@ -1,13 +1,6 @@
 ﻿using Calculadora.Models;
 using Calculadora.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Calculadora.Commands
 {
@@ -27,8 +20,8 @@ namespace Calculadora.Commands
 
                 if (pressedButtonValue == "(" || pressedButtonValue == ")")
                 {
-                    _viewModel.calculator.InsertParenthesisInDisplay(pressedButtonValue);
-                    _viewModel.displayContent = _viewModel.calculator.displayContent;
+                    CalculatorDisplay.InsertParenthesisInDisplay(pressedButtonValue);
+                    _viewModel.displayContent = CalculatorDisplay.displayContent;
                     return;
                 }
 
@@ -37,8 +30,8 @@ namespace Calculadora.Commands
                     pressedButtonValue = "%";
                 }
 
-                _viewModel.calculator.InsertOperatorInDisplay(pressedButtonValue);
-                _viewModel.displayContent = _viewModel.calculator.displayContent;
+                CalculatorDisplay.InsertOperatorInDisplay(pressedButtonValue);
+                _viewModel.displayContent = CalculatorDisplay.displayContent;
             }
         }
     }

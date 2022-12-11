@@ -1,5 +1,5 @@
-﻿using Calculadora.ViewModels;
-using System.Windows.Controls;
+﻿using Calculadora.Models;
+using Calculadora.ViewModels;
 
 namespace Calculadora.Commands
 {
@@ -13,9 +13,8 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            _viewModel.displayContent = "0";
-            _viewModel.stringResult = "";
-            _viewModel.calculator.ClearDisplay();
+            CalculatorDisplay.ClearDisplay();
+            _viewModel.UpdateDisplay();
         }
     }
 }

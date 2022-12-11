@@ -1,11 +1,5 @@
-﻿using Calculadora.Stores;
+﻿using Calculadora.Models;
 using Calculadora.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Calculadora.Commands
 {
@@ -18,7 +12,7 @@ namespace Calculadora.Commands
         }
         public override void Execute(object parameter)
         {
-            _viewModel.calculator.InsertPercentageInDisplay();
+            CalculatorDisplay.InsertPercentageInDisplay();
             _viewModel.UpdateDisplay();
         }
     }

@@ -1,9 +1,5 @@
-﻿using Calculadora.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Calculadora.Models;
+using Calculadora.ViewModels;
 
 namespace Calculadora.Commands
 {
@@ -17,7 +13,7 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            _viewModel.calculator.BackspaceDisplay();
+            CalculatorDisplay.BackspaceDisplay();
             _viewModel.UpdateDisplay();
         }
     }
