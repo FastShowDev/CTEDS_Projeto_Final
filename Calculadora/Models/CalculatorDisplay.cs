@@ -225,6 +225,7 @@ namespace Calculadora.Models
             }
 
             CalculatorEngine.HasCalculate = false;
+            CalculatorEngine.HasConst = true;
 
             if (displayContent == "0")
             {
