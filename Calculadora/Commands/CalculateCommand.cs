@@ -30,12 +30,8 @@ namespace Calculadora.Commands
                 string expression = (values[0] as TextBox).Text;
                 DataGrid dataGrid = values[1] as DataGrid;
 
-                _viewModel.stringResult = expression;
-
-                _viewModel.displayContent = _viewModel.calculator.CalculateExpression(expression).ToString();
-
-                _viewModel.calculator.hasCalculate = true;
-                _viewModel.calculator.hasConst = false;
+                Calculator.ExecuteCalculate(expression);
+                _viewModel.UpdateDisplay();
 
                 _viewModel.AddHistory(expression, _viewModel.displayContent);
                 dataGrid.ItemsSource = _viewModel.GetAllHistories();
