@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Linq;
 
 namespace Calculadora.Database.Managers
 {
     public class HistoryManager : BaseManager
     {
-        private const int MAX_INICIAL_INSTANCES = 10;
+        private const int MAX_NUMBER_INSTANCES = 10;
         public HistoryManager(CalculatorDbContext context) : base(context)
         {
 
@@ -45,7 +44,7 @@ namespace Calculadora.Database.Managers
 
         public void MaintainHistory()
         {
-            if(context.Histories.Count() > 10)
+            if(context.Histories.Count() > MAX_NUMBER_INSTANCES)
             {
                 DeleteFirstHistory();
             }
