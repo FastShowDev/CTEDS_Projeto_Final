@@ -19,25 +19,6 @@ namespace Calculadora.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<History>(entity =>
-            {
-                entity.HasData(
-                    new History
-                    {
-                        Id = 1,
-                        fullExpression = "18+4-2+5 = 25",
-                        expression = "18+4-2+5",
-                        result = "25",
-                    },
-                    new History
-                    {
-                        Id = 2,
-                        fullExpression = "30*3+2/2-1 = 90",
-                        expression = "30*3+2/2-1",
-                        result = "90",
-                    });
-            });
-
             modelBuilder.Entity<History>()
                 .Property(f => f.Id)
                 .ValueGeneratedOnAdd();
