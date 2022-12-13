@@ -13,7 +13,7 @@ namespace Calculadora.Commands
             _viewModel = viewModel;
         }
 
-        public override void Execute(object parameter)
+        public override void Execute(object? parameter)
         {
             if (parameter != null)
             {

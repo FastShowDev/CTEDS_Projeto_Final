@@ -13,11 +13,11 @@ namespace Calculadora.Commands
             _viewModel = viewModel;
         }
 
-        public override void Execute(object parameter)
+        public override void Execute(object? parameter)
         {
             if(parameter != null)
             {
-                string buttonName = (parameter as Button).Name;
+                string buttonName = ((Button)parameter).Name;
 
                 if (buttonName == "button_pi")
                 {

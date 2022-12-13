@@ -15,7 +15,7 @@
         MinWidth="400">
 
     <UserControl.Resources>
-        <converters:GenericConverter x:Key="myConverter"/>
+        <converters:CloneConverter x:Key="myConverter"/>
         <vm:StandardCalculatorViewModel x:Key="standardVM"/>
         <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
     </UserControl.Resources>
