@@ -13,6 +13,7 @@ using Calculadora.View;
 using Calculadora.ViewModels;
 using Calculadora.Stores;
 using System.Runtime.CompilerServices;
+using Calculadora.Database.Managers;
 
 namespace Calculadora
 {
@@ -21,34 +22,42 @@ namespace Calculadora
     /// </summary>
     public partial class App : Application
     {
-        private readonly ServiceProvider serviceProvider;
+        private const string CONNECTION_STRING = "Data source = Histories.db";
+
         private readonly NavigationStore _navigationStore;
+        private readonly HistoryManager _historyManager;
+
         public App()
         {
-            ServiceCollection services = new();
             _navigationStore = new NavigationStore();
 
-            services.AddDbContext<CalculatorDbContext>(options =>
-            {
-                options.UseSqlite("Data source = Histories.db");
-            });
+            DbContextOptions<CalculatorDbContext> contextOptions = new DbContextOptionsBuilder<CalculatorDbContext>().UseSqlite(CONNECTION_STRING).Options;
+            CalculatorDbContext context = new CalculatorDbContext(contextOptions);
 
-            services.AddSingleton<MainWindow>();
-            serviceProvider = services.BuildServiceProvider();
-
+            _historyManager = new HistoryManager(context);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            NavigationStore.CurrentViewModel = new StandardCalculatorViewModel();
+            NavigationStore.CurrentViewModel = CreateStandardViewModel();
 
-            MainWindow = serviceProvider.GetService<MainWindow>();
-            MainWindow.DataContext = new MainViewModel();
-            MainWindow.Show();
+            MainWindow tela = new MainWindow();
+            tela.DataContext = new MainViewModel();
+            tela.Show();
 
 
             base.OnStartup(e);
 
+        }
+
+        private StandardCalculatorViewModel CreateStandardViewModel()
+        {
+            return StandardCalculatorViewModel.LoadViewModel();
+        }
+
+        private ScientificCalculatorViewModel CreateScientificViewModel()
+        {
+            return new ScientificCalculatorViewModel();
         }
     }
 }

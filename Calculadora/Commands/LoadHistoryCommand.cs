@@ -1,20 +1,22 @@
 ﻿using Calculadora.Database;
+using Calculadora.Database.Managers;
 using Calculadora.ViewModels;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Calculadora.Commands
 {
-    public class LoadHistoryCommand : BaseCommand
+    public class LoadHistoryCommand : BaseAsyncCommand
     {
-        private StandardCalculatorViewModel _viewModel;
+        private readonly StandardCalculatorViewModel _viewModel;
         public LoadHistoryCommand(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
-        public override void Execute(object? parameter)
+
+        public override async Task ExecuteAsync(object parameter)
         {
-            DataGrid dataGrid = (DataGrid)parameter;
-            dataGrid.ItemsSource = _viewModel.GetAllHistories();
+            await _viewModel.historyManager.Load();
         }
     }
 }

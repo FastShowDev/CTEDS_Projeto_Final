@@ -20,13 +20,16 @@ namespace Calculadora.Commands
 #nullable enable
         public override void Execute(object? parameter)
         {
-            var values = (object[])parameter;
-            Border historyMenu = values[0] as Border;
-            DataGrid dataGrid = values[1] as DataGrid;
+            if(parameter != null)
+            {
+                var values = (object[])parameter;
+                Border? historyMenu = values[0] as Border;
+                DataGrid? dataGrid = values[1] as DataGrid;
 
-            historyMenu.Visibility = Visibility.Visible;
-            dataGrid.ItemsSource = _viewModel.GetAllHistories();
-            NavigationStore.CurrentViewModel.IsMenuOpen = true;
+                historyMenu.Visibility = Visibility.Visible;
+                dataGrid.ItemsSource = _viewModel.GetAllHistories();
+                NavigationStore.CurrentViewModel.IsMenuOpen = true;
+            }
         }
     }
 }
