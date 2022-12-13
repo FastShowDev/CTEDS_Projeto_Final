@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -12,6 +12,10 @@
     <EmbeddedResource Remove="Managers\**" />
     <None Remove="Managers\**" />
     <Page Remove="Managers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Commands\sdo2v50u.b0a~" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +33,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Stores\" />
   </ItemGroup>
 
 </Project>

@@ -7,13 +7,14 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using Calculadora.Database.Managers;
 using System.Threading.Tasks;
+using System;
 
 namespace Calculadora.ViewModels
 {
     public class StandardCalculatorViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public HistoryManager historyManager;
-        public readonly CalculatorDbContext context;
+        private readonly CalculatorDbContext context;
 
         #region Properties
         private string _displayContent = "0";
@@ -69,9 +70,11 @@ namespace Calculadora.ViewModels
         public ICommand LoadHistoryCM { get; }
         #endregion
 
-
         public StandardCalculatorViewModel()
         {
+            DbContextOptions<CalculatorDbContext> contextOptions = new DbContextOptionsBuilder<CalculatorDbContext>().UseSqlite("Data source = Histories.db").Options;
+            context = new CalculatorDbContext(contextOptions);
+            historyManager = new HistoryManager(context);
 
             OpenHistoryCM = new OpenHistoryCommand(this);
             DeleteHistoryCM = new DeleteHistoryCommand(this);
@@ -90,10 +93,6 @@ namespace Calculadora.ViewModels
             CalculateCM = new CalculateCommand(this);
             LoadHistoryCM = new LoadHistoryCommand(this);
 
-            var contextOptions = new DbContextOptionsBuilder<CalculatorDbContext>().UseSqlite("Data source = Histories.db").Options;
-            context = new CalculatorDbContext(contextOptions);
-
-            historyManager = new HistoryManager(context);
             ViewName = "Padrão";
         }
 
@@ -106,9 +105,9 @@ namespace Calculadora.ViewModels
         }
 
 
-        public void AddHistory(string expression, string result)
+        public async void AddHistory(string expression, string result)
         {
-            historyManager.AddHistory(new History(expression, result));
+            await historyManager.AddHistory(new History(expression, result));
             return;
         }
 
@@ -138,6 +137,14 @@ namespace Calculadora.ViewModels
         {
             this.displayContent = CalculatorDisplay.displayContent;
             this.stringResult = CalculatorDisplay.result;
+        }
+
+
+        public static StandardCalculatorViewModel LoadViewModel()
+        {
+            StandardCalculatorViewModel newViewModel = new StandardCalculatorViewModel();
+            newViewModel.LoadHistoryCM.Execute(null);
+            return newViewModel;
         }
 
 

@@ -1,4 +1,6 @@
 ﻿using Calculadora.Commands;
+using Calculadora.Database.Managers;
+using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -11,7 +13,7 @@ namespace Calculadora.ViewModels
         public ICommand LnClickCM { get; }
         public ICommand AbsoluteClickCM { get; }
 
-        public ScientificCalculatorViewModel()
+        public ScientificCalculatorViewModel() : base() 
         {
             ViewName = "Científica";
             ConstClickCM = new ConstClickCommand(this);
