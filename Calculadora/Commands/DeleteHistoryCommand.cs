@@ -10,9 +10,9 @@ namespace Calculadora.Commands
         {
             _viewModel = viewModel;
         }
-        public override void Execute(object parameter)
+        public override void Execute(object? parameter)
         {
-            DataGrid dataGrid = parameter as DataGrid;
+            DataGrid dataGrid = (DataGrid)parameter;
             _viewModel.DeleteAllHistory();
             dataGrid.ItemsSource = _viewModel.GetAllHistories();
         }

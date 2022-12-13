@@ -15,7 +15,7 @@
         MinWidth="400">
     
     <UserControl.Resources>
-        <converters:GenericConverter x:Key="myConverter"/>
+        <converters:CloneConverter x:Key="myConverter"/>
     </UserControl.Resources>
     
 

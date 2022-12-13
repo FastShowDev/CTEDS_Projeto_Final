@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace Calculadora.Converters
 {
-    public class GenericConverter : IMultiValueConverter
+    public class CloneConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

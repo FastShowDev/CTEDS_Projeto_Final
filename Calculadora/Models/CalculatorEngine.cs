@@ -78,6 +78,13 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna a raiz do valor calculado.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor da raiz da expressão calculada</returns>
         public static double SquareRoot(string expression)
         {
             double rooting = CalculateExpression(expression);
@@ -93,6 +100,13 @@ namespace Calculadora.Models
             }
 
         }
+
+
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o quadrado do valor calculado.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor ao quadrado da expressão calculada</returns>
         public static double Square(string expression)
         {
             double value = CalculateExpression(expression);
@@ -106,6 +120,13 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o logatimo de base 10 do valor calculado.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor do log10 da expressão calculada</returns>
         public static double Log10(string expression)
         {
             double rooting = CalculateExpression(expression);
@@ -120,6 +141,13 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o logaritmo neperiano do valor calculado.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor do ln da expressão calculada</returns>
         public static double Ln(string expression)
         {
             double rooting = CalculateExpression(expression);
@@ -134,6 +162,13 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o inverso do valor calculado.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor do inverso da expressão calculada</returns>
         public static double Inversion(string expression)
         {
             double rooting = CalculateExpression(expression);
@@ -148,6 +183,13 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o módulo do valor calculado.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor do módulo da expressão calculada</returns>
         public static double Absolute(string expression)
         {
             double rooting = CalculateExpression(expression);

@@ -14,7 +14,7 @@ namespace Calculadora.Commands
             _viewModel = viewModel;
         }
 
-        public override async Task ExecuteAsync(object parameter)
+        public override async Task ExecuteAsync(object? parameter)
         {
             await _viewModel.historyManager.Load();
         }
