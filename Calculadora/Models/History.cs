@@ -9,9 +9,9 @@ namespace Calculadora.Models
     public class History
     {
         public int Id { get; set; }
-        public string? fullExpression { get; set; }
-        public string? expression { get; set; }
-        public string? result { get; set; }
+        public string FullExpression { get; set; } = "";
+        public string Expression { get; set; } = "";
+        public string Result { get; set; } = "";
 
         public History()
         {
@@ -20,9 +20,9 @@ namespace Calculadora.Models
 
         public History(string expression, string result)
         {
-            this.expression = expression;
-            this.result = result;
-            this.fullExpression = String.Concat(expression, "=", result);
+            this.Expression = expression;
+            this.Result = result;
+            this.FullExpression = String.Concat(expression, "=", result);
         }
 
 
