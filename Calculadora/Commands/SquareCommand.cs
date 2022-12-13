@@ -12,11 +12,11 @@ namespace Calculadora.Commands
             _viewModel = viewModel;
         }
 
-        public override void Execute(object parameter)
+        public override void Execute(object? parameter)
         {
             if (parameter != null)
             {
-                string expression = parameter as string;
+                string? expression = parameter as string;
                 Calculator.ExecuteSquare(expression);
                 _viewModel.UpdateDisplay();
                 _viewModel.AddHistory(_viewModel.stringResult, _viewModel.displayContent);

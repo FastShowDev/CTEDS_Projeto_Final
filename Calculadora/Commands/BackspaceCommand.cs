@@ -10,7 +10,7 @@ namespace Calculadora.Commands
         {
             _viewModel = viewModel;
         }
-
+#nullable enable
         public override void Execute(object? parameter)
         {
             CalculatorDisplay.BackspaceDisplay();
