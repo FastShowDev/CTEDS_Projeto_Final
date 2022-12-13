@@ -52,7 +52,8 @@
                 </Button>
 
                 <Label Grid.Row="0" Grid.Column="1" 
-                        Style="{StaticResource OperationModeLabelStyle}"/>
+                       Style="{StaticResource OperationModeLabelStyle}"
+                       Content="{Binding ViewName}"/>
 
                 <Button Grid.Row="0" Grid.Column="2"
                         Style="{StaticResource OpenHistoryButtonStyle}"
@@ -328,7 +329,7 @@
                           Grid.Row="1"
                           Style="{StaticResource DataGridFinal}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Cálculos" Binding="{Binding fullExpression}" 
+                        <DataGridTextColumn Header="Cálculos" Binding="{Binding FullExpression}" 
                                             Width="*"
                                             CanUserReorder="False" CanUserSort="False" CanUserResize="True"
                                             MinWidth="250"
