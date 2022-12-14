@@ -11,15 +11,28 @@ namespace Calculadora.Commands
         {
             _viewModel = viewModel;
         }
-
+        public override bool CanExecute(object? parameter)
+        {
+            return !CalculatorDisplay.HasErrorMessage;
+        }
         public override void Execute(object? parameter)
         {
             if (parameter != null)
             {
-                string expression = parameter as string;
-                Calculator.ExecuteSquareRoot(expression);
+                string expression = (string)parameter;
+                try
+                {
+                    Calculator.ExecuteSquareRoot(expression);
+                }
+                catch(Exception e)
+                {
+                    CalculatorDisplay.ClearDisplay();
+                    _viewModel.ErrorMessage = e.Message;
+                    _viewModel.UpdateDisplay();
+                    return;
+                }
                 _viewModel.UpdateDisplay();
-                _viewModel.AddHistory(_viewModel.stringResult, _viewModel.displayContent);
+                _viewModel.AddHistory(_viewModel.StringResult, _viewModel.DisplayContent);
             }
             else
             {

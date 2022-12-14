@@ -22,12 +22,12 @@ namespace Calculadora.Commands
                 if (buttonName == "button_pi")
                 {
                     CalculatorDisplay.InsertConstInDisplay("π");
-                    _viewModel.displayContent = CalculatorDisplay.displayContent;
+                    _viewModel.DisplayContent = CalculatorDisplay.DisplayContent;
                 }
                 else if(buttonName == "button_e")
                 {
                     CalculatorDisplay.InsertConstInDisplay("e");
-                    _viewModel.displayContent = CalculatorDisplay.displayContent;
+                    _viewModel.DisplayContent = CalculatorDisplay.DisplayContent;
                 }
             }
             else throw new ArgumentNullException(nameof(parameter));
