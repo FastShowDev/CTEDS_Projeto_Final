@@ -146,8 +146,8 @@
 
                 
                 <!--#region Buttons: 2^, Pi, e, C, BACK-->
-                <Button Grid.Column="0" Grid.Row="2" Content="2^" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                <Button x:Name="button_powerbase2" Grid.Column="0" Grid.Row="2" Content="2^" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding PowerBase2ClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
 
                 <Button x:Name="button_pi" Grid.Column="1" Grid.Row="2" Content="π" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding ConstClickCM}" CommandParameter="{Binding ElementName=button_pi}"/>
@@ -194,7 +194,7 @@
                         Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=right_parentheses}"/>
                 
                 <Button x:Name="button_fatorial" Grid.Column="3" Grid.Row="4" Content="n!" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                        Command="{Binding FactorialClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
                 <Button x:Name="button_divides" Grid.Column="4" Grid.Row="4" Content="/" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_divides}"/>
@@ -202,7 +202,8 @@
                 
                 
                 <!--#region Buttons: x^y, 7, 8, 9, *-->
-                <Button Grid.Column="0" Grid.Row="5" Content="x^y" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button x:Name="button_powerbasex" Grid.Column="0" Grid.Row="5" Content="x^y" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding PowerBaseXClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
                 <Button x:Name="button_7" Grid.Column="1" Grid.Row="5" Content="7" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_7}"/>
@@ -219,8 +220,8 @@
                 
                 
                 <!--#region Buttons: 10^, 4, 5, 6, MINUS-->
-                <Button Grid.Column="0" Grid.Row="6" Content="10^" Style="{StaticResource CalculatorButtonStyle}"
-                        />
+                <Button x:Name="button_powerbase10" Grid.Column="0" Grid.Row="6" Content="10^" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding PowerBase10ClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
                 <Button x:Name="button_4" Grid.Column="1" Grid.Row="6" Content="4" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_4}"/>

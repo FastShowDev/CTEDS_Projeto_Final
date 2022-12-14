@@ -30,7 +30,13 @@ namespace Calculadora.Commands
                 string expression = (values[0] as TextBox).Text;
                 DataGrid dataGrid = values[1] as DataGrid;
 
-                Calculator.ExecuteCalculate(expression);
+                if (CalculatorEngine.HasExponentiation)
+                {
+                    Calculator.ExecutePowerBaseX(CalculatorDisplay.result, expression);
+                }
+                else{
+                    Calculator.ExecuteCalculate(expression);
+                }
                 _viewModel.UpdateDisplay();
 
                 _viewModel.AddHistory(expression, _viewModel.displayContent);

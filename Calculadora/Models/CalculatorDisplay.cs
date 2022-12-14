@@ -25,6 +25,7 @@ namespace Calculadora.Models
         private const string PERCENTAGE_SYMBOL = "%";
         private const string L_PARENTHESIS_SYMBOL = "(";
         private const string R_PARENTHESIS_SYMBOL = ")";
+        private const string EXPONENT_SYMBOL = "^";
         #endregion
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace Calculadora.Models
         public static string displayContent { get; set; } = "0";
         public static string result { get; set; } = "";
         private static string[] values = { "number" };
-        public static Stack<string> lastButtonPressed { get; } = new Stack<string>(values);
+        private static Stack<string> lastButtonPressed { get; } = new Stack<string>(values);
         #endregion
 
 
@@ -63,8 +64,6 @@ namespace Calculadora.Models
         /// </summary>
         public static void BackspaceDisplay()
         {
-            lastButtonPressed.Pop();
-
             if (CalculatorEngine.HasCalculate)
             {
                 ClearDisplay();
@@ -75,6 +74,13 @@ namespace Calculadora.Models
             if (lenght > 0)
             {
                 displayContent = displayContent.Substring(0, lenght);
+                lastButtonPressed.Pop();
+            }
+            else if (CalculatorEngine.HasExponentiation)
+            {
+                displayContent = DEFAULT_DISPLAY;
+                lastButtonPressed.Pop();
+                lastButtonPressed.Push(NUMBER_BUTTON);
             }
             else
             {
@@ -130,6 +136,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() == R_PARENTHESIS_BUTTON || lastButtonPressed.Peek() == CONST_BUTTON)
             {
                 pressedButtonValue = PLUS_SYMBOL + pressedButtonValue;
+                lastButtonPressed.Push(OPERATOR_BUTTON);
             }
 
             displayContent += pressedButtonValue;
@@ -186,6 +193,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() == NUMBER_BUTTON)
             {
                 displayContent += PERCENTAGE_SYMBOL;
+                lastButtonPressed.Push(NUMBER_BUTTON);
                 CalculatorEngine.HasPercentage = true;
             }
         }
@@ -211,6 +219,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() == NUMBER_BUTTON && value != R_PARENTHESIS_SYMBOL)
             {
                 displayContent += "*(";
+                lastButtonPressed.Push(OPERATOR_BUTTON);
                 lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 return;
             }
@@ -224,9 +233,10 @@ namespace Calculadora.Models
 
             if (lastButtonPressed.Peek() == R_PARENTHESIS_BUTTON && value == L_PARENTHESIS_SYMBOL)
             {
-                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 value = "*(";
                 displayContent += value;
+                lastButtonPressed.Push(OPERATOR_BUTTON);
+                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 return;
             }
 
@@ -268,6 +278,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() != OPERATOR_BUTTON)
             {
                 constValue = TIMES_SYMBOL + constValue;
+                lastButtonPressed.Push(OPERATOR_BUTTON);
             }
 
             lastButtonPressed.Push(CONST_BUTTON);
@@ -277,7 +288,8 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método auxiliar genérico para inserir o símbolo de uma função e a expressão que foi calculada dentro da função. Usado
-        /// para inserir os símbolos no display após pressionar os botões de raiz, log, ln, etc. 
+        /// para inserir os símbolos no display após pressionar os botões de raiz, log, ln, etc. O método pode ser utilizado
+        /// para adicionar símbolos personalizados como no caso de x^y, onde x^ seria o símbolo e y a expressão.
         /// </summary>
         /// <param name="symbol">Símbolo da função pressionada</param>
         /// <param name="expression">Expressão na qual á função foi calculada em cima</param>
@@ -293,5 +305,13 @@ namespace Calculadora.Models
                 result = String.Concat(symbol, L_PARENTHESIS_SYMBOL, expression, R_PARENTHESIS_SYMBOL);
             }
         }
+
+
+        public static void InsertBaseExponentiation(string expression)
+        {
+            result = String.Concat(expression, EXPONENT_SYMBOL);
+        }
+
+
     }
 }

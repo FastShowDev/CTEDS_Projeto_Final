@@ -27,14 +27,19 @@ namespace Calculadora.Models
         public static bool HasCalculate { get; set; }
         public static bool HasConst { get; set; }
         public static bool HasPercentage { get; set; }
+        public static bool HasExponentiation { get; set; }
         #endregion
 
         #region AUXILIAR METHODS
+        /// <summary>
+        /// Método auxiliar utilizado para resetar todas flags da calculadora
+        /// </summary>
         public static void ResetFlags()
         {
             HasConst = false;
             HasCalculate = false;
             HasPercentage = false;
+            HasExponentiation = false;
         }
         #endregion
 
@@ -204,8 +209,75 @@ namespace Calculadora.Models
                 return 0;
             }
         }
+
+
+        public static int Factorial(string expression)
+        {
+            int number = Convert.ToInt32(CalculateExpression(expression));
+            if(number < 0)
+            {
+                MessageBox.Show("Número inválido!");
+                return 0;
+            }
+
+            return RecursiveFactorial(number);
+
+        }
         #endregion
 
+        private static int RecursiveFactorial(int number)
+        {
+            if (number <= 1)
+            {
+                return 1;
+            }
+            return number * RecursiveFactorial(number - 1);
+        }
 
+
+        public static double PowerBase10(string expression)
+        {
+            double exponent = CalculateExpression(expression);
+            try
+            {
+                return Math.Pow(10, exponent);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+
+        public static double PowerBase2(string expression)
+        {
+            double exponent = CalculateExpression(expression);
+            try
+            {
+                return Math.Pow(2, exponent);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
+
+        public static double PowerBaseX(string baseExpression, string exponentExpression)
+        {
+            double baseValue = CalculateExpression(baseExpression);
+            double exponentValue = CalculateExpression(exponentExpression);
+            try
+            {
+                return Math.Pow(baseValue, exponentValue);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
     }
 }
