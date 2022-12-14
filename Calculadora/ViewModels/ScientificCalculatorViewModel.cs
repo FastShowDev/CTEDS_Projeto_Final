@@ -12,6 +12,10 @@ namespace Calculadora.ViewModels
         public ICommand Log10ClickCM { get; }
         public ICommand LnClickCM { get; }
         public ICommand AbsoluteClickCM { get; }
+        public ICommand FactorialClickCM { get; }
+        public ICommand PowerBase2ClickCM { get; }
+        public ICommand PowerBase10ClickCM { get; }
+
 
         public ScientificCalculatorViewModel() : base() 
         {
@@ -20,6 +24,9 @@ namespace Calculadora.ViewModels
             Log10ClickCM = new Log10Command(this);
             LnClickCM = new LnCommand(this);
             AbsoluteClickCM = new AbsoluteCommand(this);
+            FactorialClickCM = new FactorialCommand(this);
+            PowerBase2ClickCM = new PowerBase2Command(this);
+            PowerBase10ClickCM = new PowerBase10Command(this);
         }
     }
 }
