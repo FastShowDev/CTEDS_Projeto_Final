@@ -18,7 +18,7 @@ namespace Calculadora.ViewModels
 
         #region Properties
         private string _displayContent = "0";
-        public string displayContent
+        public string DisplayContent
         {
             get { return _displayContent; }
             set
@@ -26,15 +26,15 @@ namespace Calculadora.ViewModels
                 if (_displayContent != value)
                 {
                     _displayContent = value;
-                    OnPropertyChanged(nameof(displayContent));
-                    CalculatorDisplay.displayContent = value;
+                    OnPropertyChanged(nameof(DisplayContent));
+                    CalculatorDisplay.DisplayContent = value;
                 }
                 return;
             }
         }
 
-        private string _stringResult = "";
-        public string stringResult
+        private string _stringResult = string.Empty;
+        public string StringResult
         {
             get { return _stringResult; }
             set
@@ -42,12 +42,38 @@ namespace Calculadora.ViewModels
                 if (_stringResult != value)
                 {
                     _stringResult = value;
-                    OnPropertyChanged(nameof(stringResult));
-                    CalculatorDisplay.result = value;
+                    OnPropertyChanged(nameof(StringResult));
+                    CalculatorDisplay.Result = value;
                 }
                 return;
             }
         }
+
+        private string _errorMessage = string.Empty;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set { 
+                _errorMessage = value;
+                CalculatorDisplay.HasErrorMessage = !string.IsNullOrEmpty(value);
+                HasErrorMessage = !string.IsNullOrEmpty(value);
+                OnPropertyChanged(nameof(ErrorMessage));
+                
+                
+            }
+        }
+        private bool _hasErrorMessage = false;
+        public bool HasErrorMessage { 
+            get { return _hasErrorMessage; }
+            set
+            {
+                _hasErrorMessage = value;
+                OnPropertyChanged(nameof(HasErrorMessage));
+            } 
+        }
+       
+
         #endregion
 
 
@@ -135,8 +161,9 @@ namespace Calculadora.ViewModels
 
         public void UpdateDisplay()
         {
-            this.displayContent = CalculatorDisplay.displayContent;
-            this.stringResult = CalculatorDisplay.result;
+            this.DisplayContent = CalculatorDisplay.DisplayContent;
+            this.StringResult = CalculatorDisplay.Result;
+            this.HasErrorMessage = CalculatorDisplay.HasErrorMessage;
         }
 
 
