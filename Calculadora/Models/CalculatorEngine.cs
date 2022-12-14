@@ -75,7 +75,13 @@ namespace Calculadora.Models
                 System.Data.DataRow row = table.NewRow();
                 table.Rows.Add(row);
 
-                return double.Parse((string)row["expression"]);
+                double result = double.Parse((string)row["expression"]);
+
+                if (result.Equals(double.NaN))
+                {
+                    throw new Exception();
+                }
+                return result;
             }
             catch { throw new Exception("Expressão inválida"); }
         }
