@@ -28,6 +28,7 @@ namespace Calculadora.Commands
                 NavigationStore.CurrentViewModel.IsMenuOpen = false;
 
                 CalculatorDisplay.ClearDisplay();
+                NavigationStore.CurrentViewModel.ResetDisplayError();
             }
         }
     }
