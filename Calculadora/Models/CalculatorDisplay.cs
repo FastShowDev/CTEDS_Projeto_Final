@@ -174,14 +174,6 @@ namespace Calculadora.Models
             }
 
             CalculatorEngine.HasCalculate = false;
-            if (DisplayContent == DEFAULT_DISPLAY)
-            {
-                DisplayContent = pressedButtonValue;
-                LastButtonPressed.Pop();
-                LastButtonPressed.Push(OPERATOR_BUTTON);
-                return;
-            }
-
             if (LastButtonPressed.Peek() == OPERATOR_BUTTON)
             {
                 int newDisplayLenght = DisplayContent.Length - 1;
