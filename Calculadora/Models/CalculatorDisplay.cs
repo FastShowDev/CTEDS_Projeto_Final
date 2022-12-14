@@ -5,18 +5,12 @@ namespace Calculadora.Models
 {
     public static class CalculatorDisplay
     {
-        /// <summary>
-        /// Valores padrões do display
-        /// </summary>
         #region DISPLAY DEFAULT VALUES
         private const string DECIMAL_SEPERATOR = ",";
         private const string DEFAULT_DISPLAY = "0";
         private const string DEFAULT_RESULT = "";
         #endregion
 
-        /// <summary>
-        /// Símbolos dos operadores do display
-        /// </summary>
         #region SYMBOLS
         private const string PLUS_SYMBOL = "+";
         private const string MINUS_SYMBOL = "-";
@@ -28,9 +22,6 @@ namespace Calculadora.Models
         private const string EXPONENT_SYMBOL = "^";
         #endregion
 
-        /// <summary>
-        /// Tipos possíveis dos botões da calculadora
-        /// </summary>
         #region BUTTONS TYPES
         private const string NUMBER_BUTTON = "number";
         private const string OPERATOR_BUTTON = "operator";
@@ -40,9 +31,6 @@ namespace Calculadora.Models
         private const string R_PARENTHESIS_BUTTON = "right";
         #endregion
 
-        /// <summary>
-        /// Nome dos botões 
-        /// </summary>
         #region BUTTONS NAMES
         private const string FLOAT_BUTTON_NAME = "button_float";
         #endregion
@@ -53,6 +41,7 @@ namespace Calculadora.Models
         public static string Result { get; set; } = "";
         private static readonly string[] Values = { "number" };
         private static Stack<string> LastButtonPressed { get; } = new Stack<string>(Values);
+        private static bool HasDoubleOperator { get; set; }
         #endregion
 
 
@@ -77,6 +66,7 @@ namespace Calculadora.Models
                 return;
             }
 
+            HasDoubleOperator = false;
             int lenght = DisplayContent.Length - 1;
             if (lenght > 0)
             {
@@ -107,6 +97,7 @@ namespace Calculadora.Models
             DisplayContent = DEFAULT_DISPLAY;
             Result = DEFAULT_RESULT;
             HasErrorMessage = false;
+            HasDoubleOperator = false;
             CalculatorEngine.ResetFlags();
         }
 
@@ -128,6 +119,7 @@ namespace Calculadora.Models
             }
 
             CalculatorEngine.HasCalculate = false;
+            HasDoubleOperator = false;
             if (DisplayContent == DEFAULT_DISPLAY && pressedButtonValue != DECIMAL_SEPERATOR)
             {
                 DisplayContent = pressedButtonValue;
@@ -170,12 +162,35 @@ namespace Calculadora.Models
         {
             if (LastButtonPressed.Peek() == L_PARENTHESIS_BUTTON)
             {
+                if(pressedButtonValue == MINUS_SYMBOL)
+                {
+                    LastButtonPressed.Push(OPERATOR_BUTTON);
+                    DisplayContent += pressedButtonValue;
+                }
+
                 return;
             }
 
             CalculatorEngine.HasCalculate = false;
             if (LastButtonPressed.Peek() == OPERATOR_BUTTON)
             {
+                if (HasDoubleOperator)
+                {
+                    return;
+                }
+
+                string lastOperator = DisplayContent.Substring(DisplayContent.Length - 1, 1);
+                if(lastOperator == TIMES_SYMBOL  || lastOperator == DIVIDES_SYMBOL)
+                {
+                    if(pressedButtonValue == MINUS_SYMBOL)
+                    {
+                        LastButtonPressed.Push(OPERATOR_BUTTON);
+                        DisplayContent += pressedButtonValue;
+                        HasDoubleOperator = true;
+                        return;
+                    } 
+                }
+
                 int newDisplayLenght = DisplayContent.Length - 1;
                 string display = DisplayContent.Substring(0, newDisplayLenght);
                 display += pressedButtonValue;
@@ -229,6 +244,15 @@ namespace Calculadora.Models
             }
 
             CalculatorEngine.HasCalculate = false;
+            HasDoubleOperator = false;
+            if(DisplayContent == DEFAULT_DISPLAY && value == L_PARENTHESIS_SYMBOL)
+            {
+                LastButtonPressed.Pop();
+                LastButtonPressed.Push(L_PARENTHESIS_BUTTON);
+                DisplayContent = value;
+                return;
+            }
+
             if (LastButtonPressed.Peek() == NUMBER_BUTTON && value != R_PARENTHESIS_SYMBOL)
             {
                 DisplayContent += "*(";
@@ -284,11 +308,12 @@ namespace Calculadora.Models
             if (DisplayContent == "0")
             {
                 DisplayContent = constValue;
+                LastButtonPressed.Pop();
                 LastButtonPressed.Push(CONST_BUTTON);
                 return;
             }
 
-            if (LastButtonPressed.Peek() != OPERATOR_BUTTON)
+            if (LastButtonPressed.Peek() != OPERATOR_BUTTON && LastButtonPressed.Peek() != L_PARENTHESIS_BUTTON)
             {
                 constValue = TIMES_SYMBOL + constValue;
                 LastButtonPressed.Push(OPERATOR_BUTTON);
