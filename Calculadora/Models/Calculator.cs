@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows;
 
 namespace Calculadora.Models
 {
@@ -159,7 +157,8 @@ namespace Calculadora.Models
 
         public static void ExecutePowerBaseX(string baseExpression, string exponentExpression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.PowerBaseX(baseExpression, exponentExpression).ToString();
+            string calculateBase = baseExpression.Substring(0, baseExpression.Length - 1); //É necessário tirar o símbolo de ^ para calcular
+            CalculatorDisplay.displayContent = CalculatorEngine.PowerBaseX(calculateBase, exponentExpression).ToString();
             CalculatorDisplay.InsertSymbolInResult(baseExpression, exponentExpression);
             CalculatorEngine.HasCalculate = true;
             CalculatorEngine.HasExponentiation = false;
