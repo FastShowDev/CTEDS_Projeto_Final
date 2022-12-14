@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Calculadora.Models
 {
@@ -30,9 +31,6 @@ namespace Calculadora.Models
         #endregion
 
         #region AUXILIAR METHODS
-        /// <summary>
-        /// Método auxiliar utilizado para resetar todas flags da calculadora
-        /// </summary>
         public static void ResetFlags()
         {
             HasConst = false;
@@ -47,15 +45,14 @@ namespace Calculadora.Models
         /// <summary>
         /// Método que recebe uma expressão matemática simples, contendo apenas operadores aritiméticos elementares, parênteses, 
         /// constantes matemáticas (e ou pi) e símbolos de porcentagem e faz seu cálculo.
-        /// É necessário que a expressão esteja corretamente digitada, caso contrário mostra um MessageBox contendo um aviso de erro.
+        /// É necessário que a expressão esteja corretamente digitada, caso contrário, envia uma excessão.
         /// 
         /// Exemplo de expressão correta: (10 + 3)*3 -4/3 + 5 ou (10+3)*3-4/3+5
-        /// Exemplo de expressão incorreta: (10+3)*3--4/3( ou (10+3)*3 4/3++5
         /// 
-        /// O cálculo é feito utilizando uma propriedade do DataTable de calcular expressões matemáticas simples
+        /// O cálculo é feito utilizando uma propriedade do DataTable  capaz de calcular expressões matemáticas simples
         /// </summary>
         /// <param name="expression"></param>
-        /// <returns>Um double contendo o valor da expressão corretamente calculada, respeitando precedência de parênteses e operadores</returns>
+        /// <returns>Um double contendo o valor da expressão corretamente calculada</returns>
         public static double CalculateExpression(string expression)
         {
             try
@@ -89,6 +86,7 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna a raiz do valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um double contendo o valor da raiz da expressão calculada</returns>
@@ -106,6 +104,7 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o quadrado do valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um double contendo o valor ao quadrado da expressão calculada</returns>
@@ -122,6 +121,7 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o logatimo de base 10 do valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um double contendo o valor do log10 da expressão calculada</returns>
@@ -143,6 +143,7 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o logaritmo neperiano do valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um double contendo o valor do ln da expressão calculada</returns>
@@ -165,6 +166,7 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o inverso do valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um double contendo o valor do inverso da expressão calculada</returns>
@@ -186,6 +188,7 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o módulo do valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
         /// </summary>
         /// <param name="expression"></param>
         /// <returns>Um double contendo o valor do módulo da expressão calculada</returns>
@@ -201,7 +204,7 @@ namespace Calculadora.Models
         }
 
 
-        public static int Factorial(string expression)
+        public static BigInteger Factorial(string expression)
         {
             int number = Convert.ToInt32(CalculateExpression(expression));
             if(number < 0)
@@ -209,18 +212,29 @@ namespace Calculadora.Models
                 throw new Exception("O número deve ser não negativo!");
             }
 
-            return RecursiveFactorial(number);
+            return InterativeFactorial(number);
 
         }
         
 
-        private static int RecursiveFactorial(int number)
+        private static BigInteger RecursiveFactorial(BigInteger number)
         {
             if (number <= 1)
             {
                 return 1;
             }
             return number * RecursiveFactorial(number - 1);
+        }
+
+        private static BigInteger InterativeFactorial(int number)
+        {
+            BigInteger factorial = new BigInteger(1);
+            for(int i = 2; i <= number; i++)
+            {
+                factorial *= i;
+                
+            }
+            return factorial;
         }
 
 
