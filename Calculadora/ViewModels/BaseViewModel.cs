@@ -44,6 +44,33 @@ namespace Calculadora.ViewModels
             }
         }
 
+        private string _errorMessage = string.Empty;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                _errorMessage = value;
+                CalculatorDisplay.HasErrorMessage = !string.IsNullOrEmpty(value);
+                HasErrorMessage = !string.IsNullOrEmpty(value);
+                OnPropertyChanged(nameof(ErrorMessage));
+
+
+            }
+        }
+
+        private bool _hasErrorMessage = false;
+        public bool HasErrorMessage
+        {
+            get { return _hasErrorMessage; }
+            set
+            {
+                _hasErrorMessage = value;
+                OnPropertyChanged(nameof(HasErrorMessage));
+            }
+        }
+
         public ICommand OpenMenu { get; }
         public ICommand CloseMenu { get; }
         public ICommand NavigateMenuCM { get; }
@@ -57,6 +84,11 @@ namespace Calculadora.ViewModels
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void ResetDisplayError()
+        {
+            this.ErrorMessage = string.Empty;
         }
     }
 }
