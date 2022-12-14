@@ -15,6 +15,7 @@ namespace Calculadora.ViewModels
         public ICommand FactorialClickCM { get; }
         public ICommand PowerBase2ClickCM { get; }
         public ICommand PowerBase10ClickCM { get; }
+        public ICommand PowerBaseXClickCM { get; }
 
 
         public ScientificCalculatorViewModel() : base() 
@@ -27,6 +28,7 @@ namespace Calculadora.ViewModels
             FactorialClickCM = new FactorialCommand(this);
             PowerBase2ClickCM = new PowerBase2Command(this);
             PowerBase10ClickCM = new PowerBase10Command(this);
+            PowerBaseXClickCM = new PowerBaseXCommand(this);
         }
     }
 }
