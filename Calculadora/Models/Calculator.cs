@@ -4,18 +4,12 @@ namespace Calculadora.Models
 {
     public static class Calculator
     {
-        /// <summary>
-        /// Constantes mamáticos e separadores de ponto flutuante
-        /// </summary>
         #region CONSTANTS
         private const string DECIMAL_SPERATOR = ",";
         private const double PI = Math.PI;
         private const double E = Math.E;
         #endregion
 
-        /// <summary>
-        /// Constantes com os símbolos que são mostrados no display.
-        /// </summary>
         #region FUNCTIONS SYMBOLS
         private const string SQUARE_ROOT_SYMBOL = "sqrt";
         private const string SQUARE_SYMBOL = "sqr";
