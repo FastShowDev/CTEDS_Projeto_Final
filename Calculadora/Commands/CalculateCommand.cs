@@ -30,16 +30,45 @@ namespace Calculadora.Commands
                 string expression = (values[0] as TextBox).Text;
                 DataGrid dataGrid = values[1] as DataGrid;
 
+                if (CalculatorDisplay.HasErrorMessage)
+                {
+                    CalculatorDisplay.ClearDisplay();
+                    _viewModel.UpdateDisplay();
+                    return;
+                }
+
                 if (CalculatorEngine.HasExponentiation)
                 {
-                    Calculator.ExecutePowerBaseX(CalculatorDisplay.result, expression);
+                    try
+                    {
+                        Calculator.ExecutePowerBaseX(CalculatorDisplay.Result, expression);
+                    }
+                    catch (Exception e)
+                    {
+                        CalculatorDisplay.ClearDisplay();
+                        _viewModel.ErrorMessage = e.Message;
+                        _viewModel.UpdateDisplay();
+                        return;
+                    }
+
                 }
-                else{
-                    Calculator.ExecuteCalculate(expression);
+                else
+                {
+                    try
+                    {
+                        Calculator.ExecuteCalculate(expression);
+                    }
+                    catch (Exception e)
+                    {
+                        CalculatorDisplay.ClearDisplay();
+                        _viewModel.ErrorMessage = e.Message;
+                        _viewModel.UpdateDisplay();
+                        return;
+                    }
                 }
                 _viewModel.UpdateDisplay();
 
-                _viewModel.AddHistory(expression, _viewModel.displayContent);
+                _viewModel.AddHistory(expression, _viewModel.DisplayContent);
                 dataGrid.ItemsSource = _viewModel.GetAllHistories();
 
             }

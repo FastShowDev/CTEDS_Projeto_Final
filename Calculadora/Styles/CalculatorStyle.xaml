@@ -24,7 +24,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="1"/>
-        
+
     </Style>
     <!--#endregion-->
     
@@ -294,7 +294,7 @@
 
     <Style x:Key="CalculatorDisplayResultTextBlock"
            TargetType="TextBlock">
-        <Setter Property="Text" Value="{Binding stringResult}"/>
+        <Setter Property="Text" Value="{Binding StringResult}"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0 0 10 0"/>
@@ -311,13 +311,27 @@
 
     <Style x:Key="CalculatorDisplayTextBoxStyle"
            TargetType="TextBox">
-        <Setter Property="Text" Value="{Binding displayContent}"/>
+        <Setter Property="Text" Value="{Binding DisplayContent}"/>
+        <Setter Property="IsManipulationEnabled" Value="False"/>
         <Setter Property="Margin" Value="0 0 10 0"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontStretch" Value="Normal"/>
         <Setter Property="FontWeight" Value="DemiBold"/>
         <Setter Property="FontSize" Value="48"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style x:Key="ErrorDisplayStyle"
+           TargetType="TextBox">
+        <Setter Property="IsManipulationEnabled" Value="False"/>
+        <Setter Property="Margin" Value="0 0 10 0"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="48"/>
+        <Setter Property="Foreground" Value="Red"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <!--#endregion-->

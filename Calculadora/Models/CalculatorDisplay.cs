@@ -48,10 +48,11 @@ namespace Calculadora.Models
         #endregion
 
         #region PROPERTIES
-        public static string displayContent { get; set; } = "0";
-        public static string result { get; set; } = "";
-        private static string[] values = { "number" };
-        private static Stack<string> lastButtonPressed { get; } = new Stack<string>(values);
+        public static bool HasErrorMessage { get; set; }
+        public static string DisplayContent { get; set; } = "0";
+        public static string Result { get; set; } = "";
+        private static readonly string[] Values = { "number" };
+        private static Stack<string> LastButtonPressed { get; } = new Stack<string>(Values);
         #endregion
 
 
@@ -64,23 +65,29 @@ namespace Calculadora.Models
         /// </summary>
         public static void BackspaceDisplay()
         {
+            if (HasErrorMessage)
+            {
+                HasErrorMessage = false;
+                return;
+            }
+
             if (CalculatorEngine.HasCalculate)
             {
                 ClearDisplay();
                 return;
             }
 
-            int lenght = displayContent.Length - 1;
+            int lenght = DisplayContent.Length - 1;
             if (lenght > 0)
             {
-                displayContent = displayContent.Substring(0, lenght);
-                lastButtonPressed.Pop();
+                DisplayContent = DisplayContent.Substring(0, lenght);
+                LastButtonPressed.Pop();
             }
             else if (CalculatorEngine.HasExponentiation)
             {
-                displayContent = DEFAULT_DISPLAY;
-                lastButtonPressed.Pop();
-                lastButtonPressed.Push(NUMBER_BUTTON);
+                DisplayContent = DEFAULT_DISPLAY;
+                LastButtonPressed.Pop();
+                LastButtonPressed.Push(NUMBER_BUTTON);
             }
             else
             {
@@ -95,10 +102,11 @@ namespace Calculadora.Models
         /// </summary>
         public static void ClearDisplay()
         {
-            lastButtonPressed.Clear();
-            lastButtonPressed.Push(NUMBER_BUTTON);
-            displayContent = DEFAULT_DISPLAY;
-            result = DEFAULT_RESULT;
+            LastButtonPressed.Clear();
+            LastButtonPressed.Push(NUMBER_BUTTON);
+            DisplayContent = DEFAULT_DISPLAY;
+            Result = DEFAULT_RESULT;
+            HasErrorMessage = false;
             CalculatorEngine.ResetFlags();
         }
 
@@ -114,33 +122,38 @@ namespace Calculadora.Models
         /// <returns></returns>
         public static void InsertNumberInDisplay(string buttonName, string pressedButtonValue)
         {
-            CalculatorEngine.HasCalculate = false;
-            if (displayContent == DEFAULT_DISPLAY && pressedButtonValue != DECIMAL_SEPERATOR)
+            if (HasErrorMessage)
             {
-                displayContent = pressedButtonValue;
-                lastButtonPressed.Push(NUMBER_BUTTON);
+                HasErrorMessage = false;
+            }
+
+            CalculatorEngine.HasCalculate = false;
+            if (DisplayContent == DEFAULT_DISPLAY && pressedButtonValue != DECIMAL_SEPERATOR)
+            {
+                DisplayContent = pressedButtonValue;
+                LastButtonPressed.Push(NUMBER_BUTTON);
                 return;
             }
 
             if (buttonName == FLOAT_BUTTON_NAME)
             {
-                if (lastButtonPressed.Peek() == FLOAT_BUTTON)
+                if (LastButtonPressed.Peek() == FLOAT_BUTTON)
                 {
                     return;
                 }
-                lastButtonPressed.Push(FLOAT_BUTTON);
-                displayContent += pressedButtonValue;
+                LastButtonPressed.Push(FLOAT_BUTTON);
+                DisplayContent += pressedButtonValue;
                 return;
             }
 
-            if (lastButtonPressed.Peek() == R_PARENTHESIS_BUTTON || lastButtonPressed.Peek() == CONST_BUTTON)
+            if (LastButtonPressed.Peek() == R_PARENTHESIS_BUTTON || LastButtonPressed.Peek() == CONST_BUTTON)
             {
                 pressedButtonValue = PLUS_SYMBOL + pressedButtonValue;
-                lastButtonPressed.Push(OPERATOR_BUTTON);
+                LastButtonPressed.Push(OPERATOR_BUTTON);
             }
 
-            displayContent += pressedButtonValue;
-            lastButtonPressed.Push(NUMBER_BUTTON);
+            DisplayContent += pressedButtonValue;
+            LastButtonPressed.Push(NUMBER_BUTTON);
             return;
         }
 
@@ -155,23 +168,31 @@ namespace Calculadora.Models
         /// <returns></returns>
         public static void InsertOperatorInDisplay(string pressedButtonValue)
         {
-            if (lastButtonPressed.Peek() == L_PARENTHESIS_BUTTON)
+            if (LastButtonPressed.Peek() == L_PARENTHESIS_BUTTON)
             {
                 return;
             }
 
             CalculatorEngine.HasCalculate = false;
-            if (lastButtonPressed.Peek() == OPERATOR_BUTTON)
+            if (DisplayContent == DEFAULT_DISPLAY)
             {
-                int newDisplayLenght = displayContent.Length - 1;
-                string display = displayContent.Substring(0, newDisplayLenght);
+                DisplayContent = pressedButtonValue;
+                LastButtonPressed.Pop();
+                LastButtonPressed.Push(OPERATOR_BUTTON);
+                return;
+            }
+
+            if (LastButtonPressed.Peek() == OPERATOR_BUTTON)
+            {
+                int newDisplayLenght = DisplayContent.Length - 1;
+                string display = DisplayContent.Substring(0, newDisplayLenght);
                 display += pressedButtonValue;
-                displayContent = display;
+                DisplayContent = display;
             }
             else
             {
-                lastButtonPressed.Push(OPERATOR_BUTTON);
-                displayContent += pressedButtonValue;
+                LastButtonPressed.Push(OPERATOR_BUTTON);
+                DisplayContent += pressedButtonValue;
             }
 
             return;
@@ -184,16 +205,16 @@ namespace Calculadora.Models
         /// </summary>
         public static void InsertPercentageInDisplay()
         {
-            if (lastButtonPressed.Peek() == OPERATOR_BUTTON)
+            if (LastButtonPressed.Peek() == OPERATOR_BUTTON)
             {
                 return;
             }
 
             CalculatorEngine.HasCalculate = false;
-            if (lastButtonPressed.Peek() == NUMBER_BUTTON)
+            if (LastButtonPressed.Peek() == NUMBER_BUTTON)
             {
-                displayContent += PERCENTAGE_SYMBOL;
-                lastButtonPressed.Push(NUMBER_BUTTON);
+                DisplayContent += PERCENTAGE_SYMBOL;
+                LastButtonPressed.Push(NUMBER_BUTTON);
                 CalculatorEngine.HasPercentage = true;
             }
         }
@@ -210,45 +231,45 @@ namespace Calculadora.Models
         /// <param name="value"></param>
         public static void InsertParenthesisInDisplay(string value)
         {
-            if (lastButtonPressed.Peek() == OPERATOR_BUTTON && value == R_PARENTHESIS_SYMBOL)
+            if (LastButtonPressed.Peek() == OPERATOR_BUTTON && value == R_PARENTHESIS_SYMBOL)
             {
                 return;
             }
 
             CalculatorEngine.HasCalculate = false;
-            if (lastButtonPressed.Peek() == NUMBER_BUTTON && value != R_PARENTHESIS_SYMBOL)
+            if (LastButtonPressed.Peek() == NUMBER_BUTTON && value != R_PARENTHESIS_SYMBOL)
             {
-                displayContent += "*(";
-                lastButtonPressed.Push(OPERATOR_BUTTON);
-                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
+                DisplayContent += "*(";
+                LastButtonPressed.Push(OPERATOR_BUTTON);
+                LastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 return;
             }
 
-            if (displayContent == DEFAULT_DISPLAY && value == L_PARENTHESIS_SYMBOL)
+            if (DisplayContent == DEFAULT_DISPLAY && value == L_PARENTHESIS_SYMBOL)
             {
-                displayContent = value;
-                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
+                DisplayContent = value;
+                LastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 return;
             }
 
-            if (lastButtonPressed.Peek() == R_PARENTHESIS_BUTTON && value == L_PARENTHESIS_SYMBOL)
+            if (LastButtonPressed.Peek() == R_PARENTHESIS_BUTTON && value == L_PARENTHESIS_SYMBOL)
             {
                 value = "*(";
-                displayContent += value;
-                lastButtonPressed.Push(OPERATOR_BUTTON);
-                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
+                DisplayContent += value;
+                LastButtonPressed.Push(OPERATOR_BUTTON);
+                LastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 return;
             }
 
-            displayContent += value;
+            DisplayContent += value;
 
             if (value == L_PARENTHESIS_SYMBOL)
             {
-                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
+                LastButtonPressed.Push(L_PARENTHESIS_BUTTON);
             }
             else
             {
-                lastButtonPressed.Push(R_PARENTHESIS_BUTTON);
+                LastButtonPressed.Push(R_PARENTHESIS_BUTTON);
             }
 
         }
@@ -260,7 +281,7 @@ namespace Calculadora.Models
         /// <param name="constValue">Constânte matemática a ser inserida</param>
         public static void InsertConstInDisplay(string constValue)
         {
-            if (lastButtonPressed.Peek() == FLOAT_BUTTON)
+            if (LastButtonPressed.Peek() == FLOAT_BUTTON)
             {
                 return;
             }
@@ -268,21 +289,21 @@ namespace Calculadora.Models
             CalculatorEngine.HasCalculate = false;
             CalculatorEngine.HasConst = true;
 
-            if (displayContent == "0")
+            if (DisplayContent == "0")
             {
-                displayContent = constValue;
-                lastButtonPressed.Push(CONST_BUTTON);
+                DisplayContent = constValue;
+                LastButtonPressed.Push(CONST_BUTTON);
                 return;
             }
 
-            if (lastButtonPressed.Peek() != OPERATOR_BUTTON)
+            if (LastButtonPressed.Peek() != OPERATOR_BUTTON)
             {
                 constValue = TIMES_SYMBOL + constValue;
-                lastButtonPressed.Push(OPERATOR_BUTTON);
+                LastButtonPressed.Push(OPERATOR_BUTTON);
             }
 
-            lastButtonPressed.Push(CONST_BUTTON);
-            displayContent += constValue;
+            LastButtonPressed.Push(CONST_BUTTON);
+            DisplayContent += constValue;
         }
 
 
@@ -297,19 +318,19 @@ namespace Calculadora.Models
         {
             if (CalculatorEngine.HasCalculate)
             {
-                result = String.Concat(symbol, L_PARENTHESIS_SYMBOL, result, R_PARENTHESIS_SYMBOL);
+                Result = String.Concat(symbol, L_PARENTHESIS_SYMBOL, Result, R_PARENTHESIS_SYMBOL);
 
             }
             else
             {
-                result = String.Concat(symbol, L_PARENTHESIS_SYMBOL, expression, R_PARENTHESIS_SYMBOL);
+                Result = String.Concat(symbol, L_PARENTHESIS_SYMBOL, expression, R_PARENTHESIS_SYMBOL);
             }
         }
 
 
         public static void InsertBaseExponentiation(string expression)
         {
-            result = String.Concat(expression, EXPONENT_SYMBOL);
+            Result = String.Concat(expression, EXPONENT_SYMBOL);
         }
 
 

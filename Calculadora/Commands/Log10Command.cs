@@ -18,9 +18,19 @@ namespace Calculadora.Commands
             if (parameter != null)
             {
                 string expression = ((TextBox)parameter).Text;
-                Calculator.ExecuteLog10(expression);
+                try
+                {
+                    Calculator.ExecuteLog10(expression);
+                }
+                catch (Exception e)
+                {
+                    CalculatorDisplay.ClearDisplay();
+                    _viewModel.ErrorMessage = e.Message;
+                    _viewModel.UpdateDisplay();
+                    return;
+                }
                 _viewModel.UpdateDisplay();
-                _viewModel.AddHistory(_viewModel.stringResult, _viewModel.displayContent);
+                _viewModel.AddHistory(_viewModel.StringResult, _viewModel.DisplayContent);
             }
             else
             {

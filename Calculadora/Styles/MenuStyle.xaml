@@ -67,7 +67,7 @@
                                     Width="4"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    Background="DodgerBlue"
+                                    Background="Orange"
                                     Visibility="Collapsed"
                                     CornerRadius="2" />
                             <ContentPresenter />

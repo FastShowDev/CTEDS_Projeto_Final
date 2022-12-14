@@ -36,8 +36,15 @@ namespace Calculadora.Models
         /// <param name="expression">Expressão matemática simples</param>
         public static void ExecuteCalculate(string expression)
         {
-            CalculatorDisplay.result = expression;
-            CalculatorDisplay.displayContent = CalculatorEngine.CalculateExpression(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.CalculateExpression(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            CalculatorDisplay.Result = expression;
             CalculatorEngine.HasCalculate = true;
             return;
         }
@@ -50,7 +57,14 @@ namespace Calculadora.Models
         /// <param name="expression">Expressão que será calculada e elevada ao quadrado</param>
         public static void ExecuteSquare(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.Square(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.Square(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(SQUARE_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -65,7 +79,13 @@ namespace Calculadora.Models
         /// <param name="expression">Expressão que será calculada e depois tirada a raiz</param>
         public static void ExecuteSquareRoot(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.SquareRoot(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.SquareRoot(expression).ToString();
+            } catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(SQUARE_ROOT_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -80,7 +100,14 @@ namespace Calculadora.Models
         /// <param name="expression">Expressão que será calculado o log10</param>
         public static void ExecuteLog10(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.Log10(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.Log10(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(LOG_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -95,7 +122,14 @@ namespace Calculadora.Models
         /// <param name="expression">Expressão que será calculado o ln</param>
         public static void ExecuteLn(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.Ln(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.Ln(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(LN_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -110,7 +144,14 @@ namespace Calculadora.Models
         /// <param name="expression">Expressão que será calculado o inverso</param>
         public static void ExecuteInversion(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.Inversion(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.Inversion(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(INVERSION_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -124,7 +165,14 @@ namespace Calculadora.Models
         /// <param name="expression"></param>
         public static void ExecuteAbsolute(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.Absolute(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.Absolute(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(ABSOLUTE_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -133,7 +181,14 @@ namespace Calculadora.Models
 
         public static void ExecuteFactorial(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.Factorial(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.Factorial(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(FACTORIAL_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -141,7 +196,14 @@ namespace Calculadora.Models
 
         public static void ExecutePowerBase2(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.PowerBase2(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.PowerBase2(expression).ToString();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(BASE_2_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -149,7 +211,14 @@ namespace Calculadora.Models
 
         public static void ExecutePowerBase10(string expression)
         {
-            CalculatorDisplay.displayContent = CalculatorEngine.PowerBase10(expression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.PowerBase10(expression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(BASE_10_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
             return;
@@ -158,7 +227,14 @@ namespace Calculadora.Models
         public static void ExecutePowerBaseX(string baseExpression, string exponentExpression)
         {
             string calculateBase = baseExpression.Substring(0, baseExpression.Length - 1); //É necessário tirar o símbolo de ^ para calcular
-            CalculatorDisplay.displayContent = CalculatorEngine.PowerBaseX(calculateBase, exponentExpression).ToString();
+            try
+            {
+                CalculatorDisplay.DisplayContent = CalculatorEngine.PowerBaseX(calculateBase, exponentExpression).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             CalculatorDisplay.InsertSymbolInResult(baseExpression, exponentExpression);
             CalculatorEngine.HasCalculate = true;
             CalculatorEngine.HasExponentiation = false;

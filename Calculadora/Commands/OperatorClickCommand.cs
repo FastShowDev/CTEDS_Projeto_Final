@@ -21,7 +21,7 @@ namespace Calculadora.Commands
                 if (pressedButtonValue == "(" || pressedButtonValue == ")")
                 {
                     CalculatorDisplay.InsertParenthesisInDisplay(pressedButtonValue);
-                    _viewModel.displayContent = CalculatorDisplay.displayContent;
+                    _viewModel.DisplayContent = CalculatorDisplay.DisplayContent;
                     return;
                 }
 
@@ -31,7 +31,7 @@ namespace Calculadora.Commands
                 }
 
                 CalculatorDisplay.InsertOperatorInDisplay(pressedButtonValue);
-                _viewModel.displayContent = CalculatorDisplay.displayContent;
+                _viewModel.DisplayContent = CalculatorDisplay.DisplayContent;
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 
 namespace Calculadora.Models
 {
@@ -44,6 +43,7 @@ namespace Calculadora.Models
         #endregion
 
         #region FUNCTIONS
+
         /// <summary>
         /// Método que recebe uma expressão matemática simples, contendo apenas operadores aritiméticos elementares, parênteses, 
         /// constantes matemáticas (e ou pi) e símbolos de porcentagem e faz seu cálculo.
@@ -77,11 +77,7 @@ namespace Calculadora.Models
 
                 return double.Parse((string)row["expression"]);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -93,16 +89,11 @@ namespace Calculadora.Models
         public static double SquareRoot(string expression)
         {
             double rooting = CalculateExpression(expression);
-
-            try
+            if(rooting < 0)
             {
-                return Math.Sqrt(rooting);
+                throw new Exception("O número não pode ser negativo!");
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            return Math.Sqrt(rooting);
 
         }
 
@@ -119,11 +110,7 @@ namespace Calculadora.Models
             {
                 return Math.Pow(value, 2);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -134,17 +121,17 @@ namespace Calculadora.Models
         /// <returns>Um double contendo o valor do log10 da expressão calculada</returns>
         public static double Log10(string expression)
         {
-            double rooting = CalculateExpression(expression);
+            double argument = CalculateExpression(expression);
+            if(argument <= 0)
+            {
+                throw new Exception("O argumento deve ser maior que zero");
+            }
 
             try
             {
-                return Math.Log10(rooting);
+                return Math.Log10(argument);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -155,17 +142,18 @@ namespace Calculadora.Models
         /// <returns>Um double contendo o valor do ln da expressão calculada</returns>
         public static double Ln(string expression)
         {
-            double rooting = CalculateExpression(expression);
+            double argument = CalculateExpression(expression);
+
+            if (argument <= 0)
+            {
+                throw new Exception("O argumento deve ser maior que zero");
+            }
 
             try
             {
-                return Math.Log(rooting);
+                return Math.Log(argument);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -177,16 +165,16 @@ namespace Calculadora.Models
         public static double Inversion(string expression)
         {
             double rooting = CalculateExpression(expression);
+            if(rooting == 0)
+            {
+                throw new Exception("Não é possível dividir por zero!");
+            }
 
             try
             {
                 return 1 / rooting;
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -203,11 +191,7 @@ namespace Calculadora.Models
             {
                 return Math.Abs(rooting);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -216,14 +200,13 @@ namespace Calculadora.Models
             int number = Convert.ToInt32(CalculateExpression(expression));
             if(number < 0)
             {
-                MessageBox.Show("Número inválido!");
-                return 0;
+                throw new Exception("O número deve ser não negativo!");
             }
 
             return RecursiveFactorial(number);
 
         }
-        #endregion
+        
 
         private static int RecursiveFactorial(int number)
         {
@@ -242,11 +225,7 @@ namespace Calculadora.Models
             {
                 return Math.Pow(10, exponent);
             }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -257,11 +236,7 @@ namespace Calculadora.Models
             {
                 return Math.Pow(2, exponent);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
 
 
@@ -273,11 +248,8 @@ namespace Calculadora.Models
             {
                 return Math.Pow(baseValue, exponentValue);
             }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 0;
-            }
+            catch { throw new Exception("Expressão inválida"); }
         }
+        #endregion
     }
 }
