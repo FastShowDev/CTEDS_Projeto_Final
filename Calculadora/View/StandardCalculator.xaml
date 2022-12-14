@@ -15,7 +15,10 @@
         MinWidth="400">
     
     <UserControl.Resources>
-        <converters:CloneConverter x:Key="myConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+        <converters:CloneConverter x:Key="CloneConverter"/>
     </UserControl.Resources>
     
 
@@ -57,7 +60,7 @@
                         Style="{StaticResource OpenHistoryButtonStyle}"
                         Command="{Binding OpenHistoryCM}">
                     <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource myConverter}">
+                        <MultiBinding Converter="{StaticResource CloneConverter}">
                             <Binding ElementName="HistoryMenuBorder"/>
                             <Binding ElementName="HistoryDataGrid"/>
                         </MultiBinding>
@@ -80,10 +83,20 @@
 
                 <Viewbox Grid.Row="1"
                      x:Name="CalculatorDisplayViewBox"
-                     Style="{StaticResource CalculatorDisplayViewBoxStyle}">
+                     Style="{StaticResource CalculatorDisplayViewBoxStyle}"
+                     Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
                     <TextBox x:Name="CalculatorDisplay"
-                       Style="{StaticResource CalculatorDisplayTextBoxStyle}"
-                             Text="{Binding displayContent}"/>
+                             Style="{StaticResource CalculatorDisplayTextBoxStyle}"
+                             Text="{Binding DisplayContent}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1"
+                         x:Name="ErrorDisplayViewBox"
+                         Style="{StaticResource CalculatorDisplayViewBoxStyle}">
+                    <TextBox x:Name="ErrorDisplay"
+                             Text="{Binding ErrorMessage}"
+                             Visibility="{Binding HasErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             Style="{StaticResource ErrorDisplayStyle}"/>
                 </Viewbox>
 
             </Grid>
@@ -109,22 +122,27 @@
                 
                 <!--#region Memory Buttons-->
                 <Button Grid.Column="0" Grid.Row="0" Content="MC" 
-                        Style="{StaticResource CalculatorButtonStyle}"/>
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 
                 <Button Grid.Column="1" Grid.Row="0" Content="ME" 
-                        Style="{StaticResource CalculatorButtonStyle}"/>
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 
                 <Button Grid.Column="2" Grid.Row="0" Content="M+" 
-                        Style="{StaticResource CalculatorButtonStyle}"/>
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 
                 <Button Grid.Column="3" Grid.Row="0" Content="M-" 
-                        Style="{StaticResource CalculatorButtonStyle}"/>
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 <!--#endregion-->
 
                 
                 <!--#region Buttons: CE, C, BACK, /-->
-                <Button Grid.Column="0" Grid.Row="1" Content="%" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding PercentageClickCM}"/>
+                <Button Grid.Column="0" Grid.Row="1" Content="%" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding PercentageClickCM}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 
                 <Button Grid.Column="1" Grid.Row="1" Content="CE" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
@@ -141,16 +159,20 @@
                 
                 <!--#region -->
                 <Button x:Name="button_inv" Grid.Column="0" Grid.Row="2" Content="1/x" Style="{StaticResource CalculatorButtonStyle}"
-                        Command="{Binding InversionClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
+                        Command="{Binding InversionClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
 
                 <Button x:Name="button_sqrt" Grid.Column="1" Grid.Row="2" Content="√x" Style="{StaticResource CalculatorButtonStyle}"
-                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"/>
+                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
 
                 <Button x:Name="button_sqr" Grid.Column="2" Grid.Row="2" Content="x²" Style="{StaticResource CalculatorButtonStyle}"
-                        Command="{Binding SquareClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"/>
+                        Command="{Binding SquareClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 
-                <Button x:Name="button_divide" Grid.Column="3" Grid.Row="2" Content="/" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_divide}"/>
+                <Button x:Name="button_divide" Grid.Column="3" Grid.Row="2" Content="/" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_divide}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 <!--#endregion-->
                 
                 
@@ -164,8 +186,9 @@
                 <Button x:Name="button_9" Grid.Column="2" Grid.Row="3" Content="9" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_9}"/>
                 
-                <Button x:Name="button_times" Grid.Column="3" Grid.Row="3" Content="*" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_times}"/>
+                <Button x:Name="button_times" Grid.Column="3" Grid.Row="3" Content="*" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_times}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 <!--#endregion-->
                 
                 
@@ -179,40 +202,44 @@
                 <Button x:Name="button_6" Grid.Column="2" Grid.Row="4" Content="6" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_6}"/>
                 
-                <Button x:Name="button_plus" Grid.Column="3" Grid.Row="4" Content="+" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_plus}"/>
+                <Button x:Name="button_plus" Grid.Column="3" Grid.Row="4" Content="+" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_plus}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 <!--#endregion-->
                 
                 
                 <!--#region Buttons: 1, 2, 3, MINUS-->
-                <Button x:Name="button_1" Grid.Column="0" Grid.Row="5" Content="1" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_1}"/>
+                <Button x:Name="button_1" Grid.Column="0" Grid.Row="5" Content="1" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_1}"/>
                 
-                <Button x:Name="button_2" Grid.Column="1" Grid.Row="5" Content="2" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_2}"/>
+                <Button x:Name="button_2" Grid.Column="1" Grid.Row="5" Content="2" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_2}"/>
                 
-                <Button x:Name="button_3" Grid.Column="2" Grid.Row="5" Content="3" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_3}"/>
+                <Button x:Name="button_3" Grid.Column="2" Grid.Row="5" Content="3" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_3}"/>
                 
-                <Button x:Name="button_minus" Grid.Column="3" Grid.Row="5" Content="-" 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_minus}"/>
+                <Button x:Name="button_minus" Grid.Column="3" Grid.Row="5" Content="-" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_minus}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 <!--#endregion-->
                 
                 
                 <!--#region Buttons: +/-, 0, DOT, EQUALS -->
                 <Button x:Name="button_change_sinal" Grid.Column="0" Grid.Row="6" Content="+/-" 
-                        Style="{StaticResource CalculatorButtonStyle}"/>
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                 
                 <Button x:Name="button_0" Grid.Column="1" Grid.Row="6" Content="0" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_0}"/>
                 
-                <Button x:Name="button_float" Grid.Column="2" Grid.Row="6" Content="," 
-                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_float}"/>
+                <Button x:Name="button_float" Grid.Column="2" Grid.Row="6" Content="," Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_float}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
 
                 <Button x:Name="button_equals" Grid.Column="3" Grid.Row="6" Content="=" 
                         Style="{StaticResource CalculatorButtonStyle}" Command="{Binding CalculateCM}">
                     <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource myConverter}">
+                        <MultiBinding Converter="{StaticResource CloneConverter}">
                             <Binding ElementName="CalculatorDisplay"/>
                             <Binding ElementName="HistoryDataGrid"/>
                         </MultiBinding>
@@ -250,9 +277,7 @@
                             CommandParameter="{Binding ElementName=HistoryMenuBorder}"/>
                     
                     <RadioButton Margin="5"
-                            Style="{StaticResource HistoryRadioButtonStyle}"
-                            Command="{Binding LoadHistoryCM}"
-                            CommandParameter="{Binding ElementName=HistoryDataGrid}">
+                            Style="{StaticResource HistoryRadioButtonStyle}">
                         <TextBlock Text="Histórico"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
