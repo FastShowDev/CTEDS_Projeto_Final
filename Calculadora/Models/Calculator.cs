@@ -25,6 +25,9 @@ namespace Calculadora.Models
         private const string LN_SYMBOL = "ln";
         private const string ABSOLUTE_SYMBOL = "abs";
         private const string INVERSION_SYMBOL = "1/";
+        private const string FACTORIAL_SYMBOL = "fact";
+        private const string BASE_10_SYMBOL = "10^";
+        private const string BASE_2_SYMBOL = "2^";
         #endregion
 
 
@@ -126,6 +129,40 @@ namespace Calculadora.Models
             CalculatorDisplay.displayContent = CalculatorEngine.Absolute(expression).ToString();
             CalculatorDisplay.InsertSymbolInResult(ABSOLUTE_SYMBOL, expression);
             CalculatorEngine.HasCalculate = true;
+            return;
+        }
+
+
+        public static void ExecuteFactorial(string expression)
+        {
+            CalculatorDisplay.displayContent = CalculatorEngine.Factorial(expression).ToString();
+            CalculatorDisplay.InsertSymbolInResult(FACTORIAL_SYMBOL, expression);
+            CalculatorEngine.HasCalculate = true;
+            return;
+        }
+
+        public static void ExecutePowerBase2(string expression)
+        {
+            CalculatorDisplay.displayContent = CalculatorEngine.PowerBase2(expression).ToString();
+            CalculatorDisplay.InsertSymbolInResult(BASE_2_SYMBOL, expression);
+            CalculatorEngine.HasCalculate = true;
+            return;
+        }
+
+        public static void ExecutePowerBase10(string expression)
+        {
+            CalculatorDisplay.displayContent = CalculatorEngine.PowerBase10(expression).ToString();
+            CalculatorDisplay.InsertSymbolInResult(BASE_10_SYMBOL, expression);
+            CalculatorEngine.HasCalculate = true;
+            return;
+        }
+
+        public static void ExecutePowerBaseX(string baseExpression, string exponentExpression)
+        {
+            CalculatorDisplay.displayContent = CalculatorEngine.PowerBaseX(baseExpression, exponentExpression).ToString();
+            CalculatorDisplay.InsertSymbolInResult(baseExpression, exponentExpression);
+            CalculatorEngine.HasCalculate = true;
+            CalculatorEngine.HasExponentiation = false;
             return;
         }
 
