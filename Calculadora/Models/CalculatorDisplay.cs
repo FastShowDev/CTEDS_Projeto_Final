@@ -64,8 +64,6 @@ namespace Calculadora.Models
         /// </summary>
         public static void BackspaceDisplay()
         {
-            lastButtonPressed.Pop();
-
             if (CalculatorEngine.HasCalculate)
             {
                 ClearDisplay();
@@ -76,6 +74,13 @@ namespace Calculadora.Models
             if (lenght > 0)
             {
                 displayContent = displayContent.Substring(0, lenght);
+                lastButtonPressed.Pop();
+            }
+            else if (CalculatorEngine.HasExponentiation)
+            {
+                displayContent = DEFAULT_DISPLAY;
+                lastButtonPressed.Pop();
+                lastButtonPressed.Push(NUMBER_BUTTON);
             }
             else
             {
@@ -131,6 +136,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() == R_PARENTHESIS_BUTTON || lastButtonPressed.Peek() == CONST_BUTTON)
             {
                 pressedButtonValue = PLUS_SYMBOL + pressedButtonValue;
+                lastButtonPressed.Push(OPERATOR_BUTTON);
             }
 
             displayContent += pressedButtonValue;
@@ -187,6 +193,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() == NUMBER_BUTTON)
             {
                 displayContent += PERCENTAGE_SYMBOL;
+                lastButtonPressed.Push(NUMBER_BUTTON);
                 CalculatorEngine.HasPercentage = true;
             }
         }
@@ -212,6 +219,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() == NUMBER_BUTTON && value != R_PARENTHESIS_SYMBOL)
             {
                 displayContent += "*(";
+                lastButtonPressed.Push(OPERATOR_BUTTON);
                 lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 return;
             }
@@ -225,9 +233,10 @@ namespace Calculadora.Models
 
             if (lastButtonPressed.Peek() == R_PARENTHESIS_BUTTON && value == L_PARENTHESIS_SYMBOL)
             {
-                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 value = "*(";
                 displayContent += value;
+                lastButtonPressed.Push(OPERATOR_BUTTON);
+                lastButtonPressed.Push(L_PARENTHESIS_BUTTON);
                 return;
             }
 
@@ -269,6 +278,7 @@ namespace Calculadora.Models
             if (lastButtonPressed.Peek() != OPERATOR_BUTTON)
             {
                 constValue = TIMES_SYMBOL + constValue;
+                lastButtonPressed.Push(OPERATOR_BUTTON);
             }
 
             lastButtonPressed.Push(CONST_BUTTON);
