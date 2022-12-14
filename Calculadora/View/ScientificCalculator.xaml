@@ -202,7 +202,8 @@
                 
                 
                 <!--#region Buttons: x^y, 7, 8, 9, *-->
-                <Button Grid.Column="0" Grid.Row="5" Content="x^y" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button x:Name="button_powerbasex" Grid.Column="0" Grid.Row="5" Content="x^y" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding PowerBaseXClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"/>
                 
                 <Button x:Name="button_7" Grid.Column="1" Grid.Row="5" Content="7" Style="{StaticResource CalculatorButtonStyle}"
                         Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_7}"/>
