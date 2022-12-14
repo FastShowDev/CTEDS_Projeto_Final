@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculadora.Models
 {
     public class History
     {
         public int Id { get; set; }
-        public string FullExpression { get; set; } = "";
-        public string Expression { get; set; } = "";
-        public string Result { get; set; } = "";
+        public string FullExpression { get; set; } = string.Empty;
+        public string Expression { get; set; } = string.Empty;
+        public string Result { get; set; } = string.Empty;
 
         public History()
         {
