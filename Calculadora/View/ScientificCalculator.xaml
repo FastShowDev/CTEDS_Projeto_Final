@@ -125,9 +125,12 @@
 
                 <Button Grid.Column="0" Grid.Row="0" Content="MC" IsEnabled="False" Style="{StaticResource CalculatorButtonStyle}"/>
                 <Button Grid.Column="1" Grid.Row="0" Content="MR" IsEnabled="False" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="0" Content="M+" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{StaticResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="4" Grid.Row="0" Content="M^" Style="{StaticResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="2" Grid.Row="0" Content="M+" Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                <Button Grid.Column="4" Grid.Row="0" Content="M^" Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
 
                 <CheckBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource CalculatorCheckBoxStyle}">
                     <Grid>
