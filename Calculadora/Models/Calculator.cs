@@ -173,6 +173,12 @@ namespace Calculadora.Models
         }
 
 
+        /// <summary>
+        /// Método que executa a funcionalidade de fatorial. Recebe uma expressão, calcula seu resultado usando a Engine e em seguida
+        /// calcula o fatorial do resultado obtido e por fim atualiza o display da calculadora. Por simplificação não utilizou-se da 
+        /// função gama que calcula fatorial de números reais por meio de uma integral imprópria.
+        /// </summary>
+        /// <param name="expression"></param>
         public static void ExecuteFactorial(string expression)
         {
             try
@@ -188,6 +194,12 @@ namespace Calculadora.Models
             return;
         }
 
+
+        /// <summary>
+        /// Método que executa a funcionalidade de potência de base 2. Recebe uma expressão, calcula seu resultado usando a Engine e em seguida
+        /// calcula a potência de base 2 do resultado obtido e por fim atualiza o display da calculadora.
+        /// </summary>
+        /// <param name="expression"></param>
         public static void ExecutePowerBase2(string expression)
         {
             try
@@ -203,6 +215,12 @@ namespace Calculadora.Models
             return;
         }
 
+
+        /// <summary>
+        /// Método que executa a funcionalidade de potência de base 10. Recebe uma expressão, calcula seu resultado usando a Engine e em seguida
+        /// calcula a potência de base 10 do resultado obtido e por fim atualiza o display da calculadora.
+        /// </summary>
+        /// <param name="expression"></param>
         public static void ExecutePowerBase10(string expression)
         {
             try
@@ -218,6 +236,12 @@ namespace Calculadora.Models
             return;
         }
 
+
+        /// <summary>
+        /// Método que executa a funcionalidade de potência de base x. Recebe uma expressão de base e uma expressão de potência, calcula seus resultados usando a Engine e em seguida
+        /// calcula a base elevado a potência do resultado obtido e por fim atualiza o display da calculadora.
+        /// </summary>
+        /// <param name="expression"></param>
         public static void ExecutePowerBaseX(string baseExpression, string exponentExpression)
         {
             string calculateBase = baseExpression.Substring(0, baseExpression.Length - 1); //É necessário tirar o símbolo de ^ para calcular

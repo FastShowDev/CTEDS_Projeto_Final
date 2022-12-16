@@ -204,6 +204,14 @@ namespace Calculadora.Models
         }
 
 
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna o fatorial do valor calculado.
+        /// O resultado da expresão é truncado caso não resulte em um inteiro e calcula-se o valor do fatorial do número truncado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem. Por simplificação não utilizou-se da 
+        /// função gama que calcula fatorial de números reais por meio de uma integral imprópria.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor do módulo da expressão calculada</returns>
         public static BigInteger Factorial(string expression)
         {
             int number = Convert.ToInt32(CalculateExpression(expression));
@@ -217,6 +225,11 @@ namespace Calculadora.Models
         }
         
 
+        /// <summary>
+        /// Método auxiliar que calcula um fatorial de um natural de maneira recursiva
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns>O fatorial do número fornecido</returns>
         private static BigInteger RecursiveFactorial(BigInteger number)
         {
             if (number <= 1)
@@ -226,6 +239,12 @@ namespace Calculadora.Models
             return number * RecursiveFactorial(number - 1);
         }
 
+
+        /// <summary>
+        /// Método auxiliar que calcula um fatorial de um natural de maneira interativa.
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns>O fatorial do número fornecido</returns>
         private static BigInteger InterativeFactorial(int number)
         {
             BigInteger factorial = new BigInteger(1);
@@ -238,6 +257,12 @@ namespace Calculadora.Models
         }
 
 
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna 10 elevado ao valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor de 10 elevado a expressão calculada</returns>
         public static double PowerBase10(string expression)
         {
             double exponent = CalculateExpression(expression);
@@ -248,7 +273,13 @@ namespace Calculadora.Models
             catch { throw new Exception("Expressão inválida"); }
         }
 
-
+        
+        /// <summary>
+        /// Método que recebe uma expressão matemática simples e calcula essa expressão e retorna 2 elevado ao valor calculado.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor de 2 elevado a expressão calculada</returns>
         public static double PowerBase2(string expression)
         {
             double exponent = CalculateExpression(expression);
@@ -260,6 +291,12 @@ namespace Calculadora.Models
         }
 
 
+        /// <summary>
+        /// Método que recebe duas expressões matemáticas, uma para a base e outra para o expoente. Calcula essas expressões e retorna a base elevado ao expoente fornecidos.
+        /// O tratamento de erro é feito enviando uma excessão com mensagem.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>Um double contendo o valor de base elevado ao expoente</returns>
         public static double PowerBaseX(string baseExpression, string exponentExpression)
         {
             double baseValue = CalculateExpression(baseExpression);

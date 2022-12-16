@@ -152,8 +152,9 @@ namespace Calculadora.Models
 
         /// <summary>
         /// Método que insere um operador no display:
-        /// -Caso o último botão pressionado for um parênteses esquerdo, não permite a inserção do operador.
-        /// -Caso o último botão pressionado foi um operador, ou seja, o último caracter do display for um operador aritmético atualiza para o novo operador pressionado.
+        /// -Caso o último botão pressionado for um parênteses esquerdo, permite a inserção  apenas do operador de subtração.
+        /// -Caso o último botão pressionado foi um operador, ou seja, o último caracter do display for um operador aritmético verifica-se se ele é um operador
+        /// de multiplicação ou divisão e permite a concatenação do operador de subtração, caso contrário, o operador é trocado pelo valor passado.
         /// -Caso o último botão pressionado foi um número, apenas adiciona o operador pressionado ao display.
         /// </summary>
         /// <param name="pressedButtonValue">Operador pressionado</param>
@@ -344,7 +345,10 @@ namespace Calculadora.Models
             }
         }
 
-
+        /// <summary>
+        /// Método auxiliar para a função de base x elevado a y que recebe uma expressão e insere ela no resultado com símbolo de expoente.
+        /// </summary>
+        /// <param name="expression"></param>
         public static void InsertBaseExponentiation(string expression)
         {
             Result = String.Concat(expression, EXPONENT_SYMBOL);
