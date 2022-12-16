@@ -20,10 +20,12 @@ Atualmente estão desenvolvidas as seguintes funcionalidades:
 - Calculadora de matrizes, vetores.
 - Calculadora para álgebra linear (produto vetorial, escalar, interno, etc)
 
-Tem alguma sugestão? Envie um email para [gabriel_camargo@usp.br]
+Tem alguma sugestão? Envie um email para gabriel_camargo@usp.br
 
 ## Funcionalidades
 
 ### Feedback Visual
-![FeedbackSystemGif](https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif)
+O sistema de Feedback Visual consiste em uma forma da calculadora avisar para o usuário que a operação realizada é inválida, o sistema identifica uma operação matemáticamente inválida/impossível e automáticamente desativa todos os botões de operadores e operações para evitar possíveis erros.
+<img alt="Gif mostrando o feedback da calculadora" src="https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif" width="600px"/>
+
 
