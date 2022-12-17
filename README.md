@@ -31,8 +31,19 @@ O modo de operação padrão possui as quatro operações fundamentais (adição
 
 <img alt="Gif mostrando o funcionamento da calculadora padrão" src="https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif" width="600px"/>
 
+### Calculadora Científica
+O modo de operação científica possui, além do que existe na padrão, parênteses para precedência de operações, resto da divisão, fatorial, potências de base 2 e 10, potência de base x, logaritmo de base 10 e logaritmo neperiano. O funcionamento dessas operações matemáticas (com execção do resto da divisão) segue o mesmo princípio da calculadora padrão, primeiro é calculado a expressão digitada no display e em seguida calcula-se a função no valor obtido.
+
+<img alt="Gif mostrando o funcionamento da calculadora padrão" src="https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif" width="600px"/>
+
+### Histórico
+O sistema de Histórico consiste em uma forma do usuário visualizar todos os calculos feitos, além disso, é possível apagar o histórico ao pressionar o botão. Os dados são mantidos em um banco de dados. Futuramente pretende-se implementar uma forma de ao clickar em um dos registros do histórico o valor retorne ao display.
+
+<img alt="Gif mostrando o feedback da calculadora" src="https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif" width="600px"/>
+
 ### Feedback Visual
 O sistema de Feedback Visual consiste em uma forma da calculadora avisar para o usuário que a operação realizada é inválida, o sistema identifica uma operação matemáticamente inválida/impossível e automáticamente desativa todos os botões de operadores e operações para evitar possíveis erros.
+
 <img alt="Gif mostrando o feedback da calculadora" src="https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif" width="600px"/>
 
 
