@@ -3,7 +3,7 @@
 
 Autores: [Gabriel Di Vanna Camargo](https://github.com/FastShowDev) e [Matheus Ribeiro Lira](https://github.com/mtlira) <br>
 Versão atual: 1.0 <br>
-Veja as últimas atualizações <a href="#patch-notes">aqui</a> <br>
+Veja as últimas atualizações <a href="#patch-notes" scroll-behavior="smooth">aqui</a> <br>
 
 <h2 id="development"> 1. Desenvolvimento</h2>
 
