@@ -23,7 +23,7 @@ Atualmente estão desenvolvidas as seguintes funcionalidades:
 
 Tem alguma sugestão? Envie um email para gabriel_camargo@usp.br
 
-## Funcionamento
+## Funcionamento - Demonstração
 A seguir encontram-se as funcionalidades já implementadas no projeto, uma breve descrição da funcionalidade e um gif mostrando seu funcionamento.
 
 ### Calculadora Padrão
@@ -45,5 +45,7 @@ O sistema de Histórico consiste em uma forma do usuário visualizar todos os ca
 O sistema de Feedback Visual consiste em uma forma da calculadora avisar para o usuário que a operação realizada é inválida, o sistema identifica uma operação matemáticamente inválida/impossível e automáticamente desativa todos os botões de operadores e operações para evitar possíveis erros.
 
 <img alt="Gif mostrando o feedback da calculadora" src="https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif" width="600px"/>
+
+## Arquiterura do projeto
 
 
