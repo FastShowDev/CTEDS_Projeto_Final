@@ -27,7 +27,7 @@ Tem alguma sugestão? Envie um email para gabriel_camargo@usp.br
 A seguir encontram-se as funcionalidades já implementadas no projeto, uma breve descrição da funcionalidade e um gif mostrando seu funcionamento.
 
 ### Calculadora Padrão
-O modo de operação padrão possui as quatro operações fundamentais (adição, subtração, multiplicação e divisão), porcentagem, operações de raiz quadrada, elevar ao quadrado e calcular o inverso. Os botões de operação funcionam da seguinte maneira, por exemplo: ao pressionar o botão de raiz quadrada, o que está atualmente inserido no display é calculado e em seguida calcula-se a raiz quadrada do valor obtido. O mesmo ocorre para elevar ao quadrado e calcular o inverso.
+O modo de operação padrão possui as quatro operações fundamentais (adição, subtração, multiplicação e divisão), porcentagem, operações de raiz quadrada, elevar ao quadrado e calcular o inverso. Os botões de operação funcionam da seguinte maneira: por exemplo, ao pressionar o botão de raiz quadrada, o que está atualmente inserido no display é calculado e em seguida calcula-se a raiz quadrada do valor obtido. O mesmo ocorre para elevar ao quadrado e calcular o inverso.
 
 <img alt="Gif mostrando o funcionamento da calculadora padrão" src="https://user-images.githubusercontent.com/109106987/208214814-5d273a91-7764-499d-a949-4a2522d4e599.gif" width="600px"/>
 
