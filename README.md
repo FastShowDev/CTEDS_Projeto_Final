@@ -1,10 +1,13 @@
 # ChronoTrix - CTEDS Projeto Final
 **ChronoTrix** é o projeto de conclusão do curso de **Capacitação Tecnológica em Engenharia e Desenvolvimento de Software (CTEDS)**, oferecido pelo **Departamento de Engenharia de Computação e Sistemas Digitais (PCS)** da **Universidade de São Paulo (USP)**. O projeto consiste em uma aplicação Windowns de uma calculadora de multiplas funcionalidades, atualmente o projeto apresenta dois modos de funcionamento: científico e básico. A ideia do projeto é desenvolver uma calculadora completa, prática, responsiva que apresentando diversas funcionalidades úteis.
 
-Autores: [Gabriel Di Vanna Camargo](https://github.com/FastShowDev) e [Matheus Ribeiro Lira](https://github.com/mtlira)
+Autores: [Gabriel Di Vanna Camargo](https://github.com/FastShowDev) e [Matheus Ribeiro Lira](https://github.com/mtlira) <br>
+Versão atual: 1.0 <br>
+Veja as últimas atualizações <a href="#patch-notes">aqui</a> <br>
 
-## Desenvolvimento
-Atualmente estão desenvolvidas as seguintes funcionalidades:
+<h2 id="development"> 1. Desenvolvimento</h2>
+
+**Atualmente** estão desenvolvidas as seguintes funcionalidades: <br>
 - [x] Calculadora Padrão
 - [x] Calculadora Científica
 - [x] Sistema de Histórico
@@ -23,7 +26,7 @@ Atualmente estão desenvolvidas as seguintes funcionalidades:
 
 Tem alguma sugestão? Envie um email para gabriel_camargo@usp.br
 
-## Funcionamento - Demonstração
+<h2 id="operation"> 2. Funcionamento </h2>
 A seguir encontram-se as funcionalidades já implementadas no projeto, uma breve descrição da funcionalidade e um gif mostrando seu funcionamento.
 
 ### Calculadora Padrão
@@ -46,6 +49,17 @@ O sistema de Feedback Visual consiste em uma forma da calculadora avisar para o 
 
 <img alt="Gif mostrando o feedback da calculadora" src="https://user-images.githubusercontent.com/109106987/208176837-627b798c-25cb-4963-9ec6-a9b3a37b1b3d.gif" width="600px"/>
 
-## Arquiterura do projeto
+<h2 id="architecture"> 3. Arquiterura do projeto </h2>
+Tópico em construção...
+
+<h2 id="documentation"> 4. Documentação </h2>
+Tópico em construção...
+
+<h2 id="user-manual"> 5. Manual do Usuário </h2>
+Tópico em construção...
+
+<h2 id="patch-notes">6. Notas de atualização</h2>
+Tópico em construção...
+
 
 
