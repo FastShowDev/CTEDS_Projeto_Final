@@ -3,7 +3,7 @@
 
 Autores: [Gabriel Di Vanna Camargo](https://github.com/FastShowDev) e [Matheus Ribeiro Lira](https://github.com/mtlira)
 
-## Funcionalidades
+## Desenvolvimento
 Atualmente estão desenvolvidas as seguintes funcionalidades:
 - [x] Calculadora Padrão
 - [x] Calculadora Científica
@@ -23,7 +23,7 @@ Atualmente estão desenvolvidas as seguintes funcionalidades:
 
 Tem alguma sugestão? Envie um email para gabriel_camargo@usp.br
 
-## Funcionalidades
+## Funcionamento
 A seguir encontram-se as funcionalidades já implementadas no projeto, uma breve descrição da funcionalidade e um gif mostrando seu funcionamento.
 
 ### Calculadora Padrão
