@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace Calculadora.View
 {
     /// <summary>
-    /// Interaction logic for StandardCalculator.xaml
+    /// Interaction logic for ScientificCalculator.xaml
     /// </summary>
-    public partial class StandardCalculator : UserControl
+    public partial class ScientificCalculator : UserControl
     {
-        public StandardCalculator()
+        public ScientificCalculator()
         {
             InitializeComponent();
         }

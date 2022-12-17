@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Calculadora.Models.Calculator" Collapsed="true">
+    <Position X="6" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEABAAAABQAAgVEAABAACAAABAIAAQAAAYABhCAAII=</HashCode>
+      <FileName>Models\Calculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculadora.Models.CalculatorDisplay" Collapsed="true">
+    <Position X="8.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEAAAAAACEgAAkgAKCAAAARKYQCAAAJQQKAgCCQAgQA=</HashCode>
+      <FileName>Models\CalculatorDisplay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculadora.Models.CalculatorEngine" Collapsed="true">
+    <Position X="10.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAJEAAAQCBBABAgAEABAAwAAIAACIBEQAgAmDAAEA=</HashCode>
+      <FileName>Models\CalculatorEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculadora.Models.History" Collapsed="true">
+    <Position X="3.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAQAAAACAAAAAA=</HashCode>
+      <FileName>Models\History.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculadora.Database.Managers.HistoryManager" Collapsed="true">
+    <Position X="13.25" Y="3.25" Width="1.5" />
+    <InheritanceLine Type="Calculadora.Database.Managers.BaseManager" FixedFromPoint="true">
+      <Path>
+        <Point X="14.062" Y="2.062" />
+        <Point X="14.062" Y="2.875" />
+        <Point X="14" Y="2.875" />
+        <Point X="14" Y="3.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAgAJAABAiAQAAAAEAAAEAABAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Database\Managers\HistoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculadora.ViewModels.StandardCalculatorViewModel" Collapsed="true">
+    <Position X="1" Y="2.75" Width="2.25" />
+    <InheritanceLine Type="Calculadora.ViewModels.BaseViewModel" ManuallyRouted="true">
+      <Path>
+        <Point X="2.25" Y="2.062" />
+        <Point X="2.25" Y="2.375" />
+        <Point X="2.125" Y="2.375" />
+        <Point X="2.125" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQCEAIQMBBGBmAIAAAAQAAAAhAABAAAAwEBAEAAAAA=</HashCode>
+      <FileName>ViewModels\StandardCalculatorViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Calculadora.ViewModels.ScientificCalculatorViewModel" Collapsed="true">
+    <Position X="1.25" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAQCAAAgAACAAAQAAAEABA=</HashCode>
+      <FileName>ViewModels\ScientificCalculatorViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Calculadora.ViewModels.BaseViewModel" Collapsed="true">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQgAAAAQCgBAAAEAIAAAAAAEgAAAAAAAAAIAAAAAAQg=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Calculadora.Database.Managers.BaseManager" Collapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Database\Managers\BaseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculadora.Commands.BaseCommand" Collapsed="true">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Commands\BaseCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Calculadora.Converters.CloneConverter" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\CloneConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Calculadora.Converters.InverseBooleanConverter" Collapsed="true">
+    <Position X="9.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\InverseBooleanConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Calculadora.Database.CalculatorDbContext" Collapsed="true">
+    <Position X="12.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Database\CalculatorDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculadora.View.ScientificCalculator" Collapsed="true">
+    <Position X="5" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\ScientificCalculator.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Calculadora.View.StandardCalculator" Collapsed="true">
+    <Position X="7.25" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\StandardCalculator.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Controls.UserControl" Collapsed="true">
+    <Position X="6.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Calculadora.MainWindow" Collapsed="true">
+    <Position X="10.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="10.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Calculadora.Stores.NavigationStore" Collapsed="true">
+    <Position X="11.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAIEAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Stores\NavigationStore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

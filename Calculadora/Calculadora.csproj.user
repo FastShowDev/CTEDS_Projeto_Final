@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\ScientificCalculator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\StandardCalculator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -15,7 +18,16 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Styles\Styles.xaml">
+    <Page Update="Styles\CalculatorStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\HistoryMenuStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MenuStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ScientificCalculator.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StandardCalculator.xaml">

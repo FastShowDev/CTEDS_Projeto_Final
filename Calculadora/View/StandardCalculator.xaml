@@ -1,233 +1,30 @@
-﻿<Window x:Class="Calculadora.View.StandardCalculator"
+﻿<UserControl x:Class="Calculadora.View.StandardCalculator"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora.View"
+        xmlns:vm="clr-namespace:Calculadora.ViewModels" 
+        xmlns:converters="clr-namespace:Calculadora.Converters"
+        d:DataContext="{x:Type vm:StandardCalculatorViewModel}"
         mc:Ignorable="d"
-        x:Name="Calculadora"
-        Title="Calculadora" 
-        Height="550"
+        x:Name="StandardCalculatorView"
+        d:DesignHeight="550"
+        d:DesignWidth="400"
         MinHeight="550"
-        Width="400"
-        MinWidth="400"
-        WindowStartupLocation="CenterScreen"
-        
-        >
-    <Window.Resources>
-        <Style x:Key="Test" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Opacity" Value="0.7"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Opacity" Value="0.7"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        MinWidth="400">
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+        <converters:CloneConverter x:Key="CloneConverter"/>
+    </UserControl.Resources>
+    
 
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border"  Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border"  Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="LightGray"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border"  Color="DarkGray"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground"  Color="DarkGray"/>
+    <Grid Background="White" Height="auto" Width="auto">
 
-        <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.3"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.3"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.3"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                                <Setter Property="Opacity" TargetName="border" Value= "0.7"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="CalculatorButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Margin" Value="2, 2, 2, 2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-        </Style>
-    </Window.Resources>
-
-    <Grid>
-        <Border x:Name="MenuBorder"
-                CornerRadius="0, 8 , 8, 0"
-                Background="White"
-                Width="250"
-                MinWidth="250"
-                HorizontalAlignment="Left"
-                Panel.ZIndex="1"
-                Visibility="Hidden"
-                BorderBrush="Black"
-                BorderThickness="1"
-                >
-            <Grid x:Name="MenuBorderGrid"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                  ScrollViewer.CanContentScroll="True"
-                  Margin="0, 10, 0, 0"
-                  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Image Source="/Assets/icons8-close-window-50.png"
-                       Grid.Row="0"
-                       HorizontalAlignment="Left"
-                       Width="40"
-                       Height="40"
-                       Margin="10, 0 , 0 ,0"/>
-                <Button Style="{DynamicResource MenuButtonStyle}"
-                        x:Name="CloseMenuButton" 
-                        Grid.Row="0" 
-                        Height="40" Width="40"
-                        Opacity="1"
-                        BorderThickness="0"
-                        Margin="10, 0 , 0 ,0"
-                        HorizontalAlignment="Left" 
-                        Background="Transparent"
-                        Click="CloseMenuButton_Click"/>
-
-
-                <ScrollViewer Grid.Row="1">
-                    <Grid x:Name="MenuBorderContentGrid"
-                      >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="300"/>
-                            <RowDefinition Height="500"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <Label Grid.Row="0"
-                                   Content="Calculadora"
-                                   FontSize="18"
-                                   FontWeight="Light"
-                                   Margin="10, 0 , 0 ,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   />
-
-                            <Image Source="/Assets/icons8-calculator-50.png"
-                                   Grid.Row="1" 
-                                   HorizontalAlignment="Left"
-                                   Margin="10, 0, 0, 0" Width="30" Height="30"
-                                   />
-                            <TextBlock Grid.Row="1"
-                                       Text="Padrão"
-                                       FontSize="18"
-                                       FontWeight="Medium"
-                                       Margin="45, 0, 0, 0"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       />
-                            <Button Style="{DynamicResource MenuButtonStyle}" 
-                                    x:Name="StandardCalculatorButton"
-                                    Grid.Row="1"
-                                    BorderThickness="0"
-                                    Opacity="1"
-                                    Background="Transparent"
-                                    />
-
-                            <Image Source="/Assets/icons8-test-tube-48.png" 
-                                   Grid.Row="2"
-                                   HorizontalAlignment="Left"
-                                   Margin="10, 0, 0, 0" 
-                                   Width="30" 
-                                   Height="30"
-                                   />
-                            <Label Grid.Row="2"
-                                   Content="Científica"
-                                   FontSize="18"
-                                   FontWeight="Medium"
-                                   Margin="40, 0 , 0 ,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   />
-                            <Button Style="{DynamicResource MenuButtonStyle}" 
-                                    x:Name="ScienceCalculatorButton"
-                                    Grid.Row="2"
-                                    BorderThickness="0"
-                                    Opacity="1"
-                                    Background="Transparent"
-                                    />
-                        </Grid>
-
-                    </Grid>
-                </ScrollViewer>
-
-            </Grid>
-
-        </Border>
-
+        <!--#region CalculatorInterface-->
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -239,7 +36,7 @@
                 <RowDefinition Height="0.8*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Height="55" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="*"/>
@@ -249,64 +46,65 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <Image Source="/Assets/icons8-menu-rounded-50.png"
-                       Grid.Column="0"
-                       Grid.Row="0"
-                       Height="40"
-                       Width="40"
-                       />
-                <Button Style="{DynamicResource MenuButtonStyle}" 
+                <Button Style="{StaticResource OpenMenuButtonStyle}" 
                         x:Name="OpenMenuButton" 
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Background="Transparent"
-                        Opacity="1"
-                        Height="50"
-                        Width="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BorderThickness="0" 
-                        Click="MenuBtn_Click"
-                    />
+                        Grid.Row="0" Grid.Column="0"
+                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=MenuBorder}">
+                 </Button>
+                
+                 <Label Grid.Row="0" Grid.Column="1" 
+                        Style="{StaticResource OperationModeLabelStyle}"
+                        Content="{Binding ViewName}"/>
 
-                <Label Grid.Row="0"
-                       Grid.Column="1"
-                       FontSize="30"
-                       HorizontalAlignment="Left"
-                       Content="Padrão" 
-                       FontWeight="Bold"
-                       Margin="10, 0, 0, 0"
-                       />
-                <Image Source="/Assets/icons8-clock-settings-48.png"
-                       HorizontalAlignment="Center"
-                       Grid.Column="2"
-                       Height="40"
-                       Width="40"
-                       />
+                <Button Grid.Row="0" Grid.Column="2"
+                        Style="{StaticResource OpenHistoryButtonStyle}"
+                        Command="{Binding OpenHistoryCM}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource CloneConverter}">
+                            <Binding ElementName="HistoryMenuBorder"/>
+                            <Binding ElementName="HistoryDataGrid"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
             </Grid>
-            <Viewbox Grid.Row="1"
-                     Stretch="Uniform"
-                     HorizontalAlignment="Right"
-                     >
-                <TextBlock x:Name="CalculatorDisplay"
-                       Text="0"
-                       Margin="0, 0, 10, 0"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center" 
-                       FontStretch="Normal" 
-                       FontWeight="DemiBold" 
-                       FontSize="48"
-                       TextOptions.TextFormattingMode="Ideal"
-                       TextOptions.TextRenderingMode="Auto"
-                       
-                       />
-            </Viewbox>
             
-                       
+            
+            <Grid Grid.Row="1">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
+                
+                <Viewbox Grid.Row="0"
+                         HorizontalAlignment="Right">
+                    <TextBlock Style="{StaticResource CalculatorDisplayResultTextBlock}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1"
+                     x:Name="CalculatorDisplayViewBox"
+                     Style="{StaticResource CalculatorDisplayViewBoxStyle}"
+                     Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                    <TextBox x:Name="CalculatorDisplay"
+                             Style="{StaticResource CalculatorDisplayTextBoxStyle}"
+                             Text="{Binding DisplayContent}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1"
+                         x:Name="ErrorDisplayViewBox"
+                         Style="{StaticResource CalculatorDisplayViewBoxStyle}">
+                    <TextBox x:Name="ErrorDisplay"
+                             Text="{Binding ErrorMessage}"
+                             Visibility="{Binding HasErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             Style="{StaticResource ErrorDisplayStyle}"/>
+                </Viewbox>
+
+            </Grid>
 
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.5*"/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -321,40 +119,200 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Content="MC" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="0" Content="ME" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="0" Content="M+" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="0" Content="M-" Style="{DynamicResource CalculatorButtonStyle}"/>
+                
+                <!--#region Memory Buttons-->
+                <Button Grid.Column="0" Grid.Row="0" Content="MC" 
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                
+                <Button Grid.Column="1" Grid.Row="0" Content="ME" 
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                
+                <Button Grid.Column="2" Grid.Row="0" Content="M+" 
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                
+                <Button Grid.Column="3" Grid.Row="0" Content="M-" 
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                <!--#endregion-->
 
-                <Button Grid.Column="0" Grid.Row="1" Content="CE" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="1" Content="C" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="1" Content="Back" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="1" Content="/" Style="{DynamicResource CalculatorButtonStyle}"/>
+                
+                <!--#region Buttons: CE, C, BACK, /-->
+                <Button Grid.Column="0" Grid.Row="1" Content="%" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding PercentageClickCM}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                
+                <Button Grid.Column="1" Grid.Row="1" Content="CE" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
+                
+                <Button Grid.Column="2" Grid.Row="1" Content="C" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding ClearDisplayCM}"/>
 
-                <Button Grid.Column="0" Grid.Row="2" Content="7" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="2" Content="8" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="2" Content="9" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="2" Content="*" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button Grid.Column="3" Grid.Row="1" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding BackspaceCM}">
+                    <Image Style="{StaticResource BackspaceImageStyle}"/>
+                </Button>
+                <!--#endregion-->
+                
+                
+                <!--#region -->
+                <Button x:Name="button_inv" Grid.Column="0" Grid.Row="2" Content="1/x" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding InversionClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                <Button Grid.Column="0" Grid.Row="3" Content="4" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="3" Content="5" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="3" Content="6" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="3" Content="+" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button x:Name="button_sqrt" Grid.Column="1" Grid.Row="2" Content="√x" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding SqrtClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                <Button Grid.Column="0" Grid.Row="4" Content="1" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="4" Content="2" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="4" Content="3" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="4" Content="-" Style="{DynamicResource CalculatorButtonStyle}"/>
+                <Button x:Name="button_sqr" Grid.Column="2" Grid.Row="2" Content="x²" Style="{StaticResource CalculatorButtonStyle}"
+                        Command="{Binding SquareClickCM}" CommandParameter="{Binding ElementName=CalculatorDisplay, Path=Text}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                
+                <Button x:Name="button_divide" Grid.Column="3" Grid.Row="2" Content="/" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_divide}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: 7, 8, 9, *-->
+                <Button x:Name="button_7" Grid.Column="0" Grid.Row="3" Content="7" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_7}"/>
+                
+                <Button x:Name="button_8" Grid.Column="1" Grid.Row="3" Content="8" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_8}"/>
+                
+                <Button x:Name="button_9" Grid.Column="2" Grid.Row="3" Content="9" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_9}"/>
+                
+                <Button x:Name="button_times" Grid.Column="3" Grid.Row="3" Content="*" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_times}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: 4, 5, 6, PLUS-->
+                <Button x:Name="button_4" Grid.Column="0" Grid.Row="4" Content="4" 
+                        Style="{StaticResource CalculatorButtonStyle}"  Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_4}"/>
+                
+                <Button x:Name="button_5" Grid.Column="1" Grid.Row="4" Content="5" 
+                        Style="{StaticResource CalculatorButtonStyle}"  Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_5}"/>
+                
+                <Button x:Name="button_6" Grid.Column="2" Grid.Row="4" Content="6" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_6}"/>
+                
+                <Button x:Name="button_plus" Grid.Column="3" Grid.Row="4" Content="+" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_plus}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: 1, 2, 3, MINUS-->
+                <Button x:Name="button_1" Grid.Column="0" Grid.Row="5" Content="1" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_1}"/>
+                
+                <Button x:Name="button_2" Grid.Column="1" Grid.Row="5" Content="2" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_2}"/>
+                
+                <Button x:Name="button_3" Grid.Column="2" Grid.Row="5" Content="3" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_3}"/>
+                
+                <Button x:Name="button_minus" Grid.Column="3" Grid.Row="5" Content="-" Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding OperatorClickCM}" CommandParameter="{Binding ElementName=button_minus}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                <!--#endregion-->
+                
+                
+                <!--#region Buttons: +/-, 0, DOT, EQUALS -->
+                <Button x:Name="button_change_sinal" Grid.Column="0" Grid.Row="6" Content="+/-" 
+                        Style="{StaticResource CalculatorButtonStyle}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
+                
+                <Button x:Name="button_0" Grid.Column="1" Grid.Row="6" Content="0" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_0}"/>
+                
+                <Button x:Name="button_float" Grid.Column="2" Grid.Row="6" Content="," Style="{StaticResource CalculatorButtonStyle}" 
+                        Command="{Binding NumberClickCM}" CommandParameter="{Binding ElementName=button_float}"
+                        IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                <Button Grid.Column="0" Grid.Row="5" Content="+/-" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="1" Grid.Row="5" Content="0" Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="2" Grid.Row="5" Content="," Style="{DynamicResource CalculatorButtonStyle}"/>
-                <Button Grid.Column="3" Grid.Row="5" Content="=" Style="{DynamicResource CalculatorButtonStyle}"/>
-
-               
+                <Button x:Name="button_equals" Grid.Column="3" Grid.Row="6" Content="=" 
+                        Style="{StaticResource CalculatorButtonStyle}" Command="{Binding CalculateCM}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource CloneConverter}">
+                            <Binding ElementName="CalculatorDisplay"/>
+                            <Binding ElementName="HistoryDataGrid"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+                <!--#endregion-->
+                
             </Grid>
-
+            
         </Grid>
+        <!--#endregion-->
+        
+        
+        <!--#region Historic/Memory Menu-->
+        <Border x:Name="HistoryMenuBorder"
+                Style="{StaticResource HistoryBorderStyle}"
+                Width="auto"
+                Panel.ZIndex="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal">
+                    
+                    <Button Style="{StaticResource CloseHistoryButtonStyle}"
+                            Command="{Binding CloseMenu}"
+                            CommandParameter="{Binding ElementName=HistoryMenuBorder}"/>
+                    
+                    <RadioButton Margin="5"
+                            Style="{StaticResource HistoryRadioButtonStyle}">
+                        <TextBlock Text="Histórico"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="18"/>
+                    </RadioButton>
+                    
+                    <RadioButton x:Name="Memory"
+                                 Margin="5"
+                                 Style="{StaticResource HistoryRadioButtonStyle}">
+                        <TextBlock Text="Memória"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="18"/>
+                    </RadioButton>
+                </StackPanel>
+                <DataGrid x:Name="HistoryDataGrid"
+                          Grid.Row="1"
+                          Style="{StaticResource DataGridFinal}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Cálculos" Binding="{Binding FullExpression}" 
+                                            Width="*"
+                                            CanUserReorder="False" CanUserSort="False" CanUserResize="True"
+                                            MinWidth="250"
+                                            CellStyle="{StaticResource HistoricDataGridCell}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="DeleteHistoryButton"
+                        Grid.Row="2"
+                        Style="{StaticResource DeleteHistoryButtonStyle}"
+                        Command="{Binding DeleteHistoryCM}" CommandParameter="{Binding ElementName=HistoryDataGrid}"/>
+
+            </Grid>
+            
+        </Border>
+        <!--#endregion-->
+        
     </Grid>
-</Window>
+</UserControl>

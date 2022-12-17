@@ -4,17 +4,142 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora"
+        xmlns:views="clr-namespace:Calculadora.View"
+        xmlns:vm="clr-namespace:Calculadora.ViewModels"
+        xmlns:converters="clr-namespace:Calculadora.Converters"
         mc:Ignorable="d"
-        x:Name="Calculadora"
         Title="Calculadora" 
-        Height="550"
-        MinHeight="550"
-        Width="400"
-        MinWidth="400"
-        WindowStartupLocation="CenterScreen"
-        >
+        Height="590"
+        MinHeight="590"
+        Width="415"
+        MinWidth="415"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <converters:MultipleMenuConverter x:Key="menuConverter"/>
+        <vm:StandardCalculatorViewModel x:Key="standardVM"/>
+        <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
+    </Window.Resources>
 
     <Grid>
+        
+        <Grid.Resources>
+            
+            <DataTemplate DataType="{x:Type vm:StandardCalculatorViewModel}">
+                <views:StandardCalculator/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:ScientificCalculatorViewModel}">
+                <views:ScientificCalculator/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:MainViewModel}">
+                <views:StandardCalculator/>
+            </DataTemplate>
+            
+        </Grid.Resources>
+
+        <ContentControl Content="{Binding CurrentViewModel}"
+                        Margin="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+
+        <!--#region Menu Bar-->
+        <Border x:Name="MenuBorder"
+                Style="{StaticResource MenuBorderStyle}"
+                Panel.ZIndex="2">
+            <Grid x:Name="MenuBorderGrid"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                  ScrollViewer.CanContentScroll="True"
+                  Margin="0, 10, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="CloseMenuButton"
+                        Style="{StaticResource CloseMenuButtonStyle}"
+                        Grid.Row="0" 
+                        Grid.Column="0"
+                        Command="{Binding CloseMenu}" CommandParameter="{Binding ElementName=MenuBorder}">
+                </Button>
+
+
+                <ScrollViewer Grid.Row="1">
+                    <Grid x:Name="MenuBorderContentGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="500"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Content="Calculadora"
+                                   Style="{StaticResource MenuCategoryLabelStyle}"/>
+
+                            <RadioButton x:Name="StandardMenuButton"
+                                         Grid.Row="1"
+                                         Grid.Column="0"
+                                         IsChecked="True"
+                                         Style="{StaticResource MenuGridButtonStyle}"
+                                         Command="{Binding NavigateMenuCM}">
+                                <RadioButton.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource menuConverter}">
+                                        <Binding ElementName="MenuBorder"/>
+                                        <Binding Source="{StaticResource standardVM}"/>
+                                        <Binding ElementName="StandardMenuButton"/>
+                                    </MultiBinding>
+                                </RadioButton.CommandParameter>
+                                <Grid>
+                                    <Image Source="/Assets/icons8-calculator-50.png"
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+
+                                    <TextBlock Text="Padrão"
+                                               Style="{StaticResource MenuTextBlockStyle}"/>
+                                </Grid>
+                            </RadioButton>
+
+                            <RadioButton x:Name="ScientificMenuButton"
+                                         Grid.Row="2"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}"
+                                         Command="{Binding NavigateMenuCM}">
+                                <RadioButton.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource menuConverter}">
+                                        <Binding ElementName="MenuBorder"/>
+                                        <Binding Source="{StaticResource scientificVM}"/>
+                                        <Binding ElementName="ScientificMenuButton"/>
+                                    </MultiBinding>
+                                </RadioButton.CommandParameter>
+                                <Grid>
+                                    <Image Source="/Assets/icons8-test-tube-48.png"
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+
+                                    <TextBlock Text="Científica"
+                                               Style="{StaticResource MenuTextBlockStyle}"/>
+                                </Grid>
+                            </RadioButton>
+
+                        </Grid>
+
+                    </Grid>
+                </ScrollViewer>
+
+            </Grid>
+        </Border>
+        <!--#endregion-->
+        
         
     </Grid>
 </Window>
