@@ -1,5 +1,5 @@
 # ChronoTrix - CTEDS Projeto Final
-**ChronoTrix** é o projeto de conclusão do curso de **Capacitação Tecnológica em Engenharia e Desenvolvimento de Software (CTEDS)**, oferecido pelo **Departamento de Engenharia de Computação e Sistemas Digitais (PCS)** da **Universidade de São Paulo (USP)**. O projeto consiste em uma aplicação Windowns de uma calculadora de multiplas funcionalidades, atualmente o projeto apresenta dois modos de funcionamento: científico e básico. A ideia do projeto é desenvolver uma calculadora completa, prática, responsiva que apresentando diversas funcionalidades úteis.
+**ChronoTrix** é o projeto de conclusão do curso de **Capacitação Tecnológica em Engenharia e Desenvolvimento de Software (CTEDS)**, oferecido pelo **Departamento de Engenharia de Computação e Sistemas Digitais (PCS)** da **Universidade de São Paulo (USP)**. O projeto consiste em uma aplicação Windows de uma calculadora de multiplas funcionalidades, atualmente o projeto apresenta dois modos de funcionamento: científico e básico. A ideia do projeto é desenvolver uma calculadora completa, prática, responsiva que apresentando diversas funcionalidades úteis.
 
 Autores: [Gabriel Di Vanna Camargo](https://github.com/FastShowDev) e [Matheus Ribeiro Lira](https://github.com/mtlira) <br>
 Versão atual: 1.0 <br>
