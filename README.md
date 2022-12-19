@@ -4,7 +4,7 @@
 Autores: <a href="https://github.com/FastShowDev" target="_parent">Gabriel Di Vanna Camargo</a> e <a href="https://github.com/mtlira" target="_parent">Matheus Ribeiro Lira</a><br>
 Versão atual: 1.0 <br>
 Veja as últimas atualizações <a href="#patch-notes" >aqui</a> <br>
-Veja a documentação <a href="#documentation">aqui</a> e o manual de usuário <a href="#user-manual" scroll-behavior="smooth">aqui</a>
+Veja a documentação <a href="#documentation">aqui</a> e o manual de usuário <a href="#user-manual">aqui</a>
 
 <h2 id="development"> 1. Desenvolvimento</h2>
 
@@ -57,8 +57,8 @@ Tópico em construção...
 Tópico em construção...
 
 <h2 id="user-manual"> 5. Manual do Usuário </h2>
-Tópico em construção...
-<a href="https://docs.google.com/document/d/e/2PACX-1vSf-2JnVOZcVansfQQXZhFB9jTQurZpSOi3CiCfErhKYJHXNxHe6HIgou4dNN8SIjUNc7sv2asugDKC/pub">Aqui</a>
+A primeira versão do manual do usuário já está disponível, lá é possível ver um passo a passo de como utilizar a calculadora e suas funcionalidades.<br>
+Acesse clickando <a href="https://docs.google.com/document/d/11qqi_ztmujhSYV_0nnujQ3xxs60XQ_P9u8p5Z-Ze4y0/edit?usp=sharing">aqui</a>
 
 <h2 id="patch-notes">6. Notas de atualização</h2>
 Tópico em construção...
