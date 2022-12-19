@@ -57,8 +57,8 @@ Tópico em construção...
 Tópico em construção...
 
 <h2 id="user-manual"> 5. Manual do Usuário </h2>
-A primeira versão do manual do usuário já está disponível, lá é possível ver um passo a passo de como utilizar a calculadora e suas funcionalidades.<br>
-Acesse clickando <a href="https://docs.google.com/document/d/11qqi_ztmujhSYV_0nnujQ3xxs60XQ_P9u8p5Z-Ze4y0/edit?usp=sharing">aqui</a>
+A primeira versão do manual do usuário já está disponível, lá é possível ver um passo a passo de como utilizar a calculadora e suas funcionalidades.
+Acesse por <a href="https://docs.google.com/document/d/11qqi_ztmujhSYV_0nnujQ3xxs60XQ_P9u8p5Z-Ze4y0/edit?usp=sharing">aqui</a>
 
 <h2 id="patch-notes">6. Notas de atualização</h2>
 Tópico em construção...
