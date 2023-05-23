@@ -3,7 +3,7 @@ using Calculadora.ViewModels;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class OpenHistoryCommand : BaseCommand
     {
@@ -20,7 +20,7 @@ namespace Calculadora.Commands
 #nullable enable
         public override void Execute(object? parameter)
         {
-            if(parameter != null)
+            if (parameter != null)
             {
                 var values = (object[])parameter;
                 Border? historyMenu = values[0] as Border;

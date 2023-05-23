@@ -3,12 +3,12 @@ using Calculadora.ViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class AbsoluteCommand : BaseCommand
+    public class Log10Command : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
-        public AbsoluteCommand(StandardCalculatorViewModel viewModel)
+        public Log10Command(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -20,7 +20,7 @@ namespace Calculadora.Commands
                 string expression = ((TextBox)parameter).Text;
                 try
                 {
-                    Calculator.ExecuteAbsolute(expression);
+                    Calculator.ExecuteLog10(expression);
                 }
                 catch (Exception e)
                 {

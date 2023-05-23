@@ -3,7 +3,7 @@ using Calculadora.ViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class ConstClickCommand : BaseCommand
     {
@@ -15,7 +15,7 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            if(parameter != null)
+            if (parameter != null)
             {
                 string buttonName = ((Button)parameter).Name;
 
@@ -24,7 +24,7 @@ namespace Calculadora.Commands
                     CalculatorDisplay.InsertConstInDisplay("π");
                     _viewModel.DisplayContent = CalculatorDisplay.DisplayContent;
                 }
-                else if(buttonName == "button_e")
+                else if (buttonName == "button_e")
                 {
                     CalculatorDisplay.InsertConstInDisplay("e");
                     _viewModel.DisplayContent = CalculatorDisplay.DisplayContent;

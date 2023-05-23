@@ -22,10 +22,14 @@ namespace Calculadora.Commands
                 Border? menu = values[0] as Border;
                 NavigationStore.CurrentViewModel = (BaseViewModel)values[1];
                 RadioButton? radioButton = values[2] as RadioButton;
+                Window mainWindow = values[3] as Window;
 
                 menu.Visibility = Visibility.Hidden;
                 radioButton.IsChecked = true;
                 NavigationStore.CurrentViewModel.IsMenuOpen = false;
+
+                mainWindow.Height = NavigationStore.CurrentViewModel.ViewHeight;
+                mainWindow.Width = NavigationStore.CurrentViewModel.ViewWidth;
 
                 CalculatorDisplay.ClearDisplay();
                 NavigationStore.CurrentViewModel.ResetDisplayError();

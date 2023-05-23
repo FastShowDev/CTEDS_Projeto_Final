@@ -2,17 +2,19 @@
 using Calculadora.ViewModels;
 using System;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class SquareCommand : BaseCommand
+    public class SquareRootCommand : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
-
-        public SquareCommand(StandardCalculatorViewModel viewModel)
+        public SquareRootCommand(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
-
+        public override bool CanExecute(object? parameter)
+        {
+            return !CalculatorDisplay.HasErrorMessage;
+        }
         public override void Execute(object? parameter)
         {
             if (parameter != null)
@@ -20,7 +22,7 @@ namespace Calculadora.Commands
                 string expression = (string)parameter;
                 try
                 {
-                    Calculator.ExecuteSquare(expression);
+                    Calculator.ExecuteSquareRoot(expression);
                 }
                 catch (Exception e)
                 {
@@ -31,6 +33,10 @@ namespace Calculadora.Commands
                 }
                 _viewModel.UpdateDisplay();
                 _viewModel.AddHistory(_viewModel.StringResult, _viewModel.DisplayContent);
+            }
+            else
+            {
+                throw new ArgumentNullException();
             }
 
         }
