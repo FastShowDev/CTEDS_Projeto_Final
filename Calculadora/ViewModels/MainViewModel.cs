@@ -11,6 +11,8 @@ namespace Calculadora.ViewModels
         {
             NavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
             ViewName = "Main";
+            ViewHeight = 650;
+            ViewWidth = 450;
         }
 
         private void OnCurrentViewModelChanged()

@@ -21,12 +21,36 @@ namespace Calculadora.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 #nullable enable
 
-        private string _viewName = "Base";
+        private int _viewHeight;
+        public int ViewHeight
+        {
+            get { return _viewHeight; }
+            set {
+                if (_viewHeight == value) return;
+                _viewHeight = value;
+                OnPropertyChanged(nameof(ViewHeight));
+            }
+        }
 
+
+        private int _viewWidth;
+        public int ViewWidth
+        {
+            get { return _viewWidth; }
+            set {
+                if (_viewWidth == value) return;
+                _viewWidth = value;
+                OnPropertyChanged(nameof(ViewWidth));
+            }
+        }
+
+
+        private string _viewName = "Base";
         public string ViewName
         {
             get => _viewName; 
-            set { 
+            set {
+                if (_viewName == value) return;
                 _viewName = value; 
                 OnPropertyChanged(nameof(ViewName)); 
             }

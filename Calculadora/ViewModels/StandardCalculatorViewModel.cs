@@ -1,4 +1,4 @@
-﻿using Calculadora.Commands;
+﻿using Calculadora.Commands.CalculatorCommands;
 using Calculadora.Models;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -8,6 +8,7 @@ using System.ComponentModel;
 using Calculadora.Database.Managers;
 using System.Threading.Tasks;
 using System;
+using Calculadora.Stores;
 
 namespace Calculadora.ViewModels
 {
@@ -96,6 +97,8 @@ namespace Calculadora.ViewModels
             LoadHistoryCM = new LoadHistoryCommand(this);
 
             ViewName = "Padrão";
+            ViewHeight = 650;
+            ViewWidth = 450;
         }
 
 
