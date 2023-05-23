@@ -293,6 +293,7 @@
                                    FontSize="18"/>
                     </RadioButton>
                 </StackPanel>
+                
                 <DataGrid x:Name="HistoryDataGrid"
                           Grid.Row="1"
                           Style="{StaticResource DataGridFinal}">
@@ -304,6 +305,7 @@
                                             CellStyle="{StaticResource HistoricDataGridCell}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+                
                 <Button x:Name="DeleteHistoryButton"
                         Grid.Row="2"
                         Style="{StaticResource DeleteHistoryButtonStyle}"
