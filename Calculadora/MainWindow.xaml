@@ -8,17 +8,19 @@
         xmlns:vm="clr-namespace:Calculadora.ViewModels"
         xmlns:converters="clr-namespace:Calculadora.Converters"
         mc:Ignorable="d"
-        Title="Calculadora" 
-        Height="590"
-        MinHeight="590"
-        Width="415"
-        MinWidth="415"
+        x:Name="MainWindowName"
+        Title="Chrono-Trix" 
+        Height="auto"
+        MinHeight="650"
+        Width="auto"
+        MinWidth="450"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <converters:MultipleMenuConverter x:Key="menuConverter"/>
         <vm:StandardCalculatorViewModel x:Key="standardVM"/>
         <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
+        <vm:StatisticViewModel x:Key="statisticVM"/>
     </Window.Resources>
 
     <Grid>
@@ -36,7 +38,11 @@
             <DataTemplate DataType="{x:Type vm:MainViewModel}">
                 <views:StandardCalculator/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type vm:StatisticViewModel}">
+                <views:Statistic/>
+            </DataTemplate>
+
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"
@@ -99,6 +105,7 @@
                                         <Binding ElementName="MenuBorder"/>
                                         <Binding Source="{StaticResource standardVM}"/>
                                         <Binding ElementName="StandardMenuButton"/>
+                                        <Binding ElementName="MainWindowName"/>
                                     </MultiBinding>
                                 </RadioButton.CommandParameter>
                                 <Grid>
@@ -120,6 +127,7 @@
                                         <Binding ElementName="MenuBorder"/>
                                         <Binding Source="{StaticResource scientificVM}"/>
                                         <Binding ElementName="ScientificMenuButton"/>
+                                        <Binding ElementName="MainWindowName"/>
                                     </MultiBinding>
                                 </RadioButton.CommandParameter>
                                 <Grid>
@@ -127,6 +135,28 @@
                                            Style="{StaticResource MenuButtonImageStyle}"/>
 
                                     <TextBlock Text="Científica"
+                                               Style="{StaticResource MenuTextBlockStyle}"/>
+                                </Grid>
+                            </RadioButton>
+
+                            <RadioButton x:Name="StatisticMenuButton"
+                                         Grid.Row="3"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}"
+                                         Command="{Binding NavigateMenuCM}">
+                                <RadioButton.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource menuConverter}">
+                                        <Binding ElementName="MenuBorder"/>
+                                        <Binding Source="{StaticResource statisticVM}"/>
+                                        <Binding ElementName="StatisticMenuButton"/>
+                                        <Binding ElementName="MainWindowName"/>
+                                    </MultiBinding>
+                                </RadioButton.CommandParameter>
+                                <Grid>
+                                    <Image Source="/Assets/statistic-menu-64.png"
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+
+                                    <TextBlock Text="Estatística"
                                                Style="{StaticResource MenuTextBlockStyle}"/>
                                 </Grid>
                             </RadioButton>
