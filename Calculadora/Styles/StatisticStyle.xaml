@@ -4,6 +4,7 @@
 
     <Style x:Key="StatisticResultTextBlock"
            TargetType="TextBlock">
+        
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -12,8 +13,10 @@
         <Setter Property="Margin" Value="5 0 0 0"/>
     </Style>
 
-    <Style x:Key="StatisticIntervalTextBlock"
-           TargetType="TextBlock">
+    <Style x:Key="StatisticIntervalTextBox"
+           TargetType="TextBox">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -39,16 +42,39 @@
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Height" Value="auto"/>
         <Setter Property="Margin" Value="0 0 0 0"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="16"/>
     </Style>
 
-    <Style x:Key="StatisticTextBox"
+    <Style x:Key="StatisticValueTextBox"
            TargetType="TextBox">
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="Margin" Value="5 0 0 0"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Width" Value="400"/>
+    </Style>
+
+    <Style x:Key="StatisticAddMenuButtom"
+           TargetType="Button">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Content" Value="Adicionar"/>
+        
+        <Setter Property="Margin" Value="440, 0, 0, 0"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="100"/>
+        
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="IsEnabled" Value="True"/>
     </Style>
 
     <Style x:Key="StatisticMenuButton"
@@ -62,6 +88,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="IsEnabled" Value="True"/>
+        
     </Style>
     
     
