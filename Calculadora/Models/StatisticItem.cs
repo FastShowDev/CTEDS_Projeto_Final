@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Calculadora.Commands.StatisticCommands;
+using System;
+using System.Windows.Input;
 
 namespace Calculadora.Models
 {
@@ -8,6 +10,8 @@ namespace Calculadora.Models
         public double value { get; set; }
         public double dispersion { get; set; }
         public double standardDeviation { get; set; }
+        public bool selected { get; set; }
+        public ICommand SelectCM { get; }
 
         public StatisticItem(int id, double value, double dispersion)
         {
@@ -15,6 +19,9 @@ namespace Calculadora.Models
             this.value = value;
             this.dispersion = dispersion;
             standardDeviation = 0;
+            selected = false;
+
+            SelectCM = new SelectValueCommand(this);
         }
 
     }
