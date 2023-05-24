@@ -26,5 +26,15 @@ namespace Calculadora.ViewModels
             ViewHeight = 750;
             ViewWidth = 1000;
         }
+
+        public void UpdateItemsId()
+        {
+            int i = 1;
+            foreach(StatisticItem item in items)
+            {
+                item.id = i;
+                i++;
+            }
+        }
     }
 }
