@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\LinearAlgebra.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Matrices.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\ScientificCalculator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +37,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\StatisticStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LinearAlgebra.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Matrices.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ScientificCalculator.xaml">
