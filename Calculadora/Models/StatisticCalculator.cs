@@ -53,7 +53,7 @@ namespace Calculadora.Models
         public void CalculateAverageDeviation(List<StatisticItem> items)
         {
             CalculateDeviation(items);
-            averageStandardDeviation = Math.Sqrt(standardDevitation);
+            averageStandardDeviation = standardDevitation / Math.Sqrt(items.Count);
         }
     }
 }
