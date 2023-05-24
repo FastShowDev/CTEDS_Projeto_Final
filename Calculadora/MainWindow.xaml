@@ -10,9 +10,9 @@
         mc:Ignorable="d"
         x:Name="MainWindowName"
         Title="Chrono-Trix" 
-        Height="auto"
+        Height="650"
         MinHeight="650"
-        Width="auto"
+        Width="450"
         MinWidth="450"
         WindowStartupLocation="CenterScreen">
 
