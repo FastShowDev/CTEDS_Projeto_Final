@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Calculadora.View"
              xmlns:vm="clr-namespace:Calculadora.ViewModels"
              xmlns:converters="clr-namespace:Calculadora.Converters"
+             d:DataContext="{x:Type vm:LinearAlgebraViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     

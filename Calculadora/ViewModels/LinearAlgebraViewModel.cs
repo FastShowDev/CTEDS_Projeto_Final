@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System;
+
 
 namespace Calculadora.ViewModels
 {
-    public class LinearAlgebraViewModel : BaseViewModel
+    public class LinearAlgebraViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public LinearAlgebraViewModel()
         {
-            ViewName = "Algebra Linear";
+            ViewName = "Álgebra Linear";
             ViewHeight = 800;
             ViewWidth = 800;
         }

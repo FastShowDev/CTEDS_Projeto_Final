@@ -21,6 +21,8 @@
         <vm:StandardCalculatorViewModel x:Key="standardVM"/>
         <vm:ScientificCalculatorViewModel x:Key="scientificVM"/>
         <vm:StatisticViewModel x:Key="statisticVM"/>
+        <vm:LinearAlgebraViewModel x:Key="linearAlgebraVM"/>
+        <vm:MatricesViewModel x:Key="matricesVM"/>
     </Window.Resources>
 
     <Grid>
@@ -41,6 +43,14 @@
 
             <DataTemplate DataType="{x:Type vm:StatisticViewModel}">
                 <views:Statistic/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:LinearAlgebraViewModel}">
+                <views:LinearAlgebra/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:MatricesViewModel}">
+                <views:Matrices/>
             </DataTemplate>
 
         </Grid.Resources>
@@ -157,6 +167,50 @@
                                            Style="{StaticResource MenuButtonImageStyle}"/>
 
                                     <TextBlock Text="Estatística"
+                                               Style="{StaticResource MenuTextBlockStyle}"/>
+                                </Grid>
+                            </RadioButton>
+
+                            <RadioButton x:Name="LinearAlgebraMenuButton"
+                                         Grid.Row="4"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}"
+                                         Command="{Binding NavigateMenuCM}">
+                                <RadioButton.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource menuConverter}">
+                                        <Binding ElementName="MenuBorder"/>
+                                        <Binding Source="{StaticResource linearAlgebraVM}"/>
+                                        <Binding ElementName="StatisticMenuButton"/>
+                                        <Binding ElementName="MainWindowName"/>
+                                    </MultiBinding>
+                                </RadioButton.CommandParameter>
+                                <Grid>
+                                    <Image Source="/Assets/linear-algebra-60.png"
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+
+                                    <TextBlock Text="Álgebra Linear"
+                                               Style="{StaticResource MenuTextBlockStyle}"/>
+                                </Grid>
+                            </RadioButton>
+
+                            <RadioButton x:Name="MatricesMenuButton"
+                                         Grid.Row="5"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MenuGridButtonStyle}"
+                                         Command="{Binding NavigateMenuCM}">
+                                <RadioButton.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource menuConverter}">
+                                        <Binding ElementName="MenuBorder"/>
+                                        <Binding Source="{StaticResource matricesVM}"/>
+                                        <Binding ElementName="StatisticMenuButton"/>
+                                        <Binding ElementName="MainWindowName"/>
+                                    </MultiBinding>
+                                </RadioButton.CommandParameter>
+                                <Grid>
+                                    <Image Source="/Assets/matrices-algebra-32.png"
+                                           Style="{StaticResource MenuButtonImageStyle}"/>
+
+                                    <TextBlock Text="Matrizes"
                                                Style="{StaticResource MenuTextBlockStyle}"/>
                                 </Grid>
                             </RadioButton>
