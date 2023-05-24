@@ -15,26 +15,18 @@ namespace Calculadora.ViewModels
         public ICommand AddValueCM { get; }
         public ICommand CalculateStatisticCM { get; }
         public ICommand ResetCM { get; }
+        public ICommand DeleteValuesCM { get; }
         #endregion
         public StatisticViewModel()
         {
             AddValueCM = new AddValueCommmand(this);
             CalculateStatisticCM = new CalculateStatisticCommand(this);
             ResetCM = new ResetCommand(this);
+            DeleteValuesCM = new DeleteValuesCommand(this);
 
             ViewName = "Estatística";
             ViewHeight = 750;
             ViewWidth = 1000;
-        }
-
-        public void UpdateItemsId()
-        {
-            int i = 1;
-            foreach(StatisticItem item in items)
-            {
-                item.id = i;
-                i++;
-            }
         }
     }
 }
