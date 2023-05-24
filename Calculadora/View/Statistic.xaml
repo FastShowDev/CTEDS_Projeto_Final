@@ -56,7 +56,7 @@
 
             </Grid>
 
-            <DataGrid x:Name="ValuesDataGrid" Grid.Row="1" BorderBrush="Black"  BorderThickness="2">
+            <DataGrid x:Name="ValuesDataGrid" Grid.Row="1" BorderBrush="Black"  BorderThickness="2" DataContext="{x:Type vm:StatisticViewModel}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Índice" Width="50" Binding="{Binding id}"/>
                     <DataGridTextColumn Header="Valor" Width="0.45*" Binding="{Binding value}"/>
@@ -64,7 +64,12 @@
                     <DataGridTemplateColumn Header="Selecionar" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox x:Name="SelectCheckBox" HorizontalAlignment="Center"/>
+                                <CheckBox x:Name="SelectCheckBox" HorizontalAlignment="Center"
+                                          Command="{Binding SelectCM}" IsChecked="{Binding selected}">
+                                    <CheckBox.CommandParameter>
+                                        <Binding ElementName="SelectCheckBox"/>
+                                    </CheckBox.CommandParameter>
+                                </CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -100,7 +105,17 @@
                     <Button Content="Editar" Style="{StaticResource StatisticMenuButton}">
                         
                     </Button>
-                    <Button Content="Excluir" Style="{StaticResource StatisticMenuButton}"/>
+                    <Button Content="Excluir" Style="{StaticResource StatisticMenuButton}"
+                            Command="{Binding DeleteValuesCM}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CloneConverter}">
+                                <Binding ElementName="ValuesDataGrid"/>
+                                <Binding ElementName="AverageTextBlock"/>
+                                <Binding ElementName="DeviationTextBlock"/>
+                                <Binding ElementName="AverageDeviationTextBlock"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
                     <Button Content="Resetar" Style="{StaticResource StatisticMenuButton}"
                             Command="{Binding ResetCM}">
                         <Button.CommandParameter>
