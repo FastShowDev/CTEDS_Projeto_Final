@@ -8,22 +8,24 @@ Veja a documentação <a href="#documentation">aqui</a> e o manual de usuário <
 
 <h2 id="development"> 1. Desenvolvimento</h2>
 
-**Atualmente** estão desenvolvidas as seguintes funcionalidades: <br>
+**Já estão desenvolvidas as seguintes funcionalidades:** <br>
 - [x] Calculadora Padrão
 - [x] Calculadora Científica
-- [x] Sistema de Histórico
+- [x] Sistema de Histórico para o modo padrão e científico
 - [x] Sistema de Feedback visual
 - [x] Permanência do histórico das operações feitas em um banco de dados SQLite.<br/>
+
+**Atualmente** estão em desenvolvimento as seguintes funcionalidades: <br/>
+- Calculadora Estatística (Desvio padrão, moda, mediana, media simples)
+- Calculadora para Álgebra Linear (Produto escalar, vetorial e misto)
+- Calculadora de Matrizes (Produto, soma, potência, etc)
 
 **Futuramente** pretende-se implementar outras funcionalidades, por exemplo:<br/>
 
 - Plotagem e visualização de gráficos.
 - Conversor de moedas, tempo, ângulo, velocidade, etc.
 - Cálculo de Azimutes e coordenadas de levantamento topográfico.
-- Cálculo de médias aritméticas, geométricas, ponderadas, etc.
-- Cálculo de desvio padrão, moda, mediana, etc.
-- Calculadora de matrizes, vetores.
-- Calculadora para álgebra linear (produto vetorial, escalar, interno, etc)
+- Cálculadora de médias aritméticas, geométricas, ponderadas, etc.
 
 Tem alguma sugestão? Envie um email para gabriel_camargo@usp.br
 
