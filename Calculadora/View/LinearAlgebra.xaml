@@ -8,7 +8,7 @@
              xmlns:converters="clr-namespace:Calculadora.Converters"
              d:DataContext="{x:Type vm:LinearAlgebraViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
     
     <UserControl.Resources>
         <converters:CloneConverter x:Key="CloneConverter"/>
@@ -23,8 +23,8 @@
         <Grid Margin="10,10,10,10" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="0.4*"/>
-                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -53,6 +53,113 @@
                        Content="{Binding ViewName}"/>
 
             </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Style="{StaticResource LinearAlgebraSelectLabel}"/>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="True">
+                        <Grid>
+                            <TextBlock Text="Produto Escalar" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}">
+                        <Grid>
+                            <TextBlock Text="Produto Vetorial" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}">
+                        <Grid>
+                            <TextBlock Text="Produto Misto" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.60*"/>
+                    <RowDefinition Height="0.20*"/>
+                    <RowDefinition Height="0.20*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Label Content="1º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Label Content="2º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <Label Content="3º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="Resultado: " Style="{StaticResource LinearAlgebraSelectLabel}"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="ValorI" Style="{StaticResource LinearAlgebraResultVector}"/>
+                        <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBlock Text="ValorJ" Style="{StaticResource LinearAlgebraResultVector}"/>
+                        <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+
+                        <TextBlock Text="ValorK" Style="{StaticResource LinearAlgebraResultVector}"/>
+                        <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
+                    </StackPanel>
+                </Grid>
+                
+                
+                
+            </Grid>
+            
         </Grid>
     </Grid>
 </UserControl>
