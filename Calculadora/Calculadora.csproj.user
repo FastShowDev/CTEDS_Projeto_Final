@@ -33,6 +33,9 @@
     <Page Update="Styles\HistoryMenuStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\LinearAlgebraStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Styles\MenuStyle.xaml">
       <SubType>Designer</SubType>
     </Page>

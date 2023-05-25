@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Styles/HistoryMenuStyle.xaml"/>
                 <ResourceDictionary Source="Styles/MenuStyle.xaml"/>
                 <ResourceDictionary Source="Styles/StatisticStyle.xaml"/>
+                <ResourceDictionary Source="Styles/LinearAlgebraStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
             
