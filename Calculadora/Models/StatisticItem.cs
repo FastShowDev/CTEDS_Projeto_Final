@@ -9,7 +9,6 @@ namespace Calculadora.Models
         public int id { get; set; }
         public double value { get; set; }
         public double dispersion { get; set; }
-        public double standardDeviation { get; set; }
         public bool selected { get; set; }
         public ICommand SelectCM { get; }
 
@@ -18,7 +17,6 @@ namespace Calculadora.Models
             this.id = id;
             this.value = value;
             this.dispersion = dispersion;
-            standardDeviation = 0;
             selected = false;
 
             SelectCM = new SelectValueCommand(this);
