@@ -2,7 +2,7 @@
 using Calculadora.ViewModels;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class OperatorClickCommand : BaseCommand
     {
@@ -14,7 +14,7 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            if(parameter != null)
+            if (parameter != null)
             {
                 string pressedButtonValue = (parameter as Button).Content.ToString();
 
@@ -25,7 +25,7 @@ namespace Calculadora.Commands
                     return;
                 }
 
-                if(pressedButtonValue == "mod")
+                if (pressedButtonValue == "mod")
                 {
                     pressedButtonValue = "%";
                 }

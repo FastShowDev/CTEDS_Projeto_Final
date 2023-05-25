@@ -1,7 +1,7 @@
 ﻿using Calculadora.ViewModels;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class DeleteHistoryCommand : BaseCommand
     {

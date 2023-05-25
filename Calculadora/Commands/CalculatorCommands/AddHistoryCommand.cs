@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class AddHistoryCommand : BaseCommand
     {

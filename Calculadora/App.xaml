@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Styles/CalculatorStyle.xaml"/>
                 <ResourceDictionary Source="Styles/HistoryMenuStyle.xaml"/>
                 <ResourceDictionary Source="Styles/MenuStyle.xaml"/>
+                <ResourceDictionary Source="Styles/StatisticStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
             

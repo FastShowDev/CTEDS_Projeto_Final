@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="Calculadora.View.Statistic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Calculadora.View"
+             mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:Calculadora.ViewModels"
+             xmlns:converters="clr-namespace:Calculadora.Converters"
+             d:DataContext="{x:Type vm:StatisticViewModel}"
+             d:DesignHeight="600" d:DesignWidth="800"
+             x:Name="StatisticView"
+             MinHeight="600"
+             MinWidth="800">
+
+    <UserControl.Resources>
+        <converters:CloneConverter x:Key="CloneConverter"/>
+    </UserControl.Resources>
+    
+    <Grid Background="White" Height="Auto" Width="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="33*"/>
+            <ColumnDefinition Width="47*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="10,10,10,10" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.6*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Grid Height="auto" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Button Style="{StaticResource OpenMenuButtonStyle}" 
+                        x:Name="OpenMenuButton" 
+                        Grid.Row="0" Grid.Column="0"
+                        Command="{Binding OpenMenu}" CommandParameter="{Binding ElementName=MenuBorder}">
+                </Button>
+
+                <Label Grid.Row="0" Grid.Column="1" 
+                       Style="{StaticResource OperationModeLabelStyle}"
+                       Content="{Binding ViewName}"/>
+
+            </Grid>
+
+            <DataGrid x:Name="ValuesDataGrid" Grid.Row="1" BorderBrush="Black"  BorderThickness="2" DataContext="{x:Type vm:StatisticViewModel}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Índice" Width="50" Binding="{Binding id}"/>
+                    <DataGridTextColumn Header="Valor" Width="0.45*" Binding="{Binding value}"/>
+                    <DataGridTextColumn Header="Dispersão" Width="0.45*" Binding="{Binding dispersion}"/>
+                    <DataGridTemplateColumn Header="Selecionar" Width="0.1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="SelectCheckBox" HorizontalAlignment="Center"
+                                          Command="{Binding SelectCM}" IsChecked="{Binding selected}">
+                                    <CheckBox.CommandParameter>
+                                        <Binding ElementName="SelectCheckBox"/>
+                                    </CheckBox.CommandParameter>
+                                </CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 5 0 5">
+                    <Button Content="Calcular" Margin="0 0 5 0" Style="{StaticResource StatisticMenuButton}"
+                            Command="{Binding CalculateStatisticCM}" >
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CloneConverter}">
+                                <Binding ElementName="ValuesDataGrid"/>
+                                <Binding ElementName="AverageTextBlock"/>
+                                <Binding ElementName="DeviationTextBlock"/>
+                                <Binding ElementName="AverageDeviationTextBlock"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    
+                    <Button Content="Editar" Style="{StaticResource StatisticMenuButton}">
+                        
+                    </Button>
+                    <Button Content="Excluir" Style="{StaticResource StatisticMenuButton}"
+                            Command="{Binding DeleteValuesCM}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CloneConverter}">
+                                <Binding ElementName="ValuesDataGrid"/>
+                                <Binding ElementName="AverageTextBlock"/>
+                                <Binding ElementName="DeviationTextBlock"/>
+                                <Binding ElementName="AverageDeviationTextBlock"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Content="Resetar" Style="{StaticResource StatisticMenuButton}"
+                            Command="{Binding ResetCM}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CloneConverter}">
+                                <Binding ElementName="ValuesDataGrid"/>
+                                <Binding ElementName="ValueTextBox"/>
+                                <Binding ElementName="AverageTextBlock"/>
+                                <Binding ElementName="DeviationTextBlock"/>
+                                <Binding ElementName="AverageDeviationTextBlock"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Label Content="Selecionar intervalo:" Style="{StaticResource StatisticIntervalLabel}"/>
+                    <TextBox Text="Inicio" Style="{StaticResource StatisticIntervalTextBox}"/>
+                    <TextBox Text="Fim" Style="{StaticResource StatisticIntervalTextBox}"/>
+                </StackPanel>
+
+                <Label Grid.Row="1" Content="Insira um valor: " Style="{StaticResource StatisticResultLabel}"/>
+
+                <TextBox x:Name="ValueTextBox" Grid.Row="2" Style="{StaticResource StatisticValueTextBox}"/>
+
+                <Button Grid.Row = "2" Style="{StaticResource StatisticAddMenuButtom}"
+                            Command="{Binding AddValueCM}" Height="30">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource CloneConverter}">
+                            <Binding ElementName="ValueTextBox"/>
+                            <Binding ElementName="ValuesDataGrid"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Content="Media: " Style="{StaticResource StatisticResultLabel}"/>
+                    <TextBlock x:Name="AverageTextBlock" Grid.Column="1" Grid.Row="0" Text="" Style="{StaticResource StatisticResultTextBlock}"/>
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="Desvio Padrão:" Style="{StaticResource StatisticResultLabel}"/>
+                    <TextBlock x:Name="DeviationTextBlock" Grid.Column="1" Grid.Row="1" Text="" Style="{StaticResource StatisticResultTextBlock}"/>
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="Desvio Padrão Média:" Style="{StaticResource StatisticResultLabel}"/>
+                    <TextBlock x:Name="AverageDeviationTextBlock" Grid.Column="1" Grid.Row="2" Text="" Style="{StaticResource StatisticResultTextBlock}"/>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

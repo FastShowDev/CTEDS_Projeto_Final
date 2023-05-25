@@ -1,30 +1,28 @@
 ﻿using Calculadora.Models;
 using Calculadora.ViewModels;
 using System;
+using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class SquareRootCommand : BaseCommand
+    public class AbsoluteCommand : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
-        public SquareRootCommand(StandardCalculatorViewModel viewModel)
+        public AbsoluteCommand(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
-        public override bool CanExecute(object? parameter)
-        {
-            return !CalculatorDisplay.HasErrorMessage;
-        }
+
         public override void Execute(object? parameter)
         {
             if (parameter != null)
             {
-                string expression = (string)parameter;
+                string expression = ((TextBox)parameter).Text;
                 try
                 {
-                    Calculator.ExecuteSquareRoot(expression);
+                    Calculator.ExecuteAbsolute(expression);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     CalculatorDisplay.ClearDisplay();
                     _viewModel.ErrorMessage = e.Message;

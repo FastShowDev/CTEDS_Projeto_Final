@@ -1,7 +1,7 @@
 ﻿using Calculadora.Models;
 using Calculadora.ViewModels;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class BackspaceCommand : BaseCommand
     {

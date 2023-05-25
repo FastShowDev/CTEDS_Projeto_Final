@@ -3,7 +3,7 @@ using Calculadora.ViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class PowerBaseXCommand : BaseCommand
     {

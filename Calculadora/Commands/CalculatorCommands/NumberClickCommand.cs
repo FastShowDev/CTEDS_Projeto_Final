@@ -3,7 +3,7 @@ using Calculadora.ViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class NumberClickCommand : BaseCommand
     {
@@ -12,7 +12,7 @@ namespace Calculadora.Commands
         public NumberClickCommand(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
-            
+
         }
 
         public override void Execute(object? parameter)
@@ -25,7 +25,7 @@ namespace Calculadora.Commands
                 CalculatorDisplay.InsertNumberInDisplay(buttonName, pressedButtonValue);
                 _viewModel.UpdateDisplay();
             }
-            
+
         }
     }
 }

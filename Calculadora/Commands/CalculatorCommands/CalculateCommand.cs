@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.TextFormatting;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
     public class CalculateCommand : BaseCommand
     {
@@ -24,11 +24,11 @@ namespace Calculadora.Commands
 
         public override void Execute(object? parameter)
         {
-            if(parameter != null)
+            if (parameter != null)
             {
                 var values = (object[])parameter;
-                string expression = (values[0] as TextBox).Text;
-                DataGrid dataGrid = values[1] as DataGrid;
+                string expression = ((TextBox)values[0]).Text;
+                DataGrid dataGrid = (DataGrid)values[1];
 
                 if (CalculatorDisplay.HasErrorMessage)
                 {
@@ -72,7 +72,7 @@ namespace Calculadora.Commands
                 dataGrid.ItemsSource = _viewModel.GetAllHistories();
 
             }
-            
+
         }
     }
 }

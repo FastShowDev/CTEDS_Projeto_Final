@@ -13,6 +13,9 @@
     <Compile Update="View\StandardCalculator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Statistic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -27,10 +30,16 @@
     <Page Update="Styles\MenuStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\StatisticStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\ScientificCalculator.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StandardCalculator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Statistic.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -1,19 +1,18 @@
 ﻿using Calculadora.Models;
 using Calculadora.ViewModels;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class ClearDisplayCommand : BaseCommand
+    public class PercentageCommand : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
-        public ClearDisplayCommand(StandardCalculatorViewModel viewModel)
+        public PercentageCommand(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
-
         public override void Execute(object? parameter)
         {
-            CalculatorDisplay.ClearDisplay();
+            CalculatorDisplay.InsertPercentageInDisplay();
             _viewModel.UpdateDisplay();
         }
     }

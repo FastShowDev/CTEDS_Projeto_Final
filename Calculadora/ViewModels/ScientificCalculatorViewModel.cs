@@ -1,4 +1,4 @@
-﻿using Calculadora.Commands;
+﻿using Calculadora.Commands.CalculatorCommands;
 using Calculadora.Database.Managers;
 using System;
 using System.ComponentModel;

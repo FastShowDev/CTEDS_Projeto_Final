@@ -3,16 +3,15 @@ using Calculadora.ViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class Log10Command : BaseCommand
+    public class FactorialCommand : BaseCommand
     {
-        private readonly StandardCalculatorViewModel _viewModel;
-        public Log10Command(StandardCalculatorViewModel viewModel)
+        private readonly ScientificCalculatorViewModel _viewModel;
+        public FactorialCommand(ScientificCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
-
         public override void Execute(object? parameter)
         {
             if (parameter != null)
@@ -20,7 +19,7 @@ namespace Calculadora.Commands
                 string expression = ((TextBox)parameter).Text;
                 try
                 {
-                    Calculator.ExecuteLog10(expression);
+                    Calculator.ExecuteFactorial(expression);
                 }
                 catch (Exception e)
                 {
@@ -34,9 +33,8 @@ namespace Calculadora.Commands
             }
             else
             {
-                throw new ArgumentNullException();
+                throw new NullReferenceException();
             }
-
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using Calculadora.Models;
 using Calculadora.ViewModels;
 using System;
-using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class LnCommand : BaseCommand
+    public class SquareCommand : BaseCommand
     {
         private readonly StandardCalculatorViewModel _viewModel;
-        public LnCommand(StandardCalculatorViewModel viewModel)
+
+        public SquareCommand(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -17,10 +17,10 @@ namespace Calculadora.Commands
         {
             if (parameter != null)
             {
-                string expression = ((TextBox)parameter).Text;
+                string expression = (string)parameter;
                 try
                 {
-                    Calculator.ExecuteLn(expression);
+                    Calculator.ExecuteSquare(expression);
                 }
                 catch (Exception e)
                 {
@@ -31,10 +31,6 @@ namespace Calculadora.Commands
                 }
                 _viewModel.UpdateDisplay();
                 _viewModel.AddHistory(_viewModel.StringResult, _viewModel.DisplayContent);
-            }
-            else
-            {
-                throw new ArgumentNullException();
             }
 
         }

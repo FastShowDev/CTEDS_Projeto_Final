@@ -3,15 +3,16 @@ using Calculadora.ViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class PowerBase2Command : BaseCommand
+    public class LnCommand : BaseCommand
     {
-        private readonly ScientificCalculatorViewModel _viewModel;
-        public PowerBase2Command(ScientificCalculatorViewModel viewModel)
+        private readonly StandardCalculatorViewModel _viewModel;
+        public LnCommand(StandardCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
+
         public override void Execute(object? parameter)
         {
             if (parameter != null)
@@ -19,7 +20,7 @@ namespace Calculadora.Commands
                 string expression = ((TextBox)parameter).Text;
                 try
                 {
-                    Calculator.ExecutePowerBase2(expression);
+                    Calculator.ExecuteLn(expression);
                 }
                 catch (Exception e)
                 {
@@ -33,8 +34,9 @@ namespace Calculadora.Commands
             }
             else
             {
-                throw new NullReferenceException();
+                throw new ArgumentNullException();
             }
+
         }
     }
 }

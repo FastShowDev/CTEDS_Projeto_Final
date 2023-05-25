@@ -3,23 +3,23 @@ using Calculadora.ViewModels;
 using System;
 using System.Windows.Controls;
 
-namespace Calculadora.Commands
+namespace Calculadora.Commands.CalculatorCommands
 {
-    public class FactorialCommand : BaseCommand
+    public class PowerBase2Command : BaseCommand
     {
         private readonly ScientificCalculatorViewModel _viewModel;
-        public FactorialCommand(ScientificCalculatorViewModel viewModel)
+        public PowerBase2Command(ScientificCalculatorViewModel viewModel)
         {
             _viewModel = viewModel;
         }
         public override void Execute(object? parameter)
         {
-            if(parameter != null)
+            if (parameter != null)
             {
                 string expression = ((TextBox)parameter).Text;
                 try
                 {
-                    Calculator.ExecuteFactorial(expression);
+                    Calculator.ExecutePowerBase2(expression);
                 }
                 catch (Exception e)
                 {

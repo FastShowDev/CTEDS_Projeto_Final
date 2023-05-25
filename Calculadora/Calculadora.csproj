@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+	<Resource Include="Assets\statistic-menu-64.png" />
     <Resource Include="Assets\icons8-close-window-50.png" />
 	<Resource Include="Assets\icons8-calculator-50.png" />
     <Resource Include="Assets\icons8-clock-settings-48.png" />
