@@ -63,19 +63,19 @@
                 <Label Grid.Row="0" Style="{StaticResource LinearAlgebraSelectLabel}"/>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="True">
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsEscalarProduct}">
                         <Grid>
                             <TextBlock Text="Produto Escalar" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
                     </RadioButton>
-                    
-                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}">
+
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsVectorialProduct}">
                         <Grid>
                             <TextBlock Text="Produto Vetorial" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}">
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsMixedProduct}">
                         <Grid>
                             <TextBlock Text="Produto Misto" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
