@@ -13,7 +13,7 @@ namespace Calculadora.Models
             double escalar = 0;
             escalar = vector1.i * vector2.i;
             escalar += vector1.j * vector2.j;
-            escalar *= vector1.k * vector2.k;
+            escalar += vector1.k * vector2.k;
             return escalar;
         }
 
