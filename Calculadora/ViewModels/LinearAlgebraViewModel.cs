@@ -1,6 +1,5 @@
 ﻿using Calculadora.Commands.LinearAlgebraCommands;
 using System.ComponentModel;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Calculadora.ViewModels
@@ -97,6 +96,7 @@ namespace Calculadora.ViewModels
         public ICommand SelectEscalarCM { get; set; }
         public ICommand SelectVectorialCM { get; set; }
         public ICommand SelectMixedCM { get; set; }
+        public ICommand ClearCM { get; set; }
         public LinearAlgebraViewModel()
         {
             IsEscalarProduct = true;
@@ -112,6 +112,7 @@ namespace Calculadora.ViewModels
             SelectEscalarCM = new SelectEscalarCommand(this);
             SelectVectorialCM = new SelectVectorialCommand(this);
             SelectMixedCM = new SelectMixedCommand(this);
+            ClearCM = new ClearVectorCommand(this);
 
             ViewName = "Álgebra Linear";
             ViewHeight = 800;
@@ -137,6 +138,30 @@ namespace Calculadora.ViewModels
             IsEscalarProduct = false;
             IsVectorialProduct = false;
             IsMixedProduct = true;
+        }
+
+        public void ClearValues()
+        {
+            if (HasErrorMessage)
+            {
+                HasErrorMessage = false;
+                ResetDisplayError();
+            }
+
+            IsEscalarProduct = true;
+            IsVectorialProduct = false;
+            IsMixedProduct = false;
+
+            EscalarResult = 0;
+            VectorIResult = 0;
+            VectorJResult = 0;
+            VectorKResult = 0;
+        }
+
+        public override void SetErrorMessage(string ErrorMessage)
+        {
+            base.SetErrorMessage(ErrorMessage);
+            SelectEscalarProduct();
         }
     }
 }
