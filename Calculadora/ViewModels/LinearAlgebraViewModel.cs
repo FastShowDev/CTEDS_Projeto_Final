@@ -1,16 +1,60 @@
-﻿using System.ComponentModel;
+﻿using Calculadora.Commands.LinearAlgebraCommands;
+using System.ComponentModel;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Calculadora.ViewModels
 {
     public class LinearAlgebraViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        public bool IsEscalarProduct { get; set; }
-        public bool IsVectorialProduct { get; set; }
-        public bool IsMixedProduct { get; set; }
+        private bool _isEscalar;
+        public bool IsEscalarProduct {
+            get
+            {
+                return _isEscalar;
+            }
+            set
+            {
+                if (value == _isEscalar) return;
+                _isEscalar = value;
+                OnPropertyChanged(nameof(IsEscalarProduct));
+            } 
+        }
+        private bool _isVectorial;
+        public bool IsVectorialProduct {
+            get
+            {
+                return _isVectorial;
+            }
+            set
+            {
+                if (value == _isVectorial) return;
+                _isVectorial = value;
+                OnPropertyChanged(nameof(IsVectorialProduct));
+            } 
+        }
+        private bool _isMixed;
+        public bool IsMixedProduct { 
+            get
+            {
+                return _isMixed;
+            }
+            set
+            {
+                if (_isMixed == value) return;
+                _isMixed = value;
+                OnPropertyChanged(nameof(IsMixedProduct));
+            }
+        }
         public double EscalarResult { get; set; }
         public double VectorIResult { get; set; }
         public double VectorJResult { get; set; }
         public double VectorKResult { get; set; }
+
+        public ICommand CalculateCM { get; set; }
+        public ICommand SelectEscalarCM { get; set; }
+        public ICommand SelectVectorialCM { get; set; }
+        public ICommand SelectMixedCM { get; set; }
         public LinearAlgebraViewModel()
         {
             IsEscalarProduct = true;
@@ -21,6 +65,11 @@ namespace Calculadora.ViewModels
             VectorIResult = 0;
             VectorJResult = 0;
             VectorKResult = 0;
+
+            CalculateCM = new CalculateProductCommand(this);
+            SelectEscalarCM = new SelectEscalarCommand(this);
+            SelectVectorialCM = new SelectVectorialCommand(this);
+            SelectMixedCM = new SelectMixedCommand(this);
 
             ViewName = "Álgebra Linear";
             ViewHeight = 800;
