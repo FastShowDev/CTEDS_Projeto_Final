@@ -12,7 +12,6 @@ namespace Calculadora.Models
         public double averageStandardDeviation { get; set; }
 
 
-
         private void CalculateSum(List<StatisticItem> items)
         {
             sum = 0;

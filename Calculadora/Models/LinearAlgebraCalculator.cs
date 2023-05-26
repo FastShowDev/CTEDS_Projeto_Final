@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculadora.Models
 {
-    public class AlgebraLinearCalculator
+    public class LinearAlgebraCalculator
     {
         public double CalculateEscalarProduct(Vector vector1, Vector vector2)
         {
