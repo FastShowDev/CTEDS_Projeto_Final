@@ -20,6 +20,7 @@ namespace Calculadora.ViewModels
                 OnPropertyChanged(nameof(IsEscalarProduct));
             } 
         }
+
         private bool _isVectorial;
         public bool IsVectorialProduct {
             get
@@ -33,6 +34,7 @@ namespace Calculadora.ViewModels
                 OnPropertyChanged(nameof(IsVectorialProduct));
             } 
         }
+
         private bool _isMixed;
         public bool IsMixedProduct { 
             get
@@ -46,10 +48,50 @@ namespace Calculadora.ViewModels
                 OnPropertyChanged(nameof(IsMixedProduct));
             }
         }
-        public double EscalarResult { get; set; }
-        public double VectorIResult { get; set; }
-        public double VectorJResult { get; set; }
-        public double VectorKResult { get; set; }
+
+        private double _escalarResult;
+        public double EscalarResult { 
+            get { return _escalarResult; }
+            set
+            {
+                if (value == _escalarResult) return;
+                _escalarResult = value;
+                OnPropertyChanged(nameof(EscalarResult));
+            }
+        }
+
+        private double i;
+        public double VectorIResult { 
+            get { return i; }
+            set
+            {
+                if (i == value) return;
+                i = value;
+                OnPropertyChanged(nameof(VectorIResult));
+            }
+        }
+
+        private double j;
+        public double VectorJResult { 
+            get { return j; }
+            set
+            {
+                if (j == value) return;
+                j = value;
+                OnPropertyChanged(nameof(VectorJResult));
+            }
+        }
+
+        private double k;
+        public double VectorKResult { 
+            get { return k; }
+            set
+            {
+                if (k == value) return;
+                k = value;
+                OnPropertyChanged(nameof(VectorKResult));
+            }
+        }
 
         public ICommand CalculateCM { get; set; }
         public ICommand SelectEscalarCM { get; set; }

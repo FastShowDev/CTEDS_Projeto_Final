@@ -30,8 +30,8 @@
 	<Resource Include="Assets\formula-fx-50.png" />
 	<Resource Include="Assets\backspace-50.png" />
 	<Resource Include="Assets\trash-50.png" />
-	<Resource Include="Assets\matrices-algebra-32.png"/>
-	<Resource Include="Assets\linear-algebra-60.png"/>
+	<Resource Include="Assets\matrices-algebra-32.png" />
+	<Resource Include="Assets\linear-algebra-60.png" />
   </ItemGroup>
 
   <ItemGroup>
