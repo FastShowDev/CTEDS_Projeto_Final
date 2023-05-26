@@ -8,6 +8,9 @@ namespace Calculadora.ViewModels
         public bool IsVectorialProduct { get; set; }
         public bool IsMixedProduct { get; set; }
         public double EscalarResult { get; set; }
+        public double VectorIResult { get; set; }
+        public double VectorJResult { get; set; }
+        public double VectorKResult { get; set; }
         public LinearAlgebraViewModel()
         {
             IsEscalarProduct = true;
@@ -15,6 +18,9 @@ namespace Calculadora.ViewModels
             IsMixedProduct = false;
 
             EscalarResult = 0;
+            VectorIResult = 0;
+            VectorJResult = 0;
+            VectorKResult = 0;
 
             ViewName = "Álgebra Linear";
             ViewHeight = 800;
