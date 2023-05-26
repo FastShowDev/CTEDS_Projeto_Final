@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Calculadora.Models
 {
-    public class AlgebraLinearCalculator
+    public class LinearAlgebraCalculator
     {
         public double CalculateEscalarProduct(Vector vector1, Vector vector2)
         {
             double escalar = 0;
             escalar = vector1.i * vector2.i;
             escalar += vector1.j * vector2.j;
-            escalar *= vector1.k * vector2.k;
+            escalar += vector1.k * vector2.k;
             return escalar;
         }
 

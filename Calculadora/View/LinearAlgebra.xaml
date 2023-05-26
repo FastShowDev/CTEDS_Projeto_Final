@@ -11,6 +11,8 @@
              d:DesignHeight="800" d:DesignWidth="800">
     
     <UserControl.Resources>
+        <converters:BooleanToVisiblityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
         <converters:CloneConverter x:Key="CloneConverter"/>
     </UserControl.Resources>
     
@@ -63,19 +65,22 @@
                 <Label Grid.Row="0" Style="{StaticResource LinearAlgebraSelectLabel}"/>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsEscalarProduct}">
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsEscalarProduct}"
+                                 Command="{Binding SelectEscalarCM}">
                         <Grid>
                             <TextBlock Text="Produto Escalar" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsVectorialProduct}">
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsVectorialProduct}"
+                                 Command="{Binding SelectVectorialCM}">
                         <Grid>
                             <TextBlock Text="Produto Vetorial" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsMixedProduct}">
+                    <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsMixedProduct}"
+                                 Command="{Binding SelectMixedCM}">
                         <Grid>
                             <TextBlock Text="Produto Misto" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
@@ -100,45 +105,62 @@
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <Label Content="1º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="i1" Style="{StaticResource LinearAlgebraVectorBox}"/>
                         <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="j1" Style="{StaticResource LinearAlgebraVectorBox}"/>
                         <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="k1" Style="{StaticResource LinearAlgebraVectorBox}"/>
                         <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Label Content="2º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="i2" Style="{StaticResource LinearAlgebraVectorBox}"/>
                         <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="j2" Style="{StaticResource LinearAlgebraVectorBox}"/>
                         <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="k2" Style="{StaticResource LinearAlgebraVectorBox}"/>
                         <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
                         <Label Content="3º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="i3" Style="{StaticResource LinearAlgebraVectorBox}" IsEnabled="{Binding IsMixedProduct}"/>
                         <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="j3" Style="{StaticResource LinearAlgebraVectorBox}" IsEnabled="{Binding IsMixedProduct}"/>
                         <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="k3" Style="{StaticResource LinearAlgebraVectorBox}" IsEnabled="{Binding IsMixedProduct}"/>
                         <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
                     </StackPanel>
                 </Grid>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button Content="Calcular" Style="{StaticResource LinearAlgebraMenuButton}"/>
+                    <Button Content="Calcular" Style="{StaticResource LinearAlgebraMenuButton}"
+                            Command="{Binding CalculateCM}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CloneConverter}">
+                                <Binding ElementName="i1"/>
+                                <Binding ElementName="j1"/>
+                                <Binding ElementName="k1"/>
+                                
+                                <Binding ElementName="i2"/>
+                                <Binding ElementName="j2"/>
+                                <Binding ElementName="k2"/>
+                                
+                                <Binding ElementName="i3"/>
+                                <Binding ElementName="j3"/>
+                                <Binding ElementName="k3"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
                     <Button Content="Limpar" Style="{StaticResource LinearAlgebraMenuButton}"/>
                 </StackPanel>
                 
@@ -150,14 +172,18 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="Resultado: " Margin="0 10 0 0" Style="{StaticResource LinearAlgebraSelectLabel}"/>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <TextBlock Text="ValorI" Style="{StaticResource LinearAlgebraResultVector}"/>
+                    
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Text="{Binding EscalarResult}" Style="{StaticResource LinearAlgebraResultVector}"
+                               Visibility="{Binding IsVectorialProduct, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+                    
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Visibility="{Binding IsVectorialProduct, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="{Binding VectorIResult}" Style="{StaticResource LinearAlgebraResultVector}"/>
                         <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBlock Text="ValorJ" Style="{StaticResource LinearAlgebraResultVector}"/>
+                        <TextBlock Text="{Binding VectorJResult}" Style="{StaticResource LinearAlgebraResultVector}"/>
                         <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBlock Text="ValorK" Style="{StaticResource LinearAlgebraResultVector}"/>
+                        <TextBlock Text="{Binding VectorKResult}" Style="{StaticResource LinearAlgebraResultVector}"/>
                         <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
                     </StackPanel>
                 </Grid>

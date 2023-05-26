@@ -150,8 +150,6 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Normal"/>
 
-        <Setter Property="MinWidth" Value="50"/>
-
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
 

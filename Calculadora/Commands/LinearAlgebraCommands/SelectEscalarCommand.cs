@@ -13,8 +13,8 @@ namespace Calculadora.Commands.LinearAlgebraCommands
         }
         public override void Execute(object? parameter)
         {
-            RadioButton radioButton = (RadioButton) parameter;
-            radioButton.IsChecked = true;
+            //RadioButton radioButton = (RadioButton) parameter;
+            //radioButton.IsChecked = true;
             linearAlgebraViewModel.SelectEscalarProduct();
         }
     }
