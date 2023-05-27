@@ -75,8 +75,8 @@ namespace Calculadora.ViewModels
             get { return _errorMessage; }
             set
             {
+                if (_errorMessage == value) return;
                 _errorMessage = value;
-                CalculatorDisplay.HasErrorMessage = !string.IsNullOrEmpty(value);
                 HasErrorMessage = !string.IsNullOrEmpty(value);
                 OnPropertyChanged(nameof(ErrorMessage));
 
@@ -113,6 +113,11 @@ namespace Calculadora.ViewModels
         public void ResetDisplayError()
         {
             this.ErrorMessage = string.Empty;
+        }
+
+        public virtual void SetErrorMessage(string ErrorMessage)
+        {
+            this.ErrorMessage = ErrorMessage;
         }
     }
 }

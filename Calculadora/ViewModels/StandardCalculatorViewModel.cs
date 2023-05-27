@@ -153,6 +153,11 @@ namespace Calculadora.ViewModels
             return newViewModel;
         }
 
+        public override void SetErrorMessage(string ErrorMessage)
+        {
+            base.SetErrorMessage(ErrorMessage);
+            CalculatorDisplay.HasErrorMessage = !string.IsNullOrEmpty(ErrorMessage);
+        }
 
     }
 }

@@ -11,6 +11,7 @@
              d:DesignHeight="800" d:DesignWidth="800">
     
     <UserControl.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
         <converters:BooleanToVisiblityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
         <converters:CloneConverter x:Key="CloneConverter"/>
@@ -66,21 +67,21 @@
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsEscalarProduct}"
-                                 Command="{Binding SelectEscalarCM}">
+                                 Command="{Binding SelectEscalarCM}" IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}">
                         <Grid>
                             <TextBlock Text="Produto Escalar" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsVectorialProduct}"
-                                 Command="{Binding SelectVectorialCM}">
+                                 Command="{Binding SelectVectorialCM}" IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}">
                         <Grid>
                             <TextBlock Text="Produto Vetorial" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource LinearAlgebraButtonStyle}" IsChecked="{Binding IsMixedProduct}"
-                                 Command="{Binding SelectMixedCM}">
+                                 Command="{Binding SelectMixedCM}" IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}">
                         <Grid>
                             <TextBlock Text="Produto Misto" Style="{StaticResource LinearAlgebraTextButtonStyle}"/>
                         </Grid>
@@ -105,26 +106,32 @@
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <Label Content="1º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
 
-                        <TextBox x:Name="i1" Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="i1" Style="{StaticResource LinearAlgebraVectorBox}"
+                                 IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                         <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox x:Name="j1" Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="j1" Style="{StaticResource LinearAlgebraVectorBox}"
+                                 IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                         <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox x:Name="k1" Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="k1" Style="{StaticResource LinearAlgebraVectorBox}"
+                                 IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                         <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Label Content="2º Vetor: " Style="{StaticResource LinearAlgebraVectorLabel}"/>
 
-                        <TextBox x:Name="i2" Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="i2" Style="{StaticResource LinearAlgebraVectorBox}"
+                                 IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                         <Label Content="i" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox x:Name="j2" Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="j2" Style="{StaticResource LinearAlgebraVectorBox}"
+                                 IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                         <Label Content="j" Style="{StaticResource LinearAlgebraVersorLabel}"/>
 
-                        <TextBox x:Name="k2" Style="{StaticResource LinearAlgebraVectorBox}"/>
+                        <TextBox x:Name="k2" Style="{StaticResource LinearAlgebraVectorBox}"
+                                 IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}"/>
                         <Label Content="k" Style="{StaticResource LinearAlgebraVersorLabel}"/>
                     </StackPanel>
 
@@ -144,7 +151,7 @@
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Button Content="Calcular" Style="{StaticResource LinearAlgebraMenuButton}"
-                            Command="{Binding CalculateCM}">
+                            Command="{Binding CalculateCM}" IsEnabled="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanConverter}}">
                         <Button.CommandParameter>
                             <MultiBinding Converter="{StaticResource CloneConverter}">
                                 <Binding ElementName="i1"/>
@@ -161,7 +168,28 @@
                             </MultiBinding>
                         </Button.CommandParameter>
                     </Button>
-                    <Button Content="Limpar" Style="{StaticResource LinearAlgebraMenuButton}"/>
+                    
+                    <Button Content="Limpar" Style="{StaticResource LinearAlgebraMenuButton}"
+                            Command="{Binding ClearCM}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CloneConverter}">
+                                <Binding ElementName="i1"/>
+                                <Binding ElementName="j1"/>
+                                <Binding ElementName="k1"/>
+
+                                <Binding ElementName="i2"/>
+                                <Binding ElementName="j2"/>
+                                <Binding ElementName="k2"/>
+
+                                <Binding ElementName="i3"/>
+                                <Binding ElementName="j3"/>
+                                <Binding ElementName="k3"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+
+                    <TextBlock x:Name="ErrorTextBlock" Style="{StaticResource LinearAlgebraErrorStyle}"
+                               Text="{Binding ErrorMessage}" Visibility="{Binding HasErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 </StackPanel>
                 
                 

@@ -180,7 +180,7 @@
                                     <MultiBinding Converter="{StaticResource menuConverter}">
                                         <Binding ElementName="MenuBorder"/>
                                         <Binding Source="{StaticResource linearAlgebraVM}"/>
-                                        <Binding ElementName="StatisticMenuButton"/>
+                                        <Binding ElementName="LinearAlgebraMenuButton"/>
                                         <Binding ElementName="MainWindowName"/>
                                     </MultiBinding>
                                 </RadioButton.CommandParameter>
@@ -202,7 +202,7 @@
                                     <MultiBinding Converter="{StaticResource menuConverter}">
                                         <Binding ElementName="MenuBorder"/>
                                         <Binding Source="{StaticResource matricesVM}"/>
-                                        <Binding ElementName="StatisticMenuButton"/>
+                                        <Binding ElementName="MatricesMenuButton"/>
                                         <Binding ElementName="MainWindowName"/>
                                     </MultiBinding>
                                 </RadioButton.CommandParameter>
