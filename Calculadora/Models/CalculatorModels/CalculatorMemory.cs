@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculadora.Models
 {
-    public class Memory
+    public class CalculatorMemomy
     {
     }
 }

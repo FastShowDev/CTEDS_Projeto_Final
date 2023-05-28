@@ -2,19 +2,19 @@
 
 namespace Calculadora.Models
 {
-    public class History
+    public class CalculatorHistory
     {
         public int Id { get; set; }
         public string FullExpression { get; set; } = string.Empty;
         public string Expression { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
 
-        public History()
+        public CalculatorHistory()
         {
 
         }
 
-        public History(string expression, string result)
+        public CalculatorHistory(string expression, string result)
         {
             this.Expression = expression;
             this.Result = result;
