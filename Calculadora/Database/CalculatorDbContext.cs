@@ -15,11 +15,11 @@ namespace Calculadora.Database
             Database.EnsureCreated();
         }
 
-        public DbSet<History> Histories { get; set; }
+        public DbSet<CalculatorHistory> Histories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<History>()
+            modelBuilder.Entity<CalculatorHistory>()
                 .Property(f => f.Id)
                 .ValueGeneratedOnAdd();
 

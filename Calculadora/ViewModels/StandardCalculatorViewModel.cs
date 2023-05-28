@@ -102,9 +102,9 @@ namespace Calculadora.ViewModels
         }
 
 
-        public List<History> GetAllHistories()
+        public List<CalculatorHistory> GetAllHistories()
         {
-            Task<List<History>> histories = historyManager.GetAllHistories();
+            Task<List<CalculatorHistory>> histories = historyManager.GetAllHistories();
             histories.Result.Reverse();
             return histories.Result;
         }
@@ -112,7 +112,7 @@ namespace Calculadora.ViewModels
 
         public async void AddHistory(string expression, string result)
         {
-            await historyManager.AddHistory(new History(expression, result));
+            await historyManager.AddHistory(new CalculatorHistory(expression, result));
             return;
         }
 
