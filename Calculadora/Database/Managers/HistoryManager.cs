@@ -11,14 +11,14 @@ namespace Calculadora.Database.Managers
     {
         private const int MAX_NUMBER_INSTANCES = 10;
 
-        private List<History> _histories;
+        private List<CalculatorHistory> _histories;
         private readonly Lazy<Task> _initializeLazy;
-        public IEnumerable<History> Histories => _histories;
+        public IEnumerable<CalculatorHistory> Histories => _histories;
 
 
         public HistoryManager(CalculatorDbContext context) : base(context)
         {
-            _histories = new List<History>();
+            _histories = new List<CalculatorHistory>();
             _initializeLazy = new Lazy<Task>(Initialize);
         }
 
@@ -29,20 +29,20 @@ namespace Calculadora.Database.Managers
 
         private async Task Initialize()
         {
-            IEnumerable<History> histories = await GetAllHistories();
+            IEnumerable<CalculatorHistory> histories = await GetAllHistories();
 
             _histories.Clear();
             _histories.AddRange(histories);
         }
 
-        public async Task<List<History>> GetAllHistories()
+        public async Task<List<CalculatorHistory>> GetAllHistories()
         {
-            List<History> histories = await context.Histories.ToListAsync();
+            List<CalculatorHistory> histories = await context.Histories.ToListAsync();
             return histories;
         }
         
 
-        public async Task AddHistory(History history)
+        public async Task AddHistory(CalculatorHistory history)
         {
             context.Histories.Add(history);
             await context.SaveChangesAsync();
@@ -50,7 +50,7 @@ namespace Calculadora.Database.Managers
         }
 
 
-        public async void DeleteHistory(History history)
+        public async void DeleteHistory(CalculatorHistory history)
         {
             context.Histories.Remove(history);
             await context.SaveChangesAsync();
