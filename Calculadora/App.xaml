@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Styles/MenuStyle.xaml"/>
                 <ResourceDictionary Source="Styles/StatisticStyle.xaml"/>
                 <ResourceDictionary Source="Styles/LinearAlgebraStyle.xaml"/>
+                <ResourceDictionary Source="Styles/MatricesStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
             
