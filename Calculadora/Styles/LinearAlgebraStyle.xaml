@@ -25,27 +25,19 @@
                 <ControlTemplate TargetType="RadioButton">
 
                     <Border x:Name="border"
-                            Height="50"
-                            Width="200"
-                            Margin="0"
-                            BorderThickness="2"
-                            BorderBrush="Black"
-                            CornerRadius="4">
+                        Height="50"
+                        Width="200"
+                        Margin="0"
+                        BorderThickness="2"
+                        BorderBrush="Black"
+                        CornerRadius="4">
 
                         <Border.Background>
                             <SolidColorBrush x:Name="BorderBackground"
-                                             Color="White" />
+                                            Color="White" />
                         </Border.Background>
 
                         <Grid>
-                            <Border x:Name="Indicator"
-                                    Height="35"
-                                    Width="8"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Background="Red"
-                                    Visibility="Collapsed"
-                                    CornerRadius="2" />
                             <ContentPresenter />
                         </Grid>
                     </Border>
@@ -54,47 +46,47 @@
                     <ControlTemplate.Triggers>
 
                         <Trigger Property="IsMouseOver"
-                                 Value="True">
-                            <Setter Property="Visibility"
-                                    TargetName="Indicator"
-                                    Value="Visible" />
+                                Value="True">
+                            <Setter Property="BorderBrush"
+                                TargetName="border"
+                                Value="DarkOrange" />
                         </Trigger>
 
                         <EventTrigger RoutedEvent="Border.MouseEnter"
-                                      SourceName="border">
+                                    SourceName="border">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <ColorAnimation Storyboard.TargetName="BorderBackground"
-                                                    Storyboard.TargetProperty="Color"
-                                                    From="White"
-                                                    To="LightGray"
-                                                    Duration="0:0:0.3" />
+                                                Storyboard.TargetProperty="Color"
+                                                From="White"
+                                                To="LightGray"
+                                                Duration="0:0:0.3" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
 
                         <EventTrigger RoutedEvent="Border.MouseLeave"
-                                      SourceName="border">
+                                    SourceName="border">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <ColorAnimation Storyboard.TargetName="BorderBackground"
-                                                    Storyboard.TargetProperty="Color"
-                                                    From="LightGray"
-                                                    To="White"
-                                                    Duration="0:0:0.3" />
+                                                Storyboard.TargetProperty="Color"
+                                                From="LightGray"
+                                                To="White"
+                                                Duration="0:0:0.3" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
 
                         <Trigger Property="IsChecked"
-                                 Value="True">
+                                Value="True">
                             <Setter Property="Background"
-                                    TargetName="border"
-                                    Value="LightGray" />
+                                TargetName="border"
+                                Value="LightGray" />
 
-                            <Setter Property="Visibility"
-                                    TargetName="Indicator"
-                                    Value="Visible" />
+                            <Setter Property="BorderBrush"
+                                TargetName="border"
+                                Value="DarkOrange" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
