@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Calculadora.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800"
+             MinHeight="800" MinWidth="800">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -45,6 +46,49 @@
                        Content="{Binding ViewName}"/>
 
             </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Selecione uma operação:" Grid.Row="0" Style="{StaticResource SelectMatricesOpStyle}"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <RadioButton Content="Somar" Style="{StaticResource SelectMatrixOperation}"/>
+                    <RadioButton Content="Subtrair" Style="{StaticResource SelectMatrixOperation}"/>
+                    <RadioButton Content="Multiplicar" Style="{StaticResource SelectMatrixOperation}"/>
+                    <RadioButton Content="Potenciação" Style="{StaticResource SelectMatrixOperation}"/>
+                    <RadioButton Content="Determinante" Style="{StaticResource SelectMatrixOperation}"/>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Matriz A: " Style="{StaticResource LabelMatricesStyle}"/>
+                    <Label Content="Matriz B: " Style="{StaticResource LabelMatricesStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Content="Aumentar" Style="{StaticResource OrderOfMatrixButtonStyle}"/>
+                    <Button Content="Diminuir" Style="{StaticResource OrderOfMatrixButtonStyle}"/>
+                    <Button Content="Limpar" Style="{StaticResource OrderOfMatrixButtonStyle}"/>
+                    
+                    <Button Content="Aumentar" Margin="30, 0, 0, 0" Style="{StaticResource OrderOfMatrixButtonStyle}"/>
+                    <Button Content="Diminuir" Style="{StaticResource OrderOfMatrixButtonStyle}"/>
+                    <Button Content="Limpar" Style="{StaticResource OrderOfMatrixButtonStyle}"/>
+                </StackPanel>
+
+            </Grid>
+            
         </Grid>
     </Grid>
 </UserControl>
