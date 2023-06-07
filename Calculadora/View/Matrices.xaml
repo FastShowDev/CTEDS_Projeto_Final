@@ -55,11 +55,35 @@
 
                 <Label Content="Selecione uma operação:" Grid.Row="0" Style="{StaticResource SelectMatricesOpStyle}"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <RadioButton Content="Somar" Style="{StaticResource SelectMatrixOperation}"/>
-                    <RadioButton Content="Subtrair" Style="{StaticResource SelectMatrixOperation}"/>
-                    <RadioButton Content="Multiplicar" Style="{StaticResource SelectMatrixOperation}"/>
-                    <RadioButton Content="Potenciação" Style="{StaticResource SelectMatrixOperation}"/>
-                    <RadioButton Content="Determinante" Style="{StaticResource SelectMatrixOperation}"/>
+                    <RadioButton Style="{StaticResource SelectMatrixOperation}">
+                        <Grid>
+                            <TextBlock Text="Somar" Style="{StaticResource MatricesTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource SelectMatrixOperation}">
+                        <Grid>
+                            <TextBlock Text="Subtrair" Style="{StaticResource MatricesTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource SelectMatrixOperation}">
+                        <Grid>
+                            <TextBlock Text="Multiplicar" Style="{StaticResource MatricesTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource SelectMatrixOperation}">
+                        <Grid>
+                            <TextBlock Text="Potenciação" Style="{StaticResource MatricesTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource SelectMatrixOperation}">
+                        <Grid>
+                            <TextBlock Text="Determinante" Style="{StaticResource MatricesTextButtonStyle}"/>
+                        </Grid>
+                    </RadioButton>
                 </StackPanel>
 
             </Grid>
